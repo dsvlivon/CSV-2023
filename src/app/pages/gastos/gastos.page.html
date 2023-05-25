@@ -1,0 +1,173 @@
+<ion-content>
+
+  <div
+    class="d-flex justify-content-around align-items-center"
+    style="
+      border-bottom: 4px solid #fff;
+      box-shadow: 0px 2px 4px #000;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    "
+  >
+    <ion-icon style="font-size: 7rem" name="calendar-outline"></ion-icon>
+    <div style="color: #fff; padding: 0 1rem; text-shadow: 1px 1px 1px #000">
+      <p style="text-align: center; font-size: 2.3rem; font-weight: bolder">
+        {{currentMonth}} / {{currentYear}}
+      </p>
+      
+    </div>
+  </div>
+
+  <ion-grid style="color: #000">
+    <ion-row>
+      <ion-col
+        *ngIf="currentControl"
+        style="
+          background: rgba(5, 255, 5, 0.25);
+          text-shadow: 1px 1px 1px #000;
+          border: 1px solid #fff;
+          color: #fff;
+        "
+      >
+        <ion-text>Ingreso: $ {{currentControl.salary}} </ion-text>
+      </ion-col>
+      <ion-col
+        *ngIf="currentControl"
+        style="
+          background: rgba(255, 188, 5, 0.25);
+          text-shadow: 1px 1px 1px #000;
+          border: 1px solid #fff;
+          color: #fff;
+        "
+      >
+        <ion-text
+          >Ahorro: $ {{currentControl.salary - (currentControl.categories.food +
+          currentControl.categories.medicine +
+          currentControl.categories.services +
+          currentControl.categories.taxes)}}
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col
+        *ngIf="currentControl"
+        style="
+          background: rgba(255, 5, 5, 0.25);
+          text-shadow: 1px 1px 1px #000;
+          border: 1px solid #fff;
+          color: #fff;
+          margin-bottom: 1rem;
+          box-shadow: 0px 2px 4px #000;
+        "
+      >
+        <ion-text
+          >Egresos: $ {{currentControl.categories.food +
+          currentControl.categories.medicine +
+          currentControl.categories.services + currentControl.categories.taxes}}
+        </ion-text>
+      </ion-col>
+      <ion-col
+        *ngIf="currentControl"
+        style="
+          background: rgba(5, 122, 255, 0.25);
+          text-shadow: 1px 1px 1px #000;
+          border: 1px solid #fff;
+          color: #fff;
+          margin-bottom: 1rem;
+          box-shadow: 0px 2px 4px #000;
+        "
+      >
+        <ion-text>Porcentaje: {{currentControl.percentage}} % </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p
+          style="
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            text-shadow: 1px 1px 1px #000;
+            border-top: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            background: rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 2px 4px #000;
+          "
+        >
+          Ingrese sus gastos
+        </p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item >
+          <ion-label position="floating">Alimentos</ion-label>
+          <ion-input
+            [(ngModel)]="food"
+            style="color: #fff;"
+            type="number"
+            placeholder=""
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="auto" (click)="addFood()">
+        <ion-icon class="btn-sumar" name="add-circle-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item style="box-shadow: 0px 2px 4px #000;">
+          <ion-label position="floating">Medicina</ion-label>
+          <ion-input
+            [(ngModel)]="medicine"
+            style="color: #fff; box-shadow: 0px 2px 4px #000"
+            type="number"
+            placeholder=""
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="auto" (click)="addMedicine()">
+        <ion-icon class="btn-sumar" name="add-circle-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item style="box-shadow: 0px 2px 4px #000;">
+          <ion-label position="floating">Servicios</ion-label>
+          <ion-input
+            [(ngModel)]="services"
+            style="color: #fff; box-shadow: 0px 2px 4px #000"
+            type="number"
+            placeholder=""
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="auto" (click)="addServices()">
+        <ion-icon class="btn-sumar" name="add-circle-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item style="box-shadow: 0px 2px 4px #000;">
+          <ion-label position="floating">Impuestoss</ion-label>
+          <ion-input
+            [(ngModel)]="taxes"
+            style="color: #fff; box-shadow: 0px 2px 4px #000"
+            type="number"
+            placeholder=""
+          ></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="auto" (click)="addTaxes()">
+        <ion-icon class="btn-sumar" name="add-circle-outline"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <div class="divider"></div>
+      <app-barra></app-barra>   
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

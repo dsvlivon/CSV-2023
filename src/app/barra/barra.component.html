@@ -1,0 +1,41 @@
+<!-- <p>
+  barra works!
+</p> -->
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button (click)="goAltas()">
+      <ion-icon color="tertiary" name="add-circle-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Altas</ion-label>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button (click)="goQr()">
+      <ion-icon color="primary" name="bar-chart" aria-hidden="true"></ion-icon>
+      <ion-label>Lector QR</ion-label>
+    </ion-tab-button> -->
+
+    <!-- <ion-tab-button (click)="goEncuestas()">
+      <ion-icon color="success" name="cash" aria-hidden="true"></ion-icon>
+      <ion-label>Encuestas</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button (click)="goGestion()">
+      <ion-icon color="success" name="briefcase-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Gestión</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="goDelivery()">
+      <ion-icon color="success" name="bicycle-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Repartos</ion-label>
+    </ion-tab-button>
+
+    <!-- <ion-tab-button (click)="goJuegos()">
+      <ion-icon color="success" name="cash" aria-hidden="true"></ion-icon>
+      <ion-label>Juegos</ion-label>
+    </ion-tab-button> -->
+
+    <ion-tab-button (click)="logOut()">
+      <ion-icon color="danger" name="exit" aria-hidden="true"></ion-icon>
+      <ion-label>Salir</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
