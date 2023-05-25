@@ -5,8 +5,8 @@
 | 2 | Diseñar Iconos y demás elementos visuales  | Daniel   | Resuelto |
 | 3 | Crear Base de datos y autenticación en FireBase | Daniel |          |
 | 4 | Crear Splash dinámico y estático  | Daniel  |  Resuelto  |
-| 5 | Implementar la funcionalidad de Login | Sergio   |          |
+| 5 | Implementar la funcionalidad de Login | Sergio   |  Activo  |
 | 6 | Implementar la funcionalidad de registro de usuarios | Sergio |          |
-| 7 | Crear la página de inicio de sesión                   | Ignacio  |          |
+| 7 | Crear la página de inicio de sesión                   | Ignacio  |  Activo  |
 | 8 | Implementar la funcionalidad de inicio de sesión y autenticación | Ignacio |          |
 
