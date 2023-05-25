@@ -1,4 +1,4 @@
-|          |  **Sprint 1: Inicio de Proyecto**  | prox. fecha:  | --/--/--  |
+|          |  **Sprint 1: Inicio de Proyecto**  | prox. fecha:  | 27/05/23  |
 |----------|------------------------------------------------------|----------|----------|
 | **N°**  | **Tareas**                                           | **Miembro** | **Estado** |
 | 1 | Crear la estructura básica del proyecto | Daniel   |  Activo  |
