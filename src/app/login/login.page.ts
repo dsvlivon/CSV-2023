@@ -49,11 +49,11 @@ export class LoginPage implements OnInit {
   
   async accesoRapido(set:any) {
     if(set == 3){
-      this.formData.setValue({email: "tester@tester.com", password: "555555"});
+      this.formData.setValue({email: "duenio@duenio.com", password: "111111"});
     } else if(set == 2){ 
-      this.formData.setValue({email: "invitado@invitado.com", password: "222222"});
+      this.formData.setValue({email: "cliente@cliente.com", password: "222222"});
     } else if (set ==1 ){
-      this.formData.setValue({email: "anonimo@anonimo.com", password: "444444"});
+      this.formData.setValue({email: "metre@metre.com", password: "333333"});
     }
     const form = this.formData.value;
     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {

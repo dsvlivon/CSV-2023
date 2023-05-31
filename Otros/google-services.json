@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1061894083276",
+    "project_id": "pps-sp-dbb7b",
+    "storage_bucket": "pps-sp-dbb7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061894083276:android:c20bdbd3ca6e8cbe17a869",
+        "android_client_info": {
+          "package_name": "pps.sp_grupo_csv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061894083276-gsb9g3c0vq95smaq7qva6li0e7scepav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBi5VHnOpk71E2KjOQTxgw19TwhH2uS1XE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061894083276-gsb9g3c0vq95smaq7qva6li0e7scepav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
