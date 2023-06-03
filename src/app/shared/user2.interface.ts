@@ -1,8 +1,10 @@
 export interface User2 {
     uid: string;
-    name: string;
-    mail: string;
-    password: string;
-    rol: string;
-    sex: string;
+    nombre: string;
+    apellido: string;
+    dni: number;
+    img: string;
+    correo: string;
+    fechaCreacion: number;
+    estado: 'ACEPTADO' | 'PENDIENTE' | 'RECHAZADO';
 }

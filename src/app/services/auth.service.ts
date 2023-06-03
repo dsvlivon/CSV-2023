@@ -4,11 +4,9 @@ import { User2 } from '../shared/user2.interface';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import * as auth from 'firebase/auth';
-import * as firebase from 'firebase/compat/app';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import fire from 'firebase/compat/app';
 
 
 @Injectable({
