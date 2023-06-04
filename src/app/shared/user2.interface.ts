@@ -10,5 +10,5 @@ export interface User2 {
     perfil: 'DUENIO' | 'SUPERVISOR' | 'EMPLEADO' | 'CLIENTE' | 'ANONIMO';
     rol?: 'METRE' | 'MOZO' | 'COCINERO' | 'BARTENDER';
     cuil?: number;
-
+    
 }

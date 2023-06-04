@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginPage implements OnInit {
 
-  authSrv = inject(AuthService);
- 
+  authSrv = inject(AuthService); 
 
   formData: FormGroup;
   error: boolean = false;
@@ -33,6 +33,7 @@ export class LoginPage implements OnInit {
   async onLogin() {
     const form = this.formData.value;
     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
+      console.log(resp);
       this.router.navigate(['/home']);
       return user;
     }).catch(err => {
@@ -66,4 +67,8 @@ export class LoginPage implements OnInit {
   get password() {
 		return this.formData.get('password');
 	}
+
+  swiperSlideChange(e: any) {
+    
+  }
 }

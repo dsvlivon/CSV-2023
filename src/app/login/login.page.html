@@ -1,74 +1,79 @@
-  <ion-content>
-    <ion-card class="superior">
+<ion-content fullscreen="true">
+  <ion-card class="superior">
 
-      <ion-img src="../../assets/images/header150x70.png"></ion-img>
+    <ion-img src="../../assets/images/header150x70.png"></ion-img>
 
-      <ion-card-content>
+    <ion-card-content>
+      <div>
 
-        <div class="wrapform">
-          <form [formGroup]="formData">
-            <div class="d-flex flex-column">
+        <swiper-container loop="true" pagination="true" effect="cube" grab-cursor="true" cube-effect-shadow="true"
+          cube-effect-slide-shadows="true" cube-effect-shadow-offset="20" cube-effect-shadow-scale="0.94">
+          <swiper-slide class="d-flex justify-content-center">
+            <button class="btn-rapido" title="anonimo" (click)="accesoRapido(1)"><ion-img
+                src="../../assets/images/user-a.png"></ion-img> </button>
+          </swiper-slide>
+          <swiper-slide class="d-flex justify-content-center">
+            <button class="btn-rapido" title="anonimo" (click)="accesoRapido(2)"><ion-img
+                src="../../assets/images/user-b.png"></ion-img> </button>
 
-              <div class="input-group justify-content-center">
+          </swiper-slide>
+          <swiper-slide class="d-flex justify-content-center">
+            <button class="btn-rapido" title="anonimo" (click)="accesoRapido(3)"><ion-img
+                src="../../assets/images/user-c.png"></ion-img> </button>
 
-                <ion-item>
-                  <ion-icon name="mail-outline" class="me-1"></ion-icon>
-                  <ion-input formControlName="email" type="text" placeholder="Correo electrónico"></ion-input>
-                </ion-item>
+          </swiper-slide>
 
-                <ion-item lines="none">
-                  <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
-                    <p *ngIf="email.errors['required']">El correo electrónico es necesario</p>
-                    <p *ngIf="email.errors['email']">El correo electrónico es inválido</p>
-                  </div>
-                </ion-item>
+        </swiper-container>
+      </div>
 
-              </div>
+      <div class="wrapform">
+        <form [formGroup]="formData">
+          <div class="d-flex flex-column">
 
-              <br>
-              <div class="input-group justify-content-center">
+            <div class="input-group justify-content-center">
 
-                <ion-item>
-                  <ion-icon name="lock-closed-outline" class="me-1"></ion-icon>
-                  <ion-input formControlName="password" type="password" placeholder="**********"></ion-input>
-                </ion-item>
+              <ion-item>
+                <ion-icon name="mail-outline" class="me-1"></ion-icon>
+                <ion-input formControlName="email" type="text" placeholder="Correo electrónico"></ion-input>
+              </ion-item>
 
-                <ion-item lines="none" class="ion-no-margin">
-                  <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
-                    <span *ngIf="password.errors['required']">Ingresar contraseña</span>
-                    <span *ngIf="password.errors['minlength']">Ingresar mínimo 6 digitos</span>
-                  </div>
-                </ion-item>
+              <ion-item lines="none">
+                <div *ngIf="(email.dirty || email.touched) && email.errors" class="errors">
+                  <p *ngIf="email.errors['required']">El correo electrónico es necesario</p>
+                  <p *ngIf="email.errors['email']">El correo electrónico es inválido</p>
+                </div>
+              </ion-item>
 
-              </div>
             </div>
-          </form>
-          
-        </div>
-        <div class="bg-image">
-          
-        </div>
-        <div class="signin-btns">
-          <!-- <ion-button (click)="onLogin()" fill="solid" shape="round" class="loginbtn">Loguearse</ion-button> -->
-          <button class="button-53" role="button" (click)="onLogin()">INGRESAR</button>
-        </div>
 
-        
-        <div class="errors text-center">
-          <p *ngIf="error === true">{{message}}</p>
-        </div>            
-        
-      </ion-card-content>
+            <br>
+            <div class="input-group justify-content-center">
 
-      <ion-footer style="margin-top: 3.6rem; background-color: #00AFEF;">
-        <div class="row mb-4 px-3" style="color: #fff">         
-          <div class="text-center mr-3"expand="full">
-            <button class="btn-rapido" title="anonimo" (click)="accesoRapido(1)"><ion-img src="../../assets/images/user-a.png"></ion-img> </button>
-            <button class="btn-rapido" title="anonimo" (click)="accesoRapido(2)"><ion-img src="../../assets/images/user-b.png"></ion-img> </button>
-            <button class="btn-rapido" title="anonimo" (click)="accesoRapido(3)"><ion-img src="../../assets/images/user-c.png"></ion-img> </button>
+              <ion-item>
+                <ion-icon name="lock-closed-outline" class="me-1"></ion-icon>
+                <ion-input formControlName="password" type="password" placeholder="**********"></ion-input>
+              </ion-item>
+
+              <ion-item lines="none" class="ion-no-margin">
+                <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+                  <span *ngIf="password.errors['required']">Ingresar contraseña</span>
+                  <span *ngIf="password.errors['minlength']">Ingresar mínimo 6 digitos</span>
+                </div>
+              </ion-item>
+
+            </div>
           </div>
-        </div>
-      </ion-footer>
+        </form>
+       
+      </div>
+      <div class="signin-btns">
+        <button class="button-53" role="button" (click)="onLogin()">INGRESAR</button>
+      </div>
 
-    </ion-card>
-  </ion-content>
+      <div class="errors text-center">
+        <p *ngIf="error === true">{{message}}</p>
+      </div>
+
+    </ion-card-content>    
+  </ion-card>
+</ion-content>
