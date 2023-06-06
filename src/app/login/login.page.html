@@ -4,27 +4,7 @@
     <ion-img src="../../assets/images/header150x70.png"></ion-img>
 
     <ion-card-content>
-      <div>
 
-        <swiper-container loop="true" pagination="true" effect="cube" grab-cursor="true" cube-effect-shadow="true"
-          cube-effect-slide-shadows="true" cube-effect-shadow-offset="20" cube-effect-shadow-scale="0.94">
-          <swiper-slide class="d-flex justify-content-center">
-            <button class="btn-rapido" title="anonimo" (click)="accesoRapido(1)"><ion-img
-                src="../../assets/images/user-a.png"></ion-img> </button>
-          </swiper-slide>
-          <swiper-slide class="d-flex justify-content-center">
-            <button class="btn-rapido" title="anonimo" (click)="accesoRapido(2)"><ion-img
-                src="../../assets/images/user-b.png"></ion-img> </button>
-
-          </swiper-slide>
-          <swiper-slide class="d-flex justify-content-center">
-            <button class="btn-rapido" title="anonimo" (click)="accesoRapido(3)"><ion-img
-                src="../../assets/images/user-c.png"></ion-img> </button>
-
-          </swiper-slide>
-
-        </swiper-container>
-      </div>
 
       <div class="wrapform">
         <form [formGroup]="formData">
@@ -64,7 +44,7 @@
             </div>
           </div>
         </form>
-       
+
       </div>
       <div class="signin-btns">
         <button class="button-53" role="button" (click)="onLogin()">INGRESAR</button>
@@ -74,6 +54,39 @@
         <p *ngIf="error === true">{{message}}</p>
       </div>
 
-    </ion-card-content>    
+      
+
+      <div class="mt-5">
+
+        <swiper-container loop="true" pagination="true" effect="cube" grab-cursor="true" cube-effect-shadow="true"
+          cube-effect-slide-shadows="true" cube-effect-shadow-offset="20" cube-effect-shadow-scale="0.94">
+          <swiper-slide class="d-flex justify-content-center flex-column">
+            <div>
+              <ion-img (click)="accesoRapido('duenio')" src="../../assets/images/accesorapido/gerente.png"></ion-img>
+            </div>
+
+          </swiper-slide>
+          <swiper-slide class="d-flex justify-content-center">
+            <ion-img (click)="accesoRapido('cliente')" src="../../assets/images/accesorapido/cliente.png"></ion-img>
+          </swiper-slide>
+          <swiper-slide class="d-flex justify-content-center">
+            <ion-img (click)="accesoRapido('metre')" src="../../assets/images/accesorapido/metre.png"></ion-img>
+          </swiper-slide>
+          <swiper-slide class="d-flex justify-content-center">
+            <ion-img (click)="accesoRapido('mozo')" src="../../assets/images/accesorapido/camarero.png"></ion-img>
+          </swiper-slide>
+          <swiper-slide class="d-flex justify-content-center">
+            <ion-img (click)="accesoRapido('cocinero')" src="../../assets/images/accesorapido/cocinero.png"></ion-img>
+          </swiper-slide>
+          <swiper-slide class="d-flex justify-content-center">
+            <ion-img (click)="accesoRapido('bartender')" src="../../assets/images/accesorapido/barman.png"></ion-img>
+          </swiper-slide>
+          <swiper-slide class="d-flex justify-content-center">
+            <ion-img (click)="accesoRapido('supervisor')" src="../../assets/images/accesorapido/operador.png"></ion-img>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+    </ion-card-content>
   </ion-card>
+
 </ion-content>
