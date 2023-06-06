@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -20,8 +21,9 @@ export class LoginPage implements OnInit {
   formData: FormGroup;
   error: boolean = false;
   message: string = '';
+  tipoRegistro= '';
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private animationCtrl: AnimationController) { }
 
   ngOnInit() {
     this.formData = this.fb.group({
@@ -30,6 +32,33 @@ export class LoginPage implements OnInit {
     });
   }
 
+  enterAnimation = (baseEl: HTMLElement) => {
+    const root = baseEl.shadowRoot;
+
+    const backdropAnimation = this.animationCtrl
+      .create()
+      .addElement(root.querySelector('ion-backdrop')!)
+      .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+
+    const wrapperAnimation = this.animationCtrl
+      .create()
+      .addElement(root.querySelector('.modal-wrapper')!)
+      .keyframes([
+        { offset: 0, opacity: '0', transform: 'scale(0)' },
+        { offset: 1, opacity: '0.99', transform: 'scale(1)' },
+      ]);
+
+    return this.animationCtrl
+      .create()
+      .addElement(baseEl)
+      .easing('ease-out')
+      .duration(500)
+      .addAnimation([backdropAnimation, wrapperAnimation]);
+  };
+
+  leaveAnimation = (baseEl: HTMLElement) => {
+    return this.enterAnimation(baseEl).direction('reverse');
+  };
   async onLogin() {
     const form = this.formData.value;
     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
@@ -75,5 +104,9 @@ export class LoginPage implements OnInit {
   get password() {
     return this.formData.get('password');
   }
-
+  seleccionarTipo(tipo: string) {
+    this.authSrv.tipo = tipo;
+    this.router.navigate(['/alta-cliente']);
+    
+  }
 }

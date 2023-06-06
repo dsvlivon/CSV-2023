@@ -159,6 +159,13 @@ hr.solid {
   }
   
   /* ---------------------------------------------- quickacces */
+span {
+  color: white;
+  strong {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
 .button-53 {
     background-color: #3DD1E7;
     border: 0 solid #E5E7EB;
@@ -227,4 +234,18 @@ hr.solid {
   swiper-slide img {
     display: block;
     width: 100%;
+  }
+/* ---------------------------------------------- modal */
+  ion-modal#example-modal {
+    --width: fit-content;
+    --min-width: 250px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  .wrapper {
+    background: #4363AC;
+    border-radius: 15px;
+    border: 3px solid #fff;
   }

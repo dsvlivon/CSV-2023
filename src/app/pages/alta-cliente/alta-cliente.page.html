@@ -1,0 +1,22 @@
+<ion-content slot="fixed">
+    <h1 style="text-align: center;" *ngIf="authSrv.tipo === 'cliente'">Registro Cliente</h1>
+    <h1 style="text-align: center;" *ngIf="authSrv.tipo === 'anonimo'">Registro Anónimo</h1>
+
+    <form [formGroup]="form" >
+
+    </form>
+
+</ion-content>
+<ion-fab horizontal="center" vertical="bottom" *ngIf="authSrv.tipo === 'cliente'">
+  <ion-fab-button data-desc2="" color="header">
+  </ion-fab-button>
+</ion-fab>
+<ion-fab horizontal="center" vertical="bottom" *ngIf="authSrv.tipo === 'cliente'">
+  <ion-fab-button data-desc="Escanear DNI" color="escanear">
+    <ion-icon name="barcode-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-footer>
+  <ion-toolbar color="header">
+  </ion-toolbar>
+</ion-footer>

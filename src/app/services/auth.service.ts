@@ -13,6 +13,9 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+
+  tipo: string;
+  
   user$: Observable<User2>;
   public userData: any;
 
