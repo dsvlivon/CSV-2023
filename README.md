@@ -15,15 +15,16 @@
 |----------|------------------------------------------------------|------------|-------------|------------|
 |          |  **Sprint 2: Implementación de Altas**               |            | prox. fecha:|  03/06/23  |
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
-| **x1.b** | **Diseñar componenetes menu Flotante**               |    Gamma   |   Ignacio   |            |
-| **x2.a** | **Corrección de Icóno**                              |    Alfa    |   Daniel    |**Pendiente**|
+| **x1.b** | **Diseñar componenetes menu Flotante**               |    Alfa    |   Daniel    |            |
+| **x2.a** | **Corrección de Icóno**                              |    Alfa    |   Daniel    | **Activo** |
 | **x4.a** | **Corrección de splash 1 y 2**                       |    Alfa    |   Daniel    |**Pendiente**|
 | **x7**   | **Crear la página de inicio de sesión**              |    Gamma   |   Ignacio   |**Pendiente**|
 |  1       | Implementar sistema de roles y permisos              |    Beta    |   Sergio    |            |
-|  2       | Resolver funcionalidad de fotos y scan QR            |    Alfa    |   Daniel    |            |
+|  2       | Resolver funcionalidad de fotos y scan QR            |    Gamma   |   Ignacio   |            |
 |  2.a     | QR de ingreso a local                                |    Gamma   |   Ignacio   |            |
 |  2.b     | QR de la mesa                                        |    Gamma   |   Ignacio   |            |
 |  2.c     | QR de la propina                                     |    Gamma   |   Ignacio   |            |
 |  2       | Diseñar Iconos y demás elementos visuales            |    Alfa    |   Daniel    |            |
 |  3       | Implementar Swipe en el Login                        |    Beta    |   Sergio    |            |
+|  4       | Alta cliente/anónimo                                 |    Beta    |   Sergio    |            |
 |----------|------------------------------------------------------|------------|-------------|------------|
