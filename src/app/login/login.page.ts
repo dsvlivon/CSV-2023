@@ -21,7 +21,6 @@ export class LoginPage implements OnInit {
   formData: FormGroup;
   error: boolean = false;
   message: string = '';
-  tipoRegistro= '';
 
   constructor(private fb: FormBuilder, private router: Router, private animationCtrl: AnimationController) { }
 

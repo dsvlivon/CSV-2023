@@ -2,8 +2,69 @@
     <h1 style="text-align: center;" *ngIf="authSrv.tipo === 'cliente'">Registro Cliente</h1>
     <h1 style="text-align: center;" *ngIf="authSrv.tipo === 'anonimo'">Registro Anónimo</h1>
 
-    <form [formGroup]="form" >
+    <form [formGroup]="formData">
+      <div>
+        <div class="inputdiv" *ngIf="authSrv.tipo === 'cliente'">
+          <ion-label>Correo electrónico</ion-label>
+          <ion-item color="transp" style="width: 160px;">
+            <ion-input type='email' required id="email" formControlName="email"></ion-input>
+          </ion-item>
+          <ion-label class="invalid" *ngIf="formData.controls['email'].errors?.['required'] && formData.controls['email'].touched
+          || formData.controls['email'].errors?.['email']">
+            Correo inválido.
+          </ion-label>
+        </div>
 
+        <div class="inputdiv" style="margin-left: 5%;" *ngIf="authSrv.tipo === 'cliente'">
+          <ion-label>Contraseña</ion-label>
+          <ion-item color="transp" style="width: 140px;">
+            <ion-input type='password' required id="password" formControlName="password"></ion-input>
+          </ion-item>
+          <ion-label class="invalid" *ngIf="formData.controls['password'].errors?.['required'] && formData.controls['password'].touched">
+            Contraseña inválida.
+          </ion-label>
+        </div>
+      </div>
+
+
+        <div class="inputdiv" >
+          <ion-label>Nombre</ion-label>
+          <ion-item color="transp" style="width: 140px;">
+            <ion-input type='text' required id="nombre" formControlName="nombre"></ion-input>
+          </ion-item>
+          <ion-label class="invalid" *ngIf="formData.controls['nombre'].errors?.['required'] && formData.controls['nombre'].touched">
+            Nombre inválido.
+          </ion-label>
+        </div>
+
+        <div class="inputdiv" style="margin-left: 5%;" *ngIf="authSrv.tipo === 'cliente'">
+          <ion-label>Apellido</ion-label>
+          <ion-item color="transp" style="width: 140px;">
+            <ion-input type='text' required id="apellido" formControlName="apellido"></ion-input>
+          </ion-item>
+          <ion-label class="invalid" *ngIf="formData.controls['apellido'].errors?.['required'] && formData.controls['apellido'].touched">
+            Apellido inválido.
+          </ion-label>
+        </div>
+
+        <div class="inputdiv" *ngIf="authSrv.tipo === 'cliente'">
+          <ion-label>DNI</ion-label>
+          <ion-item color="transp" style="width: 130px;">
+            <ion-input type='number' required id="dni" formControlName="dni"></ion-input>
+          </ion-item>
+          <ion-label class="invalid" *ngIf="formData.controls['dni'].errors?.['required'] && formData.controls['dni'].touched
+          || (formData.controls['dni'].errors?.['min'] || formData.controls['dni'].errors?.['max'])">
+              DNI inválido.
+          </ion-label>
+        </div>
+
+      <div>
+        <ion-label>Foto</ion-label >
+        <ion-button type="button" class="ingreso" fill="solid" expand="block" color="escanear" style="width: 80px; height: 45px" (click)="SacarFoto()"><ion-icon name="camera"></ion-icon></ion-button>
+        <ion-img class="foto" [src]='this.dataUrl' id="foto"></ion-img>
+      </div>
+
+      <ion-button type="submit" class="ingreso" fill="solid" expand="block" color="enviar" id="enviar" style="margin-top: 23px;" [disabled]="formData.invalid">Enviar</ion-button>
     </form>
 
 </ion-content>
