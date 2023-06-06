@@ -26,5 +26,7 @@
 |  2.c     | QR de la propina                                     |    Gamma   |   Ignacio   |            |
 |  2       | Diseñar Iconos y demás elementos visuales            |    Alfa    |   Daniel    |            |
 |  3       | Implementar Swipe en el Login                        |    Beta    |   Sergio    |            |
-|  4       | Alta cliente/anónimo                                 |    Beta    |   Sergio    |            |
+|  4       | Alta empleado                                        |    Alfa    |   Daniel    |            |
+|  5       | Alta cliente/anónimo                                 |    Beta    |   Sergio    |            |
+|  6       | Alta supervisor                                      |    Gamma   |   Ignacio   |            |
 |----------|------------------------------------------------------|------------|-------------|------------|
