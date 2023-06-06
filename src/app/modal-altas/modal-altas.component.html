@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Altas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="mostrarBotonesFlotantes" class="botones-flotantes">
+    <ion-button (click)="altaEmpleado()">Alta Empleado</ion-button>
+    <ion-button (click)="altaCliente()">Alta Cliente</ion-button>
+    <ion-button (click)="altaSupervisor()">Alta Supervisor</ion-button>
+  </div>
+</ion-content>
