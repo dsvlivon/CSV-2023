@@ -1,53 +1,81 @@
-
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-   
-    <ion-tab-button name="expandir" (click)="expandir()" *ngIf="!mostrarComponente && !mostrarColapsar">
+    
+    <ion-tab-button (click)="expandir()" *ngIf="!mostrarComponente && !mostrarColapsar">
       <ion-icon name="chevron-up-outline" aria-hidden="true"></ion-icon>
     </ion-tab-button>
 
-    <ion-tab-button name="colapsar" (click)="colapsar()" *ngIf="mostrarComponente && mostrarColapsar">
+    <ion-tab-button (click)="colapsar()" *ngIf="mostrarComponente && mostrarColapsar">
       <ion-icon name="chevron-down-outline" aria-hidden="true"></ion-icon>
-    </ion-tab-button>  </ion-tab-bar>
-
-  <ion-row *ngIf="mostrarComponente">
-    
-    <ion-tab-button name="altas" (click)="mostrarModalAltas()">
-      <ion-icon color="tertiary" name="add-circle-outline" aria-hidden="true"></ion-icon>
-      <ion-label>Altas</ion-label>
-    </ion-tab-button>
-    
-
-    <ion-tab-button (click)="goQr()">
-      <ion-icon color="primary" name="qr-code-outline" aria-hidden="true"></ion-icon>
-      <ion-label>Lector QR</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button (click)="goEncuestas()">
-      <ion-icon color="success" name="cash" aria-hidden="true"></ion-icon>
-      <ion-label>Encuestas</ion-label>
-    </ion-tab-button>
+  </ion-tab-bar>
 
-    <ion-tab-button (click)="goGestion()">
-      <ion-icon color="success" name="briefcase-outline" aria-hidden="true"></ion-icon>
-      <ion-label>Gestión</ion-label>
-    </ion-tab-button>
+  <ion-modal id="example-modal" #modal [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+    <ng-template>
+      <div class="wrapper" style="padding: 10px; padding-bottom: 30px">
+        
+        <ion-grid>
+        
+          <ion-row>
+            <button expand="full" class="btn btn-primary" style="
+              margin: 1rem;
+              width: 13rem;
+              font-size: 1.3rem;
+              text-shadow: 1px 1px 1px #000;
+              box-shadow: 2px 2px 4px #000;
+            " (click)="modal.dismiss()" (click)="altaSupervisor()">Alta Empleado</button>
+          </ion-row>
 
-    <ion-tab-button (click)="goDelivery()">
-      <ion-icon color="success" name="bicycle-outline" aria-hidden="true"></ion-icon>
-      <ion-label>Repartos</ion-label>
-    </ion-tab-button>
+          <ion-row>
+            <button expand="full" class="btn btn-primary" style="
+              margin: 1rem;
+              width: 13rem;
+              font-size: 1.3rem;
+              text-shadow: 1px 1px 1px #000;
+              box-shadow: 2px 2px 4px #000;
+            " (click)="modal.dismiss()" (click)="altaSupervisor()">Alta Supervisor</button>
+          </ion-row>
 
-    <!-- <ion-tab-button (click)="goJuegos()">
-      <ion-icon color="success" name="cash" aria-hidden="true"></ion-icon>
-      <ion-label>Juegos</ion-label>
-    </ion-tab-button> -->
+          <ion-row>
+            <button expand="full" class="btn btn-light" style="
+              margin: 1rem;
+              width: 13rem;
+              font-size: 1.3rem;
+              text-shadow: 1px 1px 1px #000;  
+              box-shadow: 2px 2px 4px #000;
+            " (click)="modal.dismiss()" (click)="seleccionarTipo('cliente')">Alta Cliente</button>
+          </ion-row>
 
-    <ion-tab-button (click)="logOut()">
-      <ion-icon color="danger" name="exit" aria-hidden="true"></ion-icon>
-      <ion-label>Salir</ion-label>
-    </ion-tab-button>
+        </ion-grid>        
+
+      </div>
+    </ng-template>  
+  </ion-modal>
+
+
+  <ion-row *ngIf="mostrarComponente" style="background-color: white !important; color: white;">
+         
+      <ion-tab-button id="open-custom-dialog" (click)="modal.present()">
+        <ion-icon color="light" name="add-circle-outline" aria-hidden="true"></ion-icon>
+        <ion-label>Altas</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="goQr()">
+        <ion-icon color="light" name="qr-code-outline" aria-hidden="true"></ion-icon>
+        <ion-label>Lector QR</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="goEncuestas()">
+        <ion-icon color="light" name="cash" aria-hidden="true"></ion-icon>
+        <ion-label>Encuestas</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button (click)="logOut()">
+        <ion-icon color="danger" name="exit" aria-hidden="true"></ion-icon>
+        <ion-label>Salir</ion-label>
+      </ion-tab-button>
+
+  
   </ion-row>
-    
-  <!-- </ion-tab-bar> -->
 </ion-tabs>

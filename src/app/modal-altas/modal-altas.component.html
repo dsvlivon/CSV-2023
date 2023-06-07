@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>Altas</ion-title>
     <ion-buttons slot="end">
@@ -7,12 +7,56 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content>
-  <div *ngIf="mostrarBotonesFlotantes" class="botones-flotantes">
-    <ion-button (click)="altaEmpleado()">Alta Empleado</ion-button>
-    <ion-button (click)="altaCliente()">Alta Cliente</ion-button>
-    <ion-button (click)="altaSupervisor()">Alta Supervisor</ion-button>
+<!-- <div class="modal-container">
+
+  <ion-buttons slot="end">
+    <ion-button (click)="dismiss()">
+      <ion-icon slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+
+  <div style="margin-top: 5rem; margin-left: 6.5rem;">
+    <ion-row style="background-color: rgb(139, 199, 252); width: 13rem; height: 60%; border-radius: 5px;" >
+      <ion-button (click)="altaEmpleado()" style="margin-left: 20px; margin-top: 10px;">Alta Empleado</ion-button>
+      <ion-button (click)="altaCliente()" style="margin-left: 20px; margin-top: 10px;">Alta Cliente</ion-button>
+      <ion-button (click)="altaSupervisor()" style="margin-left: 20px; margin-top: 10px;">Alta Supervisor</ion-button>
+    </ion-row>
   </div>
-</ion-content>
+
+  <div style="margin-top: 30rem; margin-left: 6.5rem;">
+    <ion-row style="background-color: rgb(139, 199, 252); width: 13rem; height: 35%; border-radius: 5px;" >
+      <ion-button style="margin-left: 20px; margin-top: 10px;">Alta Producto</ion-button>
+      <ion-button style="margin-left: 20px; margin-top: 10px;">Alta Yegua</ion-button>
+    </ion-row>
+  </div>
+
+</div> -->
+
+
+<ion-grid [fixed]="true">
+
+    <ion-row>
+      <ion-buttons>
+        <ion-button (click)="dismiss()">
+          <ion-icon expand="full" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-row>
+    
+    <ion-row>
+      <ion-button expand="full" (click)="altaEmpleado()" style="margin-left: 20px; margin-top: 10px;">Alta Empleado</ion-button>
+    </ion-row>
+
+    <ion-row>
+      <ion-button expand="full" (click)="altaCliente()" style="margin-left: 20px; margin-top: 10px;">Alta Cliente</ion-button>
+    </ion-row>
+
+    <ion-row>
+      <ion-button expand="full" (click)="altaSupervisor()" style="margin-left: 20px; margin-top: 10px;">Alta Supervisor</ion-button>
+    </ion-row>
+    
+</ion-grid>
+
+
