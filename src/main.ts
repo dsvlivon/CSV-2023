@@ -4,6 +4,7 @@ import { RouteReuseStrategy, provideRouter } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { environment } from './environments/environment';
@@ -20,6 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { provideFirebaseApp, initializeApp, firebaseApp$ } from '@angular/fire/app';
+
 
 
 if (environment.production) {
@@ -44,6 +46,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     importProvidersFrom(AngularFireModule.initializeApp(environment.firebaseConfig)),
     importProvidersFrom(provideAuth(() => getAuth())),
-    importProvidersFrom(provideFirestore(() => getFirestore()))
+    importProvidersFrom(provideFirestore(() => getFirestore())),
+    importProvidersFrom(provideStorage(() => getStorage()))
   ],
 }).catch((err) => console.log(err));
