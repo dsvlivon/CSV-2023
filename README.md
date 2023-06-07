@@ -15,7 +15,7 @@
 |----------|------------------------------------------------------|------------|-------------|------------|
 |          |  **Sprint 2: Implementación de Altas**               |            | prox. fecha:|  03/06/23  |
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
-| **1.b**  | **Diseñar componenetes menu Flotante**               |    Alfa    |   Daniel    | **Activo** |
+| **1.b**  | **Diseñar componenetes menu Flotante**               |    Alfa    |   Daniel    |**Resuelto**|
 | **2.a**  | **Corrección de Icóno**                              |    Alfa    |   Daniel    |**Pendiente**|
 | **4.a**  | **Corrección de splash 1 y 2**                       |    Alfa    |   Daniel    |**Pendiente**|
 | **7**    | **Crear la página de inicio de sesión**              |    Gamma   |   Ignacio   |**Resuelto**|
@@ -30,7 +30,8 @@
 |  12.1    | Alta cliente/anónimo                                 |    Beta    |   Sergio    |   Activo   |
 |  12.2    | Alta empleado                                        |    Alfa    |   Daniel    |            |
 |  12.3    | Alta supervisor                                      |    Gamma   |   Ignacio   |            |
-|  13      | Implementar servicio de mail notification            |    Alfa    |   Daniel    |            |
+|  13      | Implementar servicio de mail notification            |    Alfa    |   Daniel    |  Resuelto  |
+|  13.1    | Testear funcionmiento                                |    Alfa    |   Daniel    |            |
 |  14      | Implementar servicio de push notification            |    Gamma   |   Ignacio   |            |
 |----------|------------------------------------------------------|------------|-------------|------------|
 
