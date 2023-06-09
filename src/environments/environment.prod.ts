@@ -1,5 +1,7 @@
 export const environment = {
   production: true,
+  fcmUrl: 'https://fcm.googleapis.com/fcm/send',
+  fcmServerKey: 'AAAA9z3R0sw:APA91bFDUFHiXabZTgXhGMiJGpbCLkN3dXaaNLxsJH6Omtia_MkOjMHKuugSNnhWWtu-JI1j_9uMqSdRs4KvONkeRkqcRXOeRmLqv8crINOWinf7rQWPQznawLxvdLj5xaYppZwnSYL5',
   firebaseConfig: {
     apiKey: "AIzaSyBLBsGpihjSpELSpOGdlU2z_O-XFbgg66M",
     authDomain: "pps-sp-dbb7b.firebaseapp.com",

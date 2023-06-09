@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { FirestoreService } from '../services/firestore.service';
 import { Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
+import { PushnotificationService } from '../services/pushnotification.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +24,7 @@ export class LoginPage implements OnInit {
   error: boolean = false;
   message: string = '';
 
-  constructor(private fb: FormBuilder, private router: Router, private animationCtrl: AnimationController) { }
+  constructor(private fb: FormBuilder, private router: Router, private animationCtrl: AnimationController, private firestoreService: FirestoreService, private pnService: PushnotificationService) { }
 
   ngOnInit() {
     this.formData = this.fb.group({
@@ -62,6 +64,13 @@ export class LoginPage implements OnInit {
     const form = this.formData.value;
     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
       console.log(resp);
+      const sub = this.firestoreService.getByMail(form.email).subscribe((data)=>{
+        //console.log(data);
+        this.pnService.getUser(data);
+        //console.log(data);
+        sub.unsubscribe();
+      });
+      //sub.unsubscribe();
       this.router.navigate(['/home']);
       return user;
     }).catch(err => {
