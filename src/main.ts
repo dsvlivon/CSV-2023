@@ -21,6 +21,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { provideFirebaseApp, initializeApp, firebaseApp$ } from '@angular/fire/app';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -47,6 +48,7 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(AngularFireModule.initializeApp(environment.firebaseConfig)),
     importProvidersFrom(provideAuth(() => getAuth())),
     importProvidersFrom(provideFirestore(() => getFirestore())),
-    importProvidersFrom(provideStorage(() => getStorage()))
+    importProvidersFrom(provideStorage(() => getStorage())),
+    importProvidersFrom(HttpClientModule)
   ],
 }).catch((err) => console.log(err));

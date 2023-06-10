@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { User2 } from '../shared/user2.interface';
 import { AuthService } from './auth.service';
 
@@ -14,19 +14,52 @@ export class FirestoreService {
   user: any;
   collection = 'usuarios';
   ref: AngularFirestoreCollection;
+  ref2: AngularFirestoreCollection;
   constructor(private angularFirestore: AngularFirestore, private authSrv: AuthService) {
     this.ref = this.angularFirestore.collection<User2>(this.collection);
+    this.ref2 = this.angularFirestore.collection<any>('token');
     this.authSrv.user$.subscribe(user => {
       this.user = user;
     })
   }
 
-  async addUser(user: User2) {
+  async addUser(user: User2, id: string) {
     try {
-      return this.ref.doc(this.user.uid).set({ ...user });
+      return this.ref.doc(id).set({ ...user });
     } catch (error) {
       console.log(error)
     }
+  }
+
+  async addToken(token: any){
+    try{
+        return this.ref2.doc().set(token);
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+
+  getByMail(mail: string) {
+    const collection = this.angularFirestore.collection<any>(
+      'usuarios',
+      (ref) => ref.where('mail', '==', mail)
+    );
+    collection.valueChanges().subscribe(data => {
+      //console.log("xxx:", data);
+    });
+
+    return collection.valueChanges();
+  }
+
+  async updateUsuario(id: string, token: any) {
+    await this.angularFirestore
+      .doc<any>(`usuarios/${id}`)
+      .update(token)
+      .then(() => {})
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
   /*  createMonthlyControl(control: any) {

@@ -40,9 +40,9 @@ notificationInabled(model: User2) {
 
 notificationStatus(model: User2) {
     let template = {
-        from_name: "La Comanda",
+        from_name: "La Comanda CSV",
         to: model.correo,
-        client_name: model.nombre,
+        to_name: model.nombre,
         message: "Usted se encuentra actualmente en estado " + model.estado + " para ingresar al local.",
     }
 

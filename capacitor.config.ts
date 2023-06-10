@@ -1,11 +1,19 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.la-comanda',
-  appName: 'la-comanda',
+  appId: 'com.lacomanda.app',
+  appName: 'La Comanda',
   webDir: 'www',
   bundledWebRuntime: false,
-  "plugins": {}
+  "plugins": {
+    "PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		}
+  }
 };
 
 export default config;

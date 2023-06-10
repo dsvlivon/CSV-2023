@@ -78,10 +78,11 @@
           <ion-row>
             <ion-col size="6">
               <div *ngIf="authSrv.tipo === 'cliente'">
-                <ion-input type='email' label="Correo electrónico" label-placement="floating" fill="solid" required
-                  formControlName="email" placeholder="Ingrese su Correo electrónico"></ion-input>
-                <ion-label class="invalid" *ngIf="formData.controls['email'].errors?.['required'] && formData.controls['email'].touched
-                || formData.controls['email'].errors?.['email']">
+                <ion-input type='email' label="Correo electrónico" label-placement="floating" fill="solid"
+                  formControlName="correo" required>
+                </ion-input>
+                <ion-label class="invalid" *ngIf="formData.controls['correo'].errors?.['required'] && formData.controls['correo'].touched
+                || formData.controls['correo'].errors?.['correo']">
                   Correo inválido.
                 </ion-label>
               </div>
@@ -98,14 +99,14 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-        <ion-button type="submit" class="ingreso" fill="solid" expand="block"
-      style="margin-top: 23px;" [disabled]="formData.invalid">Enviar</ion-button>
+        <ion-button type="submit" class="ingreso" fill="solid" expand="block" style="margin-top: 23px;"
+          (click)="Registro()">Enviar</ion-button>
       </ion-card-content>
     </ion-card>
 
     <ion-button (click)="pruebaMail()"> Holaaa</ion-button>
 
-    
+
   </form>
 
 </ion-content>
@@ -120,6 +121,6 @@
   </ion-fab-button>
 </ion-fab>
 <ion-footer>
-  <ion-toolbar >
+  <ion-toolbar>
   </ion-toolbar>
 </ion-footer>

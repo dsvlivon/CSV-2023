@@ -29,20 +29,21 @@ export class CamaraService {
     });
   }
 
-  async addNewToGallery(photo: any, type: number) {
+  async addNewToGallery(data: any) {
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera,
       quality: 100,
+      width: 800,
+      height: 800,
       webUseInput: true,
     });
 
     const storage = getStorage();
     const date = new Date().getTime();
 
-    photo.hour = date;
 
-    const name = `${this.user.mail} ${date}`;
+    const name = `${data} ${date}`;
     const storageRef = ref(storage, name);
     console.log("photoservice storageRef: "+ name);
     const url = this.angularFirestorage.ref(name);
@@ -50,11 +51,11 @@ export class CamaraService {
 
     uploadString(storageRef, capturedPhoto.dataUrl, 'data_url').then(() => {
       url.getDownloadURL().subscribe((url1: any) => {
-        photo.pathFoto = url1;
         //this.firestoreService.addPhoto(photo, type);
         // this.authService.toast('Foto subida con exito', 'success');
       });
     });
+    return capturedPhoto.dataUrl;
   } // end of addNewToGallery
 
 }

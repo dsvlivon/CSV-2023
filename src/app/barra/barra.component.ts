@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AnimationController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { ModalAltasComponent } from '../modal-altas/modal-altas.component';
 
 
 @Component({
