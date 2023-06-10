@@ -1,3 +1,5 @@
+
+
 |          |  **Sprint 1: Inicio de Proyecto**                    |            | prox. fecha:|  27/05/23  |
 |----------|------------------------------------------------------|------------|-------------|------------|
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
@@ -28,12 +30,15 @@
 |  11      | Implementar Swipe en el Inicio de Sesión             |    Beta    |   Sergio    |  Resuelto  |
 |  12      | Implementar sistema de altas                         |    Beta    |   Sergio    |   Activo   |
 |  12.1    | Alta cliente/anónimo                                 |    Beta    |   Sergio    |   Activo   |
-|  12.2    | Alta empleado                                        |    Alfa    |   Daniel    |            |
-|  12.3    | Alta supervisor                                      |    Gamma   |   Ignacio   |            |
+|  12.2    | Alta empleado                                        |    Alfa    |   Daniel    |   Activo   |
+|  12.3    | Alta supervisor                                      |    Gamma   |   Ignacio   |   Activo   |
 |  13      | Implementar servicio de mail notification            |    Alfa    |   Daniel    |  Resuelto  |
-|  13.1    | Testear funcionmiento                                |    Alfa    |   Daniel    |            |
-|  14      | Implementar servicio de push notification            |    Gamma   |   Ignacio   |            |
-|----------|------------------------------------------------------|------------|-------------|------------|
+|  13.1    | Testear funcionmiento                                |    Alfa    |   Daniel    |  Resuelto  |
+|  14      | Implementar servicio de push notification            |    Gamma   |   Ignacio   |  Resuelto  |
+|  14.1    | Testear funcionmiento                                |    Gamma   |   Ignacio   |  Resuelto  |
+
+*Link a minutas de clases: [Minutas.txt](https://github.com/dsvlivon/CSV-2023/files/11712441/Minutas.txt)
+
 
 **Diseño de Incio de Sesión con 'Swipe' de accesos rapidos**
 ![image](https://github.com/dsvlivon/CSV-2023/assets/52511637/2cdf6c49-1ea4-4b43-8daa-128d2113da87)
@@ -41,3 +46,7 @@
 **Menú rápido para Registro de Anónimo/Cliente**
 
 ![image](https://github.com/dsvlivon/CSV-2023/assets/52511637/9fbdb89b-3765-4d53-998e-33ebde3bc38c)
+
+**Diseño de Icon**
+![icon_chico](https://github.com/dsvlivon/CSV-2023/assets/52511637/ab4b7b23-668d-4da7-b55f-712ee1c7d7f6)
+
