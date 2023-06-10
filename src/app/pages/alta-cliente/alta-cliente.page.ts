@@ -1,7 +1,8 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { MailService } from 'src/app/services/mail.service';
+import { User2 } from '../../shared/user2.interface';
 import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -18,7 +19,10 @@ export class AltaClientePage implements OnInit {
   dataUrl = '../../../assets/images/clientes/usuario.png'
   formData: FormGroup;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(
+    private fb: FormBuilder,
+    private mailService: MailService,
+    ) { 
     console.log(this.authSrv.tipo)
   }
 
@@ -39,5 +43,21 @@ export class AltaClientePage implements OnInit {
 
   SacarFoto() {
 
+  }
+  pruebaMail(){
+    const user: User2 = {
+      uid: '123456789',
+      nombre: 'Ignacio',
+      apellido: 'Sanabria',
+      dni: 12345678,
+      img: 'ruta/a/imagen.png',
+      correo: 'nachoutnfra@gmail.com',
+      fechaCreacion: Date.now(),
+      estado: 'PENDIENTE',
+      perfil: 'CLIENTE',
+      rol: 'COCINERO',
+      cuil: 1234567890
+    };
+    this.mailService.notificationStatus(user);
   }
 }
