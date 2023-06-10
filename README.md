@@ -50,3 +50,8 @@
 **Diseño de Icon**
 ![icon_chico](https://github.com/dsvlivon/CSV-2023/assets/52511637/ab4b7b23-668d-4da7-b55f-712ee1c7d7f6)
 
+**Diseño de Tarjetas de perfiles**
+![muestra d iconos](https://github.com/dsvlivon/CSV-2023/assets/52511637/0701efd4-31de-4942-88e0-30d8a9c4aff0)
+
+**Diseño de QR**
+![muestra d QR](https://github.com/dsvlivon/CSV-2023/assets/52511637/a20cda64-e6de-42d6-8448-a268821d5dd0)
