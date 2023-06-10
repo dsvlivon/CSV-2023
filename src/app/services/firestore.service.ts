@@ -23,9 +23,9 @@ export class FirestoreService {
     })
   }
 
-  async addUser(user: User2) {
+  async addUser(user: User2, id: string) {
     try {
-      return this.ref.doc(this.user.uid).set({ ...user });
+      return this.ref.doc(id).set({ ...user });
     } catch (error) {
       console.log(error)
     }
