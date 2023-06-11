@@ -1,13 +1,16 @@
-<ion-header>
+<ion-header *ngIf="!scanActive">
   <ion-toolbar>
     <ion-title><img src="../../../assets/icon/icon.png" alt=""></ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content slot="fixed">
-  <h1 style="text-align: center;" *ngIf="authSrv.tipo === 'cliente'">Registro Cliente</h1>
-  <h1 style="text-align: center;" *ngIf="authSrv.tipo === 'anonimo'">Registro Anónimo</h1>
+<ion-content slot="fixed" [ngClass]="scanActive?'scanner-activo':''">
+  <div *ngIf="!scanActive">
 
-  <form [formGroup]="formData">
+    <h1 style="text-align: center;" *ngIf="authSrv.tipo === 'cliente'">Registro Cliente</h1>
+    <h1 style="text-align: center;" *ngIf="authSrv.tipo === 'anonimo'">Registro Anónimo</h1>
+  </div>
+
+  <form [formGroup]="formData" *ngIf="!scanActive">
     <ion-card>
       <ion-card-header>
         <ion-card-subtitle style="color:white">Ingrese sus datos</ion-card-subtitle>
@@ -38,7 +41,7 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col size="12">
+            <ion-col size="6">
               <div *ngIf="authSrv.tipo === 'cliente'">
                 <ion-input type="text" label="Apellido" label-placement="floating" fill="solid"
                   placeholder="Ingrese su Apellido" formControlName="apellido" required></ion-input>
@@ -48,9 +51,6 @@
                 </ion-label>
               </div>
             </ion-col>
-          </ion-row>
-
-          <ion-row>
             <ion-col size="6">
               <div *ngIf="authSrv.tipo === 'cliente'">
                 <ion-input type="number" label="DNI" label-placement="floating" fill="solid"
@@ -62,8 +62,11 @@
                 </ion-label>
               </div>
             </ion-col>
-            <ion-col size="6">
-              <!--  -->
+          </ion-row>
+
+          <ion-row>
+
+            <!-- <ion-col size="6">
               <div *ngIf="authSrv.tipo === 'cliente'">
                 <ion-input type="number" label="CUIL" label-placement="floating" fill="solid"
                   placeholder="Ingrese su CUIL(Solo números, sin guiones)" formControlName="cuil" required></ion-input>
@@ -73,10 +76,10 @@
                   Se debe ingresar un CUIL.
                 </ion-label>
               </div>
-            </ion-col>
+            </ion-col> -->
           </ion-row>
           <ion-row>
-            <ion-col size="6">
+            <ion-col size="12">
               <div *ngIf="authSrv.tipo === 'cliente'">
                 <ion-input type='email' label="Correo electrónico" label-placement="floating" fill="solid"
                   formControlName="correo" required>
@@ -87,6 +90,9 @@
                 </ion-label>
               </div>
             </ion-col>
+          </ion-row>
+
+          <ion-row>
             <ion-col size="6">
               <div *ngIf="authSrv.tipo === 'cliente'">
                 <ion-input type='password' label="Contraseña" label-placement="floating" fill="solid" required
@@ -97,30 +103,65 @@
                 </ion-label>
               </div>
             </ion-col>
+            <ion-col size="6">
+              <div *ngIf="authSrv.tipo === 'cliente'">
+                <ion-input type='password' label="Confirmar Contraseña" label-placement="floating" fill="solid" required
+                  formControlName="confirmPassword" placeholder="Ingrese su contraseña"></ion-input>
+                <ion-label class="invalid"
+                  *ngIf="formData.controls['confirmPassword'].errors?.['required'] && formData.controls['confirmPassword'].touched">
+                  Contraseña inválida.
+                </ion-label>
+              </div>
+            </ion-col>
           </ion-row>
         </ion-grid>
         <ion-button type="submit" class="ingreso" fill="solid" expand="block" style="margin-top: 23px;"
           (click)="Registro()">Enviar</ion-button>
       </ion-card-content>
     </ion-card>
-
-
-
-
   </form>
+
+  <div class="visor" *ngIf="scanActive">
+    <h2 class="titulo" *ngIf="scanActive">ESCANEANDO...</h2>
+    <p class="monto" [ngClass]="scanActive?'scanner-activo-visor':''">
+      <span></span>
+    </p>
+  </div>
+  <div class="centrado">
+    <button
+      class="escanear"
+      expand="block"
+      type="button"
+      (click)="stopScan()"
+      *ngIf="scanActive"
+    >
+      <ion-text
+        style="
+          color: #fff;
+          text-shadow: 2px 2px 4px #000;
+          font-size: 1.7rem;
+          font-family: fantasy;
+        "
+        >DETENER <ion-icon name="qr-code-outline"></ion-icon
+      ></ion-text>
+    </button>
+  </div>
 
 </ion-content>
 
-<ion-fab horizontal="center" vertical="bottom" *ngIf="authSrv.tipo === 'cliente'">
-  <ion-fab-button data-desc2="">
-  </ion-fab-button>
-</ion-fab>
-<ion-fab horizontal="center" vertical="bottom" *ngIf="authSrv.tipo === 'cliente'">
-  <ion-fab-button data-desc="Escanear DNI">
-    <ion-icon name="barcode-outline"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
-<ion-footer>
+<div *ngIf="!scanActive">
+
+  <ion-fab horizontal="center" vertical="bottom" *ngIf="authSrv.tipo === 'cliente'">
+    <ion-fab-button data-desc2="">
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab horizontal="center" vertical="bottom" *ngIf="authSrv.tipo === 'cliente'" (click)="escanearQR()">
+    <ion-fab-button data-desc="Escanear DNI">
+      <ion-icon name="barcode-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>
+<ion-footer *ngIf="!scanActive">
   <ion-toolbar>
   </ion-toolbar>
 </ion-footer>
