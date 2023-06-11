@@ -4,13 +4,13 @@
 |----------|------------------------------------------------------|------------|-------------|------------|
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
 |  1       | Crear la estructura básica del proyecto              |    Alfa    |   Daniel    |  Resuelto  |
-|  1.a     | Diseñar componenetes menu Barra                      |    Alfa    |   Daniel    |  Resuelto  |
-|  1.b     | Diseñar componenetes menu Flotante                   |    Gamma   |   Ignacio   | **Nuevo**  |
+|  1.a     |    Diseñar componenetes menu Barra                   |    Alfa    |   Daniel    |  Resuelto  |
+|  1.b     |    Diseñar componenetes menu Flotante                |    Gamma   |   Ignacio   | **Nuevo**  |
 |  2       | Diseñar Iconos y demás elementos visuales            |    Alfa    |   Daniel    |  Resuelto  |
 |  2.a     | Corrección de Icóno                                  |    Alfa    |   Daniel    |**Pendiente**|
 |  3       | Crear Base de datos y autenticación en FireBase      |    Alfa    |   Daniel    |  Resuelto  |
 |  4       | Crear Splash dinámico y estático                     |    Alfa    |   Daniel    |  Resuelto  |
-|  4.a     | Corrección de splash 1 y 2                           |    Alfa    |   Daniel    |**Pendiente**|
+|  4.a     |    Corrección de splash 1 y 2                        |    Alfa    |   Daniel    |**Pendiente**|
 |  5       | Implementar la funcionalidad de Inicio de sesión     |    Beta    |   Sergio    |  Resuelto  |
 |  6       | Implementar la funcionalidad de Registro de usuarios |    Beta    |   Sergio    |  Resuelto  |
 |  7       | Crear la página de inicio de sesión                  |    Gamma   |   Ignacio   |**Pendiente**|
@@ -21,23 +21,36 @@
 | **2.a**  | **Corrección de Icóno**                              |    Alfa    |   Daniel    |**Pendiente**|
 | **4.a**  | **Corrección de splash 1 y 2**                       |    Alfa    |   Daniel    |**Pendiente**|
 | **7**    | **Crear la página de inicio de sesión**              |    Gamma   |   Ignacio   |**Resuelto**|
-|  8       | Implementar sistema de Roles y Permisos              |    Beta    |   Sergio    |  Resuelto  |
-|  9       | Resolver funcionalidad de fotos y scan QR            |    Gamma   |   Ignacio   |  Activo    |
-|  9.a     | QR de ingreso a local                                |    Gamma   |   Ignacio   |  Resuelto  |
-|  9.b     | QR de la mesa                                        |    Gamma   |   Ignacio   |  Resuelto  |
-|  9.c     | QR de la propina                                     |    Gamma   |   Ignacio   |  Activo    |
+|  8       | Crear sistema de Roles y Permisos                    |    Beta    |   Sergio    |  Resuelto  |
+|  9       | Resolver funcionalidad de fotos y scan QR            |    Gamma   |   Ignacio   |  Resuelto  |
+|  9.a     |    QR de ingreso a local/mesa/propinas               |    Gamma   |   Ignacio   |  Resuelto  |
+|  9.b     |    Implementar servicio de QR                        |    Beta    |   Sergio    |  Resuelto  |
 |  10      | Diseñar QRs                                          |    Alfa    |   Daniel    |  Resuelto  |
 |  11      | Implementar Swipe en el Inicio de Sesión             |    Beta    |   Sergio    |  Resuelto  |
-|  12      | Implementar sistema de altas                         |    Beta    |   Sergio    |   Activo   |
-|  12.1    | Alta cliente/anónimo                                 |    Beta    |   Sergio    |   Activo   |
-|  12.2    | Alta empleado                                        |    Alfa    |   Daniel    |   Activo   |
-|  12.3    | Alta supervisor                                      |    Gamma   |   Ignacio   |   Activo   |
-|  13      | Implementar servicio de mail notification            |    Alfa    |   Daniel    |  Resuelto  |
-|  13.1    | Testear funcionmiento                                |    Alfa    |   Daniel    |  Resuelto  |
-|  14      | Implementar servicio de push notification            |    Gamma   |   Ignacio   |  Resuelto  |
-|  14.1    | Testear funcionmiento                                |    Gamma   |   Ignacio   |  Resuelto  |
+|  12      | Crear Sistema de Altas                               |    Beta    |   Sergio    |   Activo   |
+|  12.a    |    Alta cliente/anónimo                              |    Beta    |   Sergio    |   Activo   |
+|  12.b    |    Alta empleado                                     |    Alfa    |   Daniel    |   Activo   |
+|  12.c    |    Alta supervisor                                   |    Gamma   |   Ignacio   |   Activo   |
+|  13      | Crear servicio de mail notification                  |    Alfa    |   Daniel    |  Resuelto  |
+|  13.a    |    Testear funcionmiento                             |    Alfa    |   Daniel    |  Resuelto  |
+|  13.b    |    Implementar servicio de mail notification         |    Beta    |   Sergio    |  Resuelto  |
+|  14      | Crear servicio de push notification                  |    Gamma   |   Ignacio   |  Resuelto  |
+|  14.a    |    Testear funcionmiento                             |    Gamma   |   Ignacio   |  Resuelto  |
+|  14.b    |     Implementar servicio de push notification        |    Beta    |   Sergio    |  Resuelto  |
+|  15      | Crear Spinner Component                              |    Alfa    |   Daniel    |  Resuelto  |
+|----------|------------------------------------------------------|------------|-------------|------------|
+|          |  **Sprint 3: Completar Altas**                       |            | prox. fecha:|  17/06/23  |
+|  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
+|**12**    | **Crear Sistema de Altas**                           |    Beta    |   Sergio    | **Activo** |
+|**12.a**  |  **Alta cliente/anónimo**                            |    Beta    |   Sergio    | **Activo** |
+|**12.b**  |  **Alta empleado**                                   |    Alfa    |   Daniel    | **Activo** |
+|**12.c**  |  **Alta supervisor**                                 |    Gamma   |   Ignacio   | **Activo** |
+|  16      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+|  17      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+|  18      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
 
-*Link a minutas de clases: [Minutas.txt](https://github.com/dsvlivon/CSV-2023/files/11712441/Minutas.txt)
+*El equipo de CSV trackea sus decisiones, correciones y otros topics con minutas, comúnmente realizadas después de cada clase.
+**Link a Minutas:** [Minutas.txt](https://github.com/dsvlivon/CSV-2023/files/11712441/Minutas.txt)
 
 
 **Diseño de Incio de Sesión con 'Swipe' de accesos rapidos**
