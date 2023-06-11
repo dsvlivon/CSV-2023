@@ -66,12 +66,14 @@ export class LoginPage implements OnInit {
       console.log(resp);
       const sub = this.firestoreService.getByMail(form.email).subscribe((data)=>{
         //console.log(data);
-        this.pnService.getUser(data);
+        this.pnService.getUser(data[0]);
         //console.log(data);
-        sub.unsubscribe();
+        //sub.unsubscribe();
       });
       //sub.unsubscribe();
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home']).then(()=>{
+        sub.unsubscribe();
+      })
       return user;
     }).catch(err => {
       console.log(err);

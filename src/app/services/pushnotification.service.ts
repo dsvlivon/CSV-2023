@@ -49,8 +49,11 @@ export class PushnotificationService {
     //   this.inicializar();
     // });
       this.user = user;
+      console.log(this.user);
+      //this.firestoreService.updateUsuario(this.user.)
       //console.log(this.user);
-      //const token = {token: "lala"}
+      //const token = {token: "lala"};
+      //this.firestoreService.updateUsuario(this.user.uid,token);
       //this.firestoreService.addToken(token);
       this.inicializar();
   }
@@ -73,14 +76,10 @@ export class PushnotificationService {
       async (token: Token) => {
         //alert("TOKEN: "+token.value);
         const tokenBD = {token: token.value};
-        this.firestoreService.addToken(tokenBD);
+        //this.firestoreService.addToken(tokenBD);
         //Acá deberiamos asociar el token a nuestro usario en nuestra bd
         //alert('Registration token: '+token.value);
-        /*this.user.token = token.value;
-        const tokenBD = {
-          token: token.value
-        }*/
-        //this.firestoreService.updateUsuario(this.user.uid,tokenBD);
+        this.firestoreService.updateUsuario(this.user.uid,tokenBD);
         //alert(JSON.stringify(this.user));
         /*const aux = doc(this.firestore, `usuarios/${this.user.id}`);
         await updateDoc(aux, {
@@ -137,9 +136,34 @@ export class PushnotificationService {
 
   enviarNotificacionUsuarios(perfil:string, titulo:string, body:string, rol:any = false)
   {
-    //console.log('entra');
     let usuariosTokens: any[] = [];
     let sub:any;
+    if(rol){
+      sub = this.firestoreService.getByRol(perfil);
+    }
+    else{
+      sub = this.firestoreService.getByPerfil(perfil);
+    }
+
+    let sub2 = sub.subscribe((data) => {
+      console.log(data);
+        data.forEach(element => {
+          usuariosTokens.push(element.token);
+          console.log('token', element.token);
+        });
+        console.log('usuariosTokens', usuariosTokens);
+      let push = this.sendPushNotification({
+        registration_ids: usuariosTokens,
+        notification:{
+          title: titulo,
+          body: body
+        }
+      }).subscribe((data) => {
+        console.log(data);
+        push.unsubscribe();
+      });
+      sub2.unsubscribe();
+    });
   }
 
 

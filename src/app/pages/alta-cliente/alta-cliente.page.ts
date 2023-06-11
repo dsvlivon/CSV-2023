@@ -13,6 +13,7 @@ import { getStorage, ref, uploadString } from '@angular/fire/storage';
 import { FirestorageService } from 'src/app/services/firestorage.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { QrscannerService } from 'src/app/services/qrscanner.service';
+import { PushnotificationService } from 'src/app/services/pushnotification.service';
 
 @Component({
   selector: 'app-alta-cliente',
@@ -35,7 +36,8 @@ export class AltaClientePage implements OnInit {
     private route: Router,
     private camera: CamaraService,
     private qrScanner: QrscannerService,
-    private emailSrv: MailService) {
+    private emailSrv: MailService,
+    private pnService: PushnotificationService) {
   }
 
   ngOnInit() {
@@ -85,6 +87,8 @@ export class AltaClientePage implements OnInit {
         console.log('esto es respuesta auth', resp);
         this.firestore.addUser(datos, resp.user.uid);
         this.emailSrv.notificationInabled(datos);
+        this.pnService.enviarNotificacionUsuarios('DUENIO', 'Nuevo registro', 'Un nuevo cliente se registro, se encuentra pendiente de habilitación');
+        this.pnService.enviarNotificacionUsuarios('SUPERVISOR', 'Nuevo registro', 'Un nuevo cliente se registro, se encuentra pendiente de habilitación');
       }).catch(err => {
         console.log(err);
       })

@@ -52,13 +52,39 @@ export class FirestoreService {
     return collection.valueChanges();
   }
 
+  getByRol(rol: string) {
+    const collection = this.angularFirestore.collection<any>(
+      'usuarios',
+      (ref) => ref.where('rol', '==', rol)
+    );
+    collection.valueChanges().subscribe(data => {
+      //console.log("xxx:", data);
+    });
+
+    return collection.valueChanges();
+  }
+
+  getByPerfil(perfil: string) {
+    const collection = this.angularFirestore.collection<any>(
+      'usuarios',
+      (ref) => ref.where('perfil', '==', perfil)
+    );
+    collection.valueChanges().subscribe(data => {
+      //console.log("xxx:", data);
+    });
+
+    return collection.valueChanges();
+  }
+
   async updateUsuario(id: string, token: any) {
+    //console.log(id);
+    //console.log(token);
     await this.angularFirestore
       .doc<any>(`usuarios/${id}`)
       .update(token)
       .then(() => {})
       .catch((error) => {
-        console.log(error.message);
+        //console.log(error.message);
       });
   }
 
