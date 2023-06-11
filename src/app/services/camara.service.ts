@@ -38,12 +38,13 @@ export class CamaraService {
       height: 800,
       webUseInput: true,
     });
+     
+    return data.img = capturedPhoto.dataUrl;
+    /* const storage = getStorage();
+    const date = Date.now();
 
-    const storage = getStorage();
-    const date = new Date().getTime();
 
-
-    const name = `${data} ${date}`;
+    const name = `${data.nombre} ${date}`;
     const storageRef = ref(storage, name);
     console.log("photoservice storageRef: "+ name);
     const url = this.angularFirestorage.ref(name);
@@ -51,11 +52,12 @@ export class CamaraService {
 
     uploadString(storageRef, capturedPhoto.dataUrl, 'data_url').then(() => {
       url.getDownloadURL().subscribe((url1: any) => {
-        //this.firestoreService.addPhoto(photo, type);
-        // this.authService.toast('Foto subida con exito', 'success');
+        console.log(url1);
+        data.img = url1;
+
       });
-    });
-    return capturedPhoto.dataUrl;
+    }); */
+
   } // end of addNewToGallery
 
 }
