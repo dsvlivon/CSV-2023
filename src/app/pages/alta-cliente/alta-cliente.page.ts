@@ -11,6 +11,7 @@ import { CamaraService } from 'src/app/services/camara.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { getStorage, ref, uploadString } from '@angular/fire/storage';
 import { FirestorageService } from 'src/app/services/firestorage.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-alta-cliente',
@@ -21,12 +22,16 @@ import { FirestorageService } from 'src/app/services/firestorage.service';
 })
 export class AltaClientePage implements OnInit {
   authSrv = inject(AuthService);
-  
+
   dataUrl = '../../../assets/images/clientes/usuario.png'
   formData: FormGroup;
 
-  constructor(private fb: FormBuilder, private firestore: FirestoreService, private angularFirestorage: FirestorageService, private route: Router, private camera: CamaraService ) { 
-    console.log(this.authSrv.tipo)
+  constructor(private fb: FormBuilder, 
+              private firestore: FirestoreService, 
+              private firestorageSrv: FirestorageService,
+              private firestorage: AngularFireStorage, 
+              private route: Router, 
+              private camera: CamaraService) {
   }
 
   ngOnInit() {
@@ -36,14 +41,14 @@ export class AltaClientePage implements OnInit {
       'nombre': ['', Validators.required],
       'apellido': ['', Validators.required],
       'dni': ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]],
-      'cuil': ['', [Validators.required ]],
-      
+      'cuil': ['', [Validators.required]],
+
     });
   }
 
   async Registro() {
     const form = this.formData.value;
-    if(this.authSrv.tipo === 'anonimo') {
+    if (this.authSrv.tipo === 'anonimo') {
       const email = form.nombre + '@anonymous.com';
       const password = '123456'
       let datos: User2 = {
@@ -51,7 +56,7 @@ export class AltaClientePage implements OnInit {
         img: this.dataUrl,
         perfil: 'ANONIMO',
       }
-      
+
       const user = await this.authSrv.registerUser(email, password).then((resp) => {
         console.log('esto es respuesta auth', resp);
         this.firestore.addUser(datos, resp.user.uid)
@@ -65,7 +70,7 @@ export class AltaClientePage implements OnInit {
         apellido: form.apellido,
         dni: form.dni,
         img: this.dataUrl,
-        correo: form.email,
+        correo: form.correo,
         password: form.password,
         perfil: 'CLIENTE',
         fechaCreacion: new Date().getDate(),
@@ -82,10 +87,27 @@ export class AltaClientePage implements OnInit {
   }
 
   async SacarFoto() {
-
-    const photo = await this.camera.addNewToGallery(this.dataUrl);
-
+    const form = this.formData.value;
+    let foto = {
+      img: ''
+    }
+    const photo = await this.camera.addNewToGallery(foto);
     this.dataUrl = photo;
-        
+
+    const fileStorage = getStorage();
+    const date = Date.now();
+
+    const name = `${form.nombre}/${date}`;
+    const storageRef = ref(fileStorage, name);
+    const url = this.firestorage.ref(name);
+    
+    uploadString(storageRef, this.dataUrl, 'data_url').then(() => {
+      url.getDownloadURL().subscribe((url1) => {
+        this.dataUrl = url1;
+        console.log(this.dataUrl);
+      })
+    })
+
+
   }
 }
