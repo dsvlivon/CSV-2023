@@ -1,0 +1,74 @@
+.spinner-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    margin-left: 25.6%;
+    margin-top: 47.1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    z-index: 9999;
+  }
+  
+  .spinner-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: -1;
+  }
+  
+  ion-spinner {
+    --color: magenta;
+    z-index: 1;
+  }
+  
+  .spinner-image {
+    // position: relative;
+    margin-left: 95%;
+    margin-top: 220%;
+    height: 9rem; /* Ajusta el tamaño de la imagen si es necesario */
+    width: 9rem; /* Ajusta el tamaño de la imagen si es necesario */
+    z-index: 2;
+    border-radius: 50%;
+  }
+
+  @keyframes delayed-rotate {
+    0% {
+      transform: rotate(0deg);
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); /* Inicio: relentizar */
+    }
+    20% {
+      transform: rotate(180deg);
+      animation-timing-function: cubic-bezier(0.55, 0, 0.675, 0.19); /* Aceleración */
+    }
+    80% {
+      transform: rotate(540deg);
+      animation-timing-function: cubic-bezier(0.55, 0, 0.675, 0.19); /* Relentizar */
+    }
+    100% {
+      transform: rotate(720deg);
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); /* Final: relentizar */
+    }
+  }
+  
+  .delayed-rotate-image {
+    animation-name: delayed-rotate;
+    animation-duration: 5s; /* Ajusta la duración de la animación según tu preferencia */
+    animation-iteration-count: infinite;
+    margin-left: 95%;
+    margin-top: 220%;
+    box-shadow: 0 0 20px rgb(0,175,239), 0 0 40px magenta, 0 0 60px rgb(0,175,239);
+    filter: brightness(150%);
+  }
