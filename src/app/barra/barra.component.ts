@@ -43,14 +43,14 @@ goDelivery(){ this.router.navigate(['/delivery']); }
 
 goJuegos(){ this.router.navigate(['/juegos']); }
 
-goQr(){ this.router.navigate(['/app-lector-qr']); }
+goQr(){ this.router.navigate(['/lector-qr']); }
+
+goHome(){ this.router.navigate(['/home']); }
 
 logOut() { this.authService.signOut(); }
 
 
-altaCliente(){ this.router.navigate(['/app-alta-cliente']); }
-altaSupervisor(){ this.router.navigate(['/app-altas']); }
-altaEmpleado(){ this.router.navigate(['/app-altas']); }
+
 
 
 expandir() {
@@ -91,12 +91,20 @@ leaveAnimation = (baseEl: HTMLElement) => {
   return this.enterAnimation(baseEl).direction('reverse');
 };
 
-seleccionarTipo(tipo: string) {
+altaCliente(tipo: string) {
   this.authSrv.tipo = tipo;
   this.router.navigate(['/alta-cliente']);
-  
 }
 
+altaSupervisor() {
+  this.authSrv.tipo = 'anonimo';
+  this.router.navigate(['/alta-supervisor']); 
+}
+
+altaEmpleado() {
+  this.authSrv.tipo = 'anonimo';
+  this.router.navigate(['/alta-empleado']); 
+}
 
 
 

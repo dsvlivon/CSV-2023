@@ -31,10 +31,6 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.page').then( m => m.HomePage)
   },
   {
-    path: 'altas',
-    loadComponent: () => import('./pages/altas/altas.page').then( m => m.AltasPage)
-  },
-  {
     path: 'lector-qr',
     loadComponent: () => import('./pages/lector-qr/lector-qr.page').then( m => m.LectorQrPage)
   },
@@ -53,9 +49,18 @@ export const routes: Routes = [
   {
     path: 'juegos',
     loadComponent: () => import('./pages/juegos/juegos.page').then( m => m.JuegosPage)
-  },  {
+  },
+  {
     path: 'alta-cliente',
     loadComponent: () => import('./pages/alta-cliente/alta-cliente.page').then( m => m.AltaClientePage)
+  },
+  {
+    path: 'alta-empleado',
+    loadComponent: () => import('./pages/alta-empleado/alta-empleado.page').then( m => m.AltaEmpleadoPage)
+  },
+  {
+    path: 'alta-supervisor',
+    loadComponent: () => import('./pages/alta-supervisor/alta-supervisor.page').then( m => m.AltaSupervisorPage)
   }
 
 ];

@@ -1,0 +1,30 @@
+Minuta clase 3/6/23
+-los primeros 13 (c sus push notif. y la parte de mail) = 6
+-generar cuenta de correo empresarial
+-el mail que se envia deberia tener el logo d la empresa y un formato "descente"
+	(ver modulo de envio de correos)
+-agregar al planning pruebas de uso c compañeros. (ejemplo push)
+-ver modulo push. agregar tareas de push
+-ver que se puede hacer c el splash estático p cambiar el fondo del splash dinamico
+-mandar videos por funcionalidades
+-nombrar videos (agregar la preparacion del video en las tareas sprint)
+-cada miembro tiene q hacer un poco d todo, no puedo cargar una funcionalidad completa a 1 solo
+	(cada miembro deberia tener al menos 1 push, 1 mail y un alta=)
+-ver tema de formatos de dni y lector d dni
+-usuario: cuando creamos el usuario. no debe tener full permisos, sino q debe ingresar en una lista d 
+pendientes. 
+-no hay form d registro d productos d menu! (no en las 13f p/ el 6)
+	(puedo cargar un par d prods en la bd y ya)
+-agregar a mano info p las encuestas (osea simular encuestas)
+-en las altas d usuario, cuando es anonimo no requiere ni mail, ni pasword ni nombre ni apellido
+-en los 13 pts solo entra el alta d cliente
+
+
+Minuta clase 10/6/23
+- qr de ingreso: te va a dar la opcion para la lista de espera, ahi podes ver las encuestas
+- qr de mesa: se me va a habilitar la encuesta para enviar sobre mi pedido.
+- los videos lo vamos a tener que hacer en el meet
+- cada entrega de material tiene q estar documentada y ser especifico q se entrega
+- en el manejo de errores, siempre devolver un mensaje amistoso p el user
+- si o si vamos a distribuir altas p cada uno
+- se definió que el alta de clientes no usa la barra, sino q tendra un metodo p volver al login
