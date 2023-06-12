@@ -36,7 +36,7 @@
 |  13.b    |    Implementar servicio de mail notification         |    Beta    |   Sergio    |  Resuelto  |
 |  14      | Crear servicio de push notification                  |    Gamma   |   Ignacio   |  Resuelto  |
 |  14.a    |    Testear funcionmiento                             |    Gamma   |   Ignacio   |  Resuelto  |
-|  14.b    |     Implementar servicio de push notification        |    Beta    |   Sergio    |  Resuelto  |
+|  14.b    |    Implementar servicio de push notification        |    Beta    |   Sergio    |  Resuelto  |
 |  15      | Crear Spinner Component                              |    Alfa    |   Daniel    |  Resuelto  |
 |----------|------------------------------------------------------|------------|-------------|------------|
 |          |  **Sprint 3: Completar Altas**                       |            | prox. fecha:|  17/06/23  |
@@ -45,11 +45,12 @@
 |**12.a**  |  **Alta cliente/anónimo**                            |    Beta    |   Sergio    | **Activo** |
 |**12.b**  |  **Alta empleado**                                   |    Alfa    |   Daniel    | **Activo** |
 |**12.c**  |  **Alta supervisor**                                 |    Gamma   |   Ignacio   | **Activo** |
-|  15.1    | Problema con Imagen del Spinner                      |    Alfa    |   Daniel    |   Activo    |
+|  15.a    | Problema con Imagen del Spinner                      |    Alfa    |   Daniel    |   Activo    |
 |  12.a.1  |    Crear forma de volver en el Alta cliente/anónimo  |    Beta    |   Sergio    |  Resuelto  |
 |  5.1     | Problema con el retorno en Inicio de sesión          |    Beta    |   Sergio    |  Resuelto  |
 |  16      | Implementar Lista de Espera                          |    Gamma   |   Ignacio   |   Activo    |
-|  17      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+|  17      | Implementar Aprobacion de Supervisores               |    Beta    |   Sergio    |   Nuevo    |
+|  17.a    |    Meet testear func. Alta completa                  |    Alfa    |   Daniel    |   Nuevo    |
 |  18      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
 |  19      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
 |  20      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
