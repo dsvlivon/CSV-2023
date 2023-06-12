@@ -45,9 +45,16 @@
 |**12.a**  |  **Alta cliente/anónimo**                            |    Beta    |   Sergio    | **Activo** |
 |**12.b**  |  **Alta empleado**                                   |    Alfa    |   Daniel    | **Activo** |
 |**12.c**  |  **Alta supervisor**                                 |    Gamma   |   Ignacio   | **Activo** |
-|  16      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+|  15.1    | Problema con Imagen del Spinner                      |    Alfa    |   Daniel    |   Activo    |
+|  12.a.1  |    Crear forma de volver en el Alta cliente/anónimo  |    Beta    |   Sergio    |  Resuelto  |
+|  5.1     | Problema con el retorno en Inicio de sesión          |    Beta    |   Sergio    |  Resuelto  |
+|  16      | Implementar Lista de Espera                          |    Gamma   |   Ignacio   |   Activo    |
 |  17      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
 |  18      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+|  19      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+|  20      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+|  21      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+
 
 *El equipo de CSV trackea sus decisiones, correciones y otros topics con minutas, comúnmente realizadas después de cada clase.
 **Link a Minutas:** [Minutas.txt](https://github.com/dsvlivon/CSV-2023/files/11712441/Minutas.txt)
