@@ -1,13 +1,169 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>alta-supervisor</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content *ngIf="!scanActive">
+  <ion-grid *ngIf="!scanActive">
+    
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">alta-supervisor</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-row>
+      <div class="form-container">
+        <form [formGroup]="formData" *ngIf="!scanActive">
+          
+        <h2>Alta de Dueños/Supervisores</h2>
+          
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle style="color:white">Ingrese sus datos</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content class="ion-padding mt-3">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="6" class="d-flex flex-column justify-content-end">
+              <div>
+                <ion-input label="Nombre" label-placement="floating" fill="solid" placeholder="Ingresar nombre"
+                  formControlName="nombre"></ion-input>
+                <ion-label class="invalid"
+                  *ngIf="formData.controls['nombre'].errors?.['required'] && formData.controls['nombre'].touched">
+                  Nombre inválido.
+                </ion-label>
+
+              </div>
+
+            </ion-col>
+            <ion-col size="6">
+              <div class="position">
+                <ion-button style="width: 130px; height: 75px" fill="outline" (click)="SacarFoto()">
+                  <img src="../../../assets/images/camara-reflex-digital.png" alt="" style="width: 10rem;">
+                </ion-button>
+                <ion-img class="foto" [src]='this.dataUrl' id="foto"></ion-img>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <!-- <div *ngIf="authSrv.tipo === 'cliente'"> -->
+                <div>
+                <ion-input type="text" label="Apellido" label-placement="floating" fill="solid"
+                  placeholder="Ingrese su Apellido" formControlName="apellido" required></ion-input>
+                <ion-label class="invalid"
+                  *ngIf="formData.controls['apellido'].errors?.['required'] && formData.controls['apellido'].touched">
+                  Apellido inválido.
+                </ion-label>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div>
+                <ion-input type="number" label="DNI" label-placement="floating" fill="solid"
+                  placeholder="Ingrese su DNI" formControlName="dni" required></ion-input>
+
+                <ion-label class="invalid" *ngIf="formData.controls['dni'].errors?.['required'] && formData.controls['dni'].touched
+                    || (formData.controls['dni'].errors?.['min'] || formData.controls['dni'].errors?.['max'])">
+                  DNI inválido.
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+
+            <ion-col size="6">
+              <div *ngIf="authSrv.tipo === 'cliente'">
+                <ion-input type="number" label="CUIL" label-placement="floating" fill="solid"
+                  placeholder="Ingrese su CUIL(Solo números, sin guiones)" formControlName="cuil" required></ion-input>
+
+                <ion-label class="invalid"
+                  *ngIf="formData.controls['dni'].errors?.['required'] && formData.controls['dni'].touched">
+                  Se debe ingresar un CUIL.
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div>
+                <ion-input type='email' label="Correo electrónico" label-placement="floating" fill="solid"
+                  formControlName="correo" required>
+                </ion-input>
+                <ion-label class="invalid" *ngIf="formData.controls['correo'].errors?.['required'] && formData.controls['correo'].touched
+                || formData.controls['correo'].errors?.['correo']">
+                  Correo inválido.
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size="6">
+              <div>
+                <ion-input type='password' label="Contraseña" label-placement="floating" fill="solid" required
+                  id="password" formControlName="password" placeholder="Ingrese su contraseña"></ion-input>
+                <ion-label class="invalid"
+                  *ngIf="formData.controls['password'].errors?.['required'] && formData.controls['password'].touched">
+                  Contraseña inválida.
+                </ion-label>
+              </div>
+            </ion-col>
+            <ion-col size="6">
+              <div>
+                <ion-input type='password' label="Confirmar Contraseña" label-placement="floating" fill="solid" required
+                  formControlName="confirmPassword" placeholder="Ingrese su contraseña"></ion-input>
+                <ion-label class="invalid"
+                  *ngIf="formData.controls['confirmPassword'].errors?.['required'] && formData.controls['confirmPassword'].touched">
+                  Contraseña inválida.
+                </ion-label>
+              </div>
+            </ion-col>
+          </ion-row>
+          <ion-col size="6">
+            <div>
+              <ion-toggle (ionChange)="cambiarPerfil($event)" [checked]="false" formControlName="perfil"><span style="color:white">{{textoSwitch}}</span></ion-toggle>
+            </div>
+          </ion-col>
+        </ion-grid>
+
+        <ion-button type="submit" class="ingreso" fill="solid" expand="block" style="margin-top: 23px;"
+          (click)="Registro()">Enviar</ion-button>
+      </ion-card-content>
+
+  
+    </ion-card>    
+
+  </form>
+</div>
+</ion-row>
+
+<ion-row>
+<app-barra></app-barra>
+</ion-row>
+</ion-grid>
+<div class="visor" *ngIf="scanActive">
+  <h2 class="titulo" *ngIf="scanActive">ESCANEANDO...</h2>
+  <p class="monto" [ngClass]="scanActive?'scanner-activo-visor':''">
+    <span></span>
+  </p>
+</div>
+<div class="centrado">
+  <button
+    class="escanear"
+    expand="block"
+    type="button"
+    (click)="stopScan()"
+    *ngIf="scanActive"
+  >
+    <ion-text
+      style="
+        color: #fff;
+        text-shadow: 2px 2px 4px #000;
+        font-size: 1.7rem;
+        font-family: fantasy;
+      "
+      >DETENER <ion-icon name="qr-code-outline"></ion-icon
+    ></ion-text>
+  </button>
+</div>
 </ion-content>
+<div *ngIf="!scanActive">
+  <ion-fab horizontal="center" vertical="bottom" (click)="escanearQR()">
+    <ion-fab-button data-desc="Escanear DNI">
+      <ion-icon name="barcode-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>
