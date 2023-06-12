@@ -1,0 +1,19 @@
+-como creen q lo venimos haciendo hasta aca. 
+	Creo que venimos con un gran ritmo, el equipo alterna momentos de gran productividad y otros de pausa. Claramente debido a compromisos con otras materias y cuestiones personales.
+	Así y todo el equipo esta alcanzando sus objetivos e incluso el ritmo aceleró.
+
+-alguna cosa q quieran cambiar respecto de la forma de trabajo
+	
+	
+-alguna cosa q quieran destacar respecto de la forma de trabajo
+	Destaco la buena predisposición para ayudar. El equipo utiliza un grupo de whatsapp para comunicarse siendo esta la vía mas rápida y cuando surge un problema, de inmediato el miembro que esté activo en el momento toma cartas en el asunto. Ya sea para explicar una parte de código si es que es el que lo desarrolló, o bien para aportar otro par de ojos y analizar lo que sucede.
+
+-algo positivo de sus compañeros 
+	Destaco el trabajo de Sergio, nuestro Beta, quién auspicia el rol de líder técnico dentro del equipo. Es según mi opinión quién demuestra mayor conocimiento y gracias a él, el equipo creció a un ritmo notable.
+	También destaco la voluntad de Ignacio, nuestro Gama, quién de inmediato aporta soluciones, es el primero en testear problemas y es nuestro mejor investigador.
+
+-algo q creen q sus compañeros pueden mejorar
+	Creo que el código podría ser mas prolijo, a veces dejamos cosas de prueba, código comentado. Cosas que dificultan su comprensión.
+	También podríamos implementar notación de funciones, pero entiendo que hacemos lo mejor que podemos con el tiempo que tenemos.
+
+
