@@ -117,6 +117,9 @@ export class AltaClientePage implements OnInit {
     })
   }
 
+  goLogin() {
+    this.route.navigateByUrl('login', { replaceUrl: true })
+  }
   escanearQR() {
     this.scanActive = true;
     this.qrScanner.startScan().then((result) => {
@@ -125,18 +128,18 @@ export class AltaClientePage implements OnInit {
 
       this.formData.patchValue({
         apellido:
-            this.currentScan[1].charAt(0) +
-            this.currentScan[1].slice(1).toLocaleLowerCase(),
-          nombre:
-            this.currentScan[2].split(' ')[0].charAt(0) +
-            this.currentScan[2].split(' ')[0].slice(1).toLocaleLowerCase() +
-            ' ' +
-            this.currentScan[2].split(' ')[1].charAt(0) +
-            this.currentScan[2].split(' ')[1].slice(1).toLocaleLowerCase(),
-          dni: this.currentScan[4],
-          correo: this.formData.getRawValue().correo,
-          clave1: this.formData.getRawValue().password,
-          clave2: this.formData.getRawValue().confirmPassword,
+          this.currentScan[1].charAt(0) +
+          this.currentScan[1].slice(1).toLocaleLowerCase(),
+        nombre:
+          this.currentScan[2].split(' ')[0].charAt(0) +
+          this.currentScan[2].split(' ')[0].slice(1).toLocaleLowerCase() +
+          ' ' +
+          this.currentScan[2].split(' ')[1].charAt(0) +
+          this.currentScan[2].split(' ')[1].slice(1).toLocaleLowerCase(),
+        dni: this.currentScan[4],
+        correo: this.formData.getRawValue().correo,
+        clave1: this.formData.getRawValue().password,
+        clave2: this.formData.getRawValue().confirmPassword,
       });
       this.scanActive = false;
 
@@ -147,19 +150,19 @@ export class AltaClientePage implements OnInit {
     this.qrScanner.stopScanner();
   }
 
-//   pruebaMail(){
-//     const user: User2 = {
-//       nombre: 'Ignacio',
-//       apellido: 'Sanabria',
-//       dni: 12345678,
-//       img: 'ruta/a/imagen.png',
-//       correo: 'nachoutnfra@gmail.com',
-//       fechaCreacion: Date.now(),
-//       estado: 'PENDIENTE',
-//       perfil: 'CLIENTE',
-//       rol: 'COCINERO',
-//       cuil: 1234567890
-//     };
-//     this.mailService.notificationStatus(user);
-//   }
+  //   pruebaMail(){
+  //     const user: User2 = {
+  //       nombre: 'Ignacio',
+  //       apellido: 'Sanabria',
+  //       dni: 12345678,
+  //       img: 'ruta/a/imagen.png',
+  //       correo: 'nachoutnfra@gmail.com',
+  //       fechaCreacion: Date.now(),
+  //       estado: 'PENDIENTE',
+  //       perfil: 'CLIENTE',
+  //       rol: 'COCINERO',
+  //       cuil: 1234567890
+  //     };
+  //     this.mailService.notificationStatus(user);
+  //   }
 }

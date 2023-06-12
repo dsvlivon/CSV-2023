@@ -188,3 +188,11 @@ ion-fab-button[data-desc]::after {
 ion-card {
     box-shadow: 8px 10px 10px 1px rgba(0, 0, 0, 0.5);
 }
+
+span {
+    color: white;
+    strong {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }

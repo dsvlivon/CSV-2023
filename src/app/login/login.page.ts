@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
 import { PushnotificationService } from '../services/pushnotification.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -72,19 +73,33 @@ export class LoginPage implements OnInit {
         //sub.unsubscribe();
       });
       //sub.unsubscribe();
+      Swal.fire({
+        title: 'Ingreso exitoso',
+        icon: 'success',
+        timer: 2000,
+        toast: true,
+        backdrop: false,
+        position: 'top',
+        grow: 'row',
+        showConfirmButton: false,
+        timerProgressBar: true
+      })
+      
       setTimeout(() => {
         this.spinner = false;
+
         this.router.navigateByUrl('home', { replaceUrl: true }).then(() => {
           sub.unsubscribe();
         })
       }, 3000);
-      
+
     }).catch(err => {
       console.log(err);
 
       this.error = true;
       this.message = "El usuario no existe";
       setTimeout(() => {
+        this.spinner = false;
         this.message = '';
         this.error = false;
       }, 2000);
@@ -119,8 +134,12 @@ export class LoginPage implements OnInit {
     return this.formData.get('password');
   }
   seleccionarTipo(tipo: string) {
-    this.authSrv.tipo = tipo;
-    this.router.navigateByUrl('alta-cliente', { replaceUrl: true });
+    this.spinner = true;
+    setTimeout(() => {
+      this.authSrv.tipo = tipo;
+      this.router.navigateByUrl('alta-cliente', { replaceUrl: true });
+
+    }, 4000);
 
   }
 }
