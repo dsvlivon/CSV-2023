@@ -24,7 +24,6 @@ export class CamaraService {
     this.authService.user$.subscribe((user: any) => {
       if (user) {
         this.user = user;
-        console.log(this.user);
       }
     });
   }
@@ -40,24 +39,7 @@ export class CamaraService {
     });
      
     return data.img = capturedPhoto.dataUrl;
-    /* const storage = getStorage();
-    const date = Date.now();
-
-
-    const name = `${data.nombre} ${date}`;
-    const storageRef = ref(storage, name);
-    console.log("photoservice storageRef: "+ name);
-    const url = this.angularFirestorage.ref(name);
-    console.log("photoservice url: "+ name);
-
-    uploadString(storageRef, capturedPhoto.dataUrl, 'data_url').then(() => {
-      url.getDownloadURL().subscribe((url1: any) => {
-        console.log(url1);
-        data.img = url1;
-
-      });
-    }); */
-
+    
   } // end of addNewToGallery
 
 }

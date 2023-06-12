@@ -49,7 +49,7 @@ export class PushnotificationService {
     //   this.inicializar();
     // });
       this.user = user;
-      console.log(this.user);
+     /*  console.log(this.user); */
       //this.firestoreService.updateUsuario(this.user.)
       //console.log(this.user);
       //const token = {token: "lala"};
@@ -93,8 +93,8 @@ export class PushnotificationService {
       'pushNotificationReceived',
       (notification: PushNotificationSchema) => {
         //Este evento solo se activa cuando tenemos la app en primer plano
-        console.log('Push notification received: ', notification);
-        console.log('data: ', notification.data);
+        /* console.log('Push notification received: ', notification);
+        console.log('data: ', notification.data); */
         //Esto se hace en el caso de que querramos que nos aparezca la notificacion en la task bar del celular ya que por
         //defecto las push en primer plano no lo hacen, de no ser necesario esto se puede sacar.
         LocalNotifications.schedule({
@@ -146,12 +146,12 @@ export class PushnotificationService {
     }
 
     let sub2 = sub.subscribe((data) => {
-      console.log(data);
+     /*  console.log(data); */
         data.forEach(element => {
           usuariosTokens.push(element.token);
-          console.log('token', element.token);
+          /* console.log('token', element.token); */
         });
-        console.log('usuariosTokens', usuariosTokens);
+        /* console.log('usuariosTokens', usuariosTokens); */
       let push = this.sendPushNotification({
         registration_ids: usuariosTokens,
         notification:{
@@ -159,7 +159,7 @@ export class PushnotificationService {
           body: body
         }
       }).subscribe((data) => {
-        console.log(data);
+        /* console.log(data); */
         push.unsubscribe();
       });
       sub2.unsubscribe();

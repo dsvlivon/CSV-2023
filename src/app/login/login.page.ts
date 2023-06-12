@@ -65,33 +65,33 @@ export class LoginPage implements OnInit {
   async onLogin() {
     const form = this.formData.value;
     this.spinner = true;
+    
     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
-      console.log(resp);
       const sub = this.firestoreService.getByMail(form.email).subscribe((data) => {
+        console.log(data);
         this.pnService.getUser(data[0]);
-        //console.log(data);
-        //sub.unsubscribe();
+        Swal.fire({
+          title: 'Ingreso exitoso',
+          icon: 'success',
+          timer: 2000,
+          toast: true,
+          backdrop: false,
+          position: 'top',
+          grow: 'row',
+          showConfirmButton: false,
+          timerProgressBar: true
+        })
+  
+        setTimeout(() => {
+          this.spinner = false;
+  
+          this.router.navigateByUrl('home', { replaceUrl: true }).then(() => {
+            sub.unsubscribe();
+          })
+        }, 3000);
       });
       //sub.unsubscribe();
-      Swal.fire({
-        title: 'Ingreso exitoso',
-        icon: 'success',
-        timer: 2000,
-        toast: true,
-        backdrop: false,
-        position: 'top',
-        grow: 'row',
-        showConfirmButton: false,
-        timerProgressBar: true
-      })
       
-      setTimeout(() => {
-        this.spinner = false;
-
-        this.router.navigateByUrl('home', { replaceUrl: true }).then(() => {
-          sub.unsubscribe();
-        })
-      }, 3000);
 
     }).catch(err => {
       console.log(err);
