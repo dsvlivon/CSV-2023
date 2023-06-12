@@ -28,3 +28,4 @@ Minuta clase 10/6/23
 - en el manejo de errores, siempre devolver un mensaje amistoso p el user
 - si o si vamos a distribuir altas p cada uno
 - se definió que el alta de clientes no usa la barra, sino q tendra un metodo p volver al login
+- las tareas pendientes se mueven al siguiente sprint como *n.n*
