@@ -1,5 +1,4 @@
-<div class="spinner-container">
-  <ion-spinner *ngIf="mostrar" name="crescent" class="spinner-overlay"></ion-spinner>
-  <img *ngIf="mostrar" class="spinner-image delayed-rotate-image" src="../../assets/icon/icon_spinner.png" alt="Spinner Image" />
+<div class="spinner-container" *ngIf="mostrar">
+  <ion-spinner name="crescent" class="spinner-overlay"></ion-spinner>
+  <img class="spinner-image delayed-rotate-image" src="../../assets/icon/icon_spinner.png" alt="Spinner Image" />
 </div>
-

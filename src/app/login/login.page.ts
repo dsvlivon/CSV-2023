@@ -7,17 +7,18 @@ import { FirestoreService } from '../services/firestore.service';
 import { Router } from '@angular/router';
 import { AnimationController } from '@ionic/angular';
 import { PushnotificationService } from '../services/pushnotification.service';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, SpinnerComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LoginPage implements OnInit {
-
+  spinner: boolean = false;
   authSrv = inject(AuthService);
 
   formData: FormGroup;
@@ -62,19 +63,22 @@ export class LoginPage implements OnInit {
   };
   async onLogin() {
     const form = this.formData.value;
+    this.spinner = true;
     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
       console.log(resp);
-      const sub = this.firestoreService.getByMail(form.email).subscribe((data)=>{
-        //console.log(data);
+      const sub = this.firestoreService.getByMail(form.email).subscribe((data) => {
         this.pnService.getUser(data[0]);
         //console.log(data);
         //sub.unsubscribe();
       });
       //sub.unsubscribe();
-      this.router.navigate(['/home']).then(()=>{
-        sub.unsubscribe();
-      })
-      return user;
+      setTimeout(() => {
+        this.spinner = false;
+        this.router.navigateByUrl('home', { replaceUrl: true }).then(() => {
+          sub.unsubscribe();
+        })
+      }, 3000);
+      
     }).catch(err => {
       console.log(err);
 
@@ -103,10 +107,10 @@ export class LoginPage implements OnInit {
     } else if (set == 'supervisor') {
       this.formData.setValue({ email: "supervisor@supervisor.com", password: "777777" });
     }
-   /*  const form = this.formData.value;
-    const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
-      this.router.navigate(['/home']);
-    }); */
+    /*  const form = this.formData.value;
+     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
+       this.router.navigate(['/home']);
+     }); */
   }
   get email() {
     return this.formData.get('email');
@@ -116,7 +120,7 @@ export class LoginPage implements OnInit {
   }
   seleccionarTipo(tipo: string) {
     this.authSrv.tipo = tipo;
-    this.router.navigate(['/alta-cliente']);
-    
+    this.router.navigateByUrl('alta-cliente', { replaceUrl: true });
+
   }
 }
