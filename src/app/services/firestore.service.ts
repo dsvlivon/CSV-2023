@@ -46,7 +46,7 @@ export class FirestoreService {
       (ref) => ref.where('correo', '==', mail)
     );
     collection.valueChanges().subscribe(data => {
-      //console.log("xxx:", data);
+      /* console.log("xxx:", data); */
     });
 
     return collection.valueChanges();

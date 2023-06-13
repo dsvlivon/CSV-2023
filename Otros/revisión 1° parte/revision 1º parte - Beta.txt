@@ -1,0 +1,22 @@
+-como creen q lo venimos haciendo hasta aca. 
+	Creo que el proyecto va en camino a terminarse los requerimientos principales en tiempo y forma. 
+	El equipo se comunica cuando inicia y cuando descansa debido a cuestiones personales, lo que hace que el que este desarrollando pueda seguir con cosas que se dejaron o 
+	investigando sobre el tema y asi logrando terminar con el punto desde donde se dejo.
+	
+
+-alguna cosa q quieran cambiar respecto de la forma de trabajo
+	
+	
+-alguna cosa q quieran destacar respecto de la forma de trabajo
+	Destaco el trabajo en equipo y la comunicación que hay por parte del equipo, tanto como para solucionar problemas, como para informar estados de entregas. 
+	
+-algo positivo de sus compañeros 
+	Destaco el trabajo de Daniel, quien siempre busca el bienestar del equipo. En su rol de Alfa de equipo, busca lo mejor para que el equipo prospere, se comunica constantemente para asignar tareas, ver progresos, comentar problemas en la aplicacion por medio de whatsapp o meet de equipo 
+	y asi buscar posibles soluciones. Tiene conocimiento en scrum, por lo que hace el trabajo en equipo sea llevadero.
+	Y destaco el trabajo de Ignacio, que sabe testear funcionalidades, y soluciona problemas investigando sobre los temas a solucionar, siempre esta predispuesto para dar una mano al integrante del equipo que lo necesite.
+	
+
+-algo q creen q sus compañeros pueden mejorar
+	Clean Code, de mi parte buscar la forma de aplicar mas tiempo en la semana al proyecto generalmente son de 2 a 4 horas por dia.
+	 
+
