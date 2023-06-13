@@ -1,4 +1,4 @@
-<ion-content *ngIf="!scanActive">
+<ion-content [ngClass]="scanActive?'scanner-activo':''">
   <ion-grid *ngIf="!scanActive">
     
 
@@ -134,6 +134,7 @@
 <app-barra></app-barra>
 </ion-row>
 </ion-grid>
+<!-- ESCANER -->
 <div class="visor" *ngIf="scanActive">
   <h2 class="titulo" *ngIf="scanActive">ESCANEANDO...</h2>
   <p class="monto" [ngClass]="scanActive?'scanner-activo-visor':''">
@@ -159,6 +160,7 @@
     ></ion-text>
   </button>
 </div>
+
 </ion-content>
 <div *ngIf="!scanActive">
   <ion-fab horizontal="center" vertical="bottom" (click)="escanearQR()">
