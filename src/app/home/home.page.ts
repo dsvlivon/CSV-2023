@@ -7,21 +7,19 @@ import { LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { FirestoreService } from '../services/firestore.service';
 import { BarraComponent } from 'src/app/barra/barra.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, BarraComponent]
+  imports: [IonicModule, CommonModule, FormsModule, BarraComponent, SpinnerComponent]
 })
 export class HomePage implements OnInit {
   user: any = null;
-  salary: number;
-  percentage: number;
-  flag: boolean = false;
-  loading: any;
-  activeMonth: boolean=false;
+  
+  spinner: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -31,6 +29,9 @@ export class HomePage implements OnInit {
 
   ngOnInit() { }
 
+    prueba(){
+      this.spinner = true;
+    }
   
 }
 

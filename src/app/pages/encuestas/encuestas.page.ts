@@ -7,15 +7,18 @@ import { LoadingController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
 import { FirestoreService } from '../../services/firestore.service';
 import { BarraComponent } from 'src/app/barra/barra.component';
+import { SpinnerComponent } from '../../spinner/spinner.component';
 
 @Component({
   selector: 'app-encuestas',
   templateUrl: './encuestas.page.html',
   styleUrls: ['./encuestas.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, BarraComponent]
+  imports: [IonicModule, CommonModule, FormsModule, BarraComponent, SpinnerComponent]
 })
 export class EncuestasPage implements OnInit {
+
+  spinner: boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -24,6 +27,10 @@ export class EncuestasPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+  
+  prueba(){
+    this.spinner = !this.spinner;
   }
 
 }
