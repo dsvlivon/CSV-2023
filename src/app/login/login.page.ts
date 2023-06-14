@@ -50,26 +50,27 @@ export class LoginPage implements OnInit {
       const sub = this.firestoreService.getByMail(resp.user.email).subscribe((data) => {
         if (data[0]['estado'] === 'ACEPTADO') {
           this.pnService.getUser(data[0]);
+
           this.toast('Ingreso exitoso', 'success');
-
           setTimeout(() => {
-            this.spinner = false;
-
             this.router.navigateByUrl('home', { replaceUrl: true }).then(() => {
               sub.unsubscribe();
+              this.spinner = false;
+  
             })
-          }, 2000);
+            
+          }, 3000);
         } else if (data[0]['estado'] === 'PENDIENTE') {
           this.mailService.notificationStatus(data[0]);
           this.toast('Error en el ingreso', 'info', 'Tu solicitud de registro aún no fue aceptada')
 
           this.spinner = false;
         } else if (data[0]['estado'] === 'RECHAZADO') {
+
           this.mailService.notificationStatus(data[0]);
-
           this.toast('Error en el ingreso', 'error', 'Tu solicitud de registro fue rechazada')
-
           this.spinner = false;
+
         } else {
           this.toast('Error en el ingreso', 'error')
           this.spinner = false;
@@ -92,7 +93,7 @@ export class LoginPage implements OnInit {
   }
 
   async toast(title: string, icono: any, text?: string) {
-    Swal.fire({
+    await Swal.fire({
       title: title,
       text: text,
       icon: icono,

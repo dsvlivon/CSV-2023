@@ -51,6 +51,7 @@
                 </ion-label>
               </div>
             </ion-col>
+            
             <ion-col size="6">
               <div *ngIf="authSrv.tipo === 'cliente'">
                 <ion-input type="number" label="DNI" label-placement="floating" fill="solid"
@@ -65,20 +66,6 @@
           </ion-row>
 
           <ion-row>
-
-            <!-- <ion-col size="6">
-              <div *ngIf="authSrv.tipo === 'cliente'">
-                <ion-input type="number" label="CUIL" label-placement="floating" fill="solid"
-                  placeholder="Ingrese su CUIL(Solo números, sin guiones)" formControlName="cuil" required></ion-input>
-
-                <ion-label class="invalid"
-                  *ngIf="formData.controls['dni'].errors?.['required'] && formData.controls['dni'].touched">
-                  Se debe ingresar un CUIL.
-                </ion-label>
-              </div>
-            </ion-col> -->
-          </ion-row>
-          <ion-row>
             <ion-col size="12">
               <div *ngIf="authSrv.tipo === 'cliente'">
                 <ion-input type='email' label="Correo electrónico" label-placement="floating" fill="solid"
@@ -86,8 +73,15 @@
                 </ion-input>
                 <ion-label class="invalid" *ngIf="formData.controls['correo'].errors?.['required'] && formData.controls['correo'].touched
                 || formData.controls['correo'].errors?.['correo']">
+                  Debe ingresar un correo electrónico.
+                </ion-label>
+                <ion-label class="invalid" *ngIf="formData.controls['correo'].errors?.['email']">
                   Correo inválido.
                 </ion-label>
+                <ion-label class="invalid" *ngIf="formData.controls['correo'].errors?.['pattern']">
+                  Carácteres incorrectos.
+                </ion-label>
+
               </div>
             </ion-col>
           </ion-row>
@@ -101,8 +95,13 @@
                   *ngIf="formData.controls['password'].errors?.['required'] && formData.controls['password'].touched">
                   Contraseña inválida.
                 </ion-label>
+                <ion-label class="invalid"
+                  *ngIf="formData.controls['password'].errors?.['minlength'] && formData.controls['password'].touched">
+                  La contraseña debe tener 6 carácteres.
+                </ion-label>
               </div>
             </ion-col>
+
             <ion-col size="6">
               <div *ngIf="authSrv.tipo === 'cliente'">
                 <ion-input type='password' label="Confirmar Contraseña" label-placement="floating" fill="solid" required
@@ -111,16 +110,19 @@
                   *ngIf="formData.controls['confirmPassword'].errors?.['required'] && formData.controls['confirmPassword'].touched">
                   Contraseña inválida.
                 </ion-label>
+                <ion-label class="invalid" *ngIf="formData.controls['confirmPassword'].errors?.['minlength']">
+                  La contraseña debe tener 6 carácteres.
+                </ion-label>
               </div>
             </ion-col>
           </ion-row>
         </ion-grid>
         <ion-button type="submit" class="ingreso" fill="solid" expand="block" style="margin-top: 23px;"
           (click)="Registro()">Registrate</ion-button>
-          <div class="d-flex justify-content-end">
-            <span >¿Ya tenes cuenta?<a (click)="goLogin()"><strong> Inicia Sesión</strong></a></span>
-    
-          </div>
+        <div class="d-flex justify-content-end">
+          <span>¿Ya tenes cuenta?<a (click)="goLogin()"><strong> Inicia Sesión</strong></a></span>
+
+        </div>
       </ion-card-content>
     </ion-card>
 
@@ -133,25 +135,17 @@
     </p>
   </div>
   <div class="centrado">
-    <button
-      class="escanear"
-      expand="block"
-      type="button"
-      (click)="stopScan()"
-      *ngIf="scanActive"
-    >
-      <ion-text
-        style="
+    <button class="escanear" expand="block" type="button" (click)="stopScan()" *ngIf="scanActive">
+      <ion-text style="
           color: #fff;
           text-shadow: 2px 2px 4px #000;
           font-size: 1.7rem;
           font-family: fantasy;
-        "
-        >DETENER <ion-icon name="qr-code-outline"></ion-icon
-      ></ion-text>
+        ">DETENER <ion-icon name="qr-code-outline"></ion-icon></ion-text>
     </button>
   </div>
 
+  <app-spinner [mostrar]="spinner"></app-spinner>
 </ion-content>
 
 <div *ngIf="!scanActive">

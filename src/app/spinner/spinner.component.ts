@@ -23,9 +23,9 @@ export class SpinnerComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    setTimeout(() => {
+   /*  setTimeout(() => {
       this.mostrar = false;
-    }, 4000);
+    }, 4000); */
   }
 
   mostrarSpinner() {

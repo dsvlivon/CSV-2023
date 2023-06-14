@@ -135,9 +135,16 @@ h1 {
     width: 110px;
     height: 96px;
     display: inline-flex;
-
+    
 }
-
+ion-label {
+    font-size: small;
+    color: red;
+    font-weight: bold;
+}
+ion-img {
+    border-radius: 50%;
+}
 .position {
     display: inline-block;
     position: relative;
@@ -149,6 +156,7 @@ h1 {
     right: -4em;
     border-radius: 1.5em;
     padding: 1em 1.5em;
+    
 
 }
 

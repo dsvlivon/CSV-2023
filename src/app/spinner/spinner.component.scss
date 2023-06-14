@@ -17,7 +17,20 @@
     background-color: transparent;
     z-index: 9999;
   }
-  
+  .spinner {
+    
+    background-image: url('../../assets/icon/icon_spinner.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    border-radius: 50%;
+    animation-name: delayed-rotate;
+    animation-duration: 5s; /* Ajusta la duración de la animación según tu preferencia */
+    animation-iteration-count: infinite;
+    
+    /* box-shadow: 0 0 20px rgb(0,175,239), 0 0 40px magenta, 0 0 60px rgb(0,175,239); */
+    filter: brightness(150%);
+  }
   .spinner-overlay::before {
     content: '';
     position: absolute;
@@ -35,9 +48,10 @@
   }
   
   .spinner-image {
+   /*  display: flex; */
     // position: relative;
-    margin-left: 95%;
-    margin-top: 220%;
+    margin-left: 66%;
+    margin-top: -68%;
     height: 9rem; /* Ajusta el tamaño de la imagen si es necesario */
     width: 9rem; /* Ajusta el tamaño de la imagen si es necesario */
     z-index: 2;
@@ -67,8 +81,8 @@
     animation-name: delayed-rotate;
     animation-duration: 5s; /* Ajusta la duración de la animación según tu preferencia */
     animation-iteration-count: infinite;
-    margin-left: 95%;
-    margin-top: 220%;
+    margin-left: 90%;
+    margin-top: -62%;
     box-shadow: 0 0 20px rgb(0,175,239), 0 0 40px magenta, 0 0 60px rgb(0,175,239);
     filter: brightness(150%);
   }

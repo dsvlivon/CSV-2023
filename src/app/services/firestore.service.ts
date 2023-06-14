@@ -23,14 +23,16 @@ export class FirestoreService {
     })
   }
 
-  async addUser(user: User2, id: string) {
+  async addUser(user: User2, id?: string) {
     try {
+      
       return this.ref.doc(id).set({ ...user });
     } catch (error) {
       console.log(error)
     }
   }
 
+  
   async addToken(token: any){
     try{
         return this.ref2.doc().set(token);
@@ -45,10 +47,7 @@ export class FirestoreService {
       'usuarios',
       (ref) => ref.where('correo', '==', mail)
     );
-    collection.valueChanges().subscribe(data => {
-      /* console.log("xxx:", data); */
-    });
-
+   
     return collection.valueChanges();
   }
 
