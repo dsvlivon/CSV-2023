@@ -50,11 +50,24 @@
 |  5.1     | Problema con el retorno en Inicio de sesión          |    Beta    |   Sergio    |  Resuelto  |
 |  16      | Implementar Lista de Espera                          |    Gamma   |   Ignacio   |   Activo    |
 |  17      | Implementar Aprobacion de Supervisores               |    Beta    |   Sergio    |   Nuevo    |
-|  17.a    |    Meet testear func. Alta completa                  |    Alfa    |   Daniel    |   Nuevo    |
-|  18      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
-|  19      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
-|  20      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
-|  21      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+|  17.a    |    Meet testear func. Alta completa                  |            |             |   Nuevo    |
+|  18      | Implementar Alta de Mesa (superv/duenio)             |            |             |   Nuevo    |
+|  18.a    |    Crear Coleccion en BD                             |            |             |   Nuevo    |
+|  18.b    |    Crear Model de Mesa                               |            |             |   Nuevo    |
+|  18.c    |    Crear Menu Alta de Mesa                           |            |             |   Nuevo    |
+|  19      | Implementar Lista de Espera de Clientes              |            |             |   Nuevo    |
+|  19.a    |    Crear Menu Metre p/ asignar Mesas                 |            |             |   Nuevo    |
+|  19.b    |    Verificar q/ el cliente no pueda tomar otra mesa  |            |             |   Nuevo    |
+|  20      | Implementar boton "consulta al mozo"                 |            |             |   Nuevo    |
+|  20.a    |    Verificar q/ llegue la PN a todos los mozos       |            |             |   Nuevo    |
+|  20.b    |    Implementar respuesta de mozo                     |            |             |   Nuevo    |
+|  20.c    |    Verificar respuesta como cliente                  |            |             |   Nuevo    |
+|----------|------------------------------------------------------|------------|-------------|------------|
+|          |  **Sprint 4: Fase final**                            |            | prox. fecha:|  24/06/23  |
+|  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
+|  20      | Implementar Lista de Productos                       |            |             |   Nuevo    |
+|  20.a    |    Crear Menu Productos                              |            |             |   Nuevo    |
+|  20.a    |    Implementar seleccion de productos                |            |             |   Nuevo    |
 
 
 *El equipo de CSV trackea sus decisiones, correciones y otros topics con minutas, comúnmente realizadas después de cada clase.
