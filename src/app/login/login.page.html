@@ -36,8 +36,8 @@
 
               <ion-item lines="none" class="ion-no-margin">
                 <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
-                  <span *ngIf="password.errors['required']">Ingresar contraseña</span>
-                  <span *ngIf="password.errors['minlength']">Ingresar mínimo 6 digitos</span>
+                  <p *ngIf="password.errors['required']">Ingresar contraseña</p>
+                  <p *ngIf="password.errors['minlength']">Ingresar mínimo 6 dígitos</p>
                 </div>
               </ion-item>
 

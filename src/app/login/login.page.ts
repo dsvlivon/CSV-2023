@@ -39,6 +39,7 @@ export class LoginPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+    this.formData.reset();
   }
 
   async onLogin() {
@@ -47,7 +48,6 @@ export class LoginPage implements OnInit {
 
     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
       const sub = this.firestoreService.getByMail(resp.user.email).subscribe((data) => {
-        /* console.log(data[0]['estado']); */
         if (data[0]['estado'] === 'ACEPTADO') {
           this.pnService.getUser(data[0]);
           this.toast('Ingreso exitoso', 'success');
@@ -58,17 +58,23 @@ export class LoginPage implements OnInit {
             this.router.navigateByUrl('home', { replaceUrl: true }).then(() => {
               sub.unsubscribe();
             })
-          }, 3000);
+          }, 2000);
         } else if (data[0]['estado'] === 'PENDIENTE') {
           this.mailService.notificationStatus(data[0]);
           this.toast('Error en el ingreso', 'info', 'Tu solicitud de registro aún no fue aceptada')
 
           this.spinner = false;
-        } else {
+        } else if (data[0]['estado'] === 'RECHAZADO') {
+          this.mailService.notificationStatus(data[0]);
+
           this.toast('Error en el ingreso', 'error', 'Tu solicitud de registro fue rechazada')
-          
+
+          this.spinner = false;
+        } else {
+          this.toast('Error en el ingreso', 'error')
           this.spinner = false;
         }
+
       });
       //sub.unsubscribe();
 
@@ -76,7 +82,7 @@ export class LoginPage implements OnInit {
     }).catch(err => {
       console.log(err);
       this.toast('Error en el ingreso', 'error', 'El usuario no existe')
-
+      this.formData.reset();
       this.error = true;
       setTimeout(() => {
         this.spinner = false;

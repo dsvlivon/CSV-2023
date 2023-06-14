@@ -1,251 +1,264 @@
-.superior{
-    height: 100%;
-    margin: 0;
+.superior {
+  height: 100%;
+  margin: 0;
 }
- 
- ion-content {
-    background: rgb(0, 0, 0);
-    //background: 
-    font-family: Georgia, Times, "Times New Roman", serif;
-    height: 100%;
-    --ion-background-color: linear-gradient(
-        0deg,
-        #4363AC 0%,
-        #00AFEF 100%
-      );
+
+ion-content {
+  background: rgb(0, 0, 0);
+  //background: 
+  font-family: Georgia, Times, "Times New Roman", serif;
+  height: 100%;
+  --ion-background-color: linear-gradient(0deg,
+      #4363AC 0%,
+      #00AFEF 100%);
 }
 
 
 
 ion-header {
-    position: absolute;
+  position: absolute;
 }
 
 ion-toolbar {
-    --ion-background-color: transparent;
-    opacity: 0;
+  --ion-background-color: transparent;
+  opacity: 0;
 }
 
 ion-card {
-    --ion-background-color: transparent;
-    box-shadow: none;
+  --ion-background-color: transparent;
+  box-shadow: none;
 }
+
 ion-card-title {
-    margin-top: 10px;
-    font-size: 20px;    
-    color: #4363AC;
-    text-align: center;
-    font-weight: 600;
+  margin-top: 10px;
+  font-size: 20px;
+  color: #4363AC;
+  text-align: center;
+  font-weight: 600;
 
 }
-ion-card-subtitle{
-    padding-top: 10px;
-    font-size: 11px;
-    color: #4363AC;
-    text-align: center;
-    font-weight: 300;
+
+ion-card-subtitle {
+  padding-top: 10px;
+  font-size: 11px;
+  color: #4363AC;
+  text-align: center;
+  font-weight: 300;
 }
+
 .signin-btns {
-    margin-top: 10px;
-    text-align: center;
+  margin-top: 10px;
+  text-align: center;
 }
+
 .loginbtn {
-    --ion-color-primary:#00AFEF;
+  --ion-color-primary: #00AFEF;
 }
 
 .text-tag {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    text-align: center;
-    span {
-        font-size: 13px;
-        font-weight: normal;
-        color: #160403;
-    }
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+
+  span {
+    font-size: 13px;
+    font-weight: normal;
+    color: #160403;
+  }
 }
+
 .quickAcces-btns {
-    // text-align: center;    
-    border-radius: 50%;
-    color: white;
-    border: none;
-    outline: none;
-    cursor: pointer;
+  // text-align: center;    
+  border-radius: 50%;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .wrapform {
-    margin-top: 4px;
+  margin-top: 4px;
 }
+
 .errors {
-    font-size: small;
-	color: var(--ion-color-danger);
-	padding-left: 15px;
-	padding-top: 5px;
-	padding-bottom: 5px;
+  font-size: small;
+  color: var(--ion-color-danger);
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  p {
+    font-weight: bold;
+  }
 }
+
 .password-forgot {
-    text-align: right;
-    ion-button {
-        font-size: 12px;
-        text-transform: initial;
-        color: #160403;
-    }
+  text-align: right;
+
+  ion-button {
+    font-size: 12px;
+    text-transform: initial;
+    color: #160403;
+  }
 }
 
 
 hr.solid {
-    border-top: 3px solid #ffffff;
+  border-top: 3px solid #ffffff;
 }
 
 .bg-image {
-    height: 11rem;
-    width: auto;
-    background-image: url("../../assets/images/image-not-found.png");
-    background-size:cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    //background-color: rgba(255, 255, 255, 0.5); /* El último valor, 0.5, es la opacidad de la imagen de fondo */
-    background-color: transparent;
-    margin: 3rem;
-  }
-  
+  height: 11rem;
+  width: auto;
+  background-image: url("../../assets/images/image-not-found.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  //background-color: rgba(255, 255, 255, 0.5); /* El último valor, 0.5, es la opacidad de la imagen de fondo */
+  background-color: transparent;
+  margin: 3rem;
+}
 
 
-  button:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    outline-width: 0;
-  }
-  
 
-  .or {
-    width: 10%;
-    font-weight: bold;
-  }
-  
-  .btn-ingresar:hover {
-    background-color: #00AFEF;
-    cursor: pointer;
-  }
-  
-  .btn-rapido {
-    width: 60px;
-    height: auto;
-    margin: 10px;
-    margin-top: 20px;
-    font-weight: bold;
-    box-shadow: 1px 1px #00AFEF;
-    border-radius: 25%;
-    background-color: transparent;
-    color: transparent;
-  }
-  
-  .btn-rapido:hover {
-    color: #fff;
-    background: #00AFEF;
-  }
+button:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  outline-width: 0;
+}
 
-    
-  .line {
-    height: 1px;
-    width: 45%;
-    background-color: #e0e0e0;
-    margin-top: 5px;
-  }
 
-    
-  .border-line {
-    border-right: 1px solid #eeeeee;
-  }
-  
-  /* ---------------------------------------------- quickacces */
+.or {
+  width: 10%;
+  font-weight: bold;
+}
+
+.btn-ingresar:hover {
+  background-color: #00AFEF;
+  cursor: pointer;
+}
+
+.btn-rapido {
+  width: 60px;
+  height: auto;
+  margin: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+  box-shadow: 1px 1px #00AFEF;
+  border-radius: 25%;
+  background-color: transparent;
+  color: transparent;
+}
+
+.btn-rapido:hover {
+  color: #fff;
+  background: #00AFEF;
+}
+
+
+.line {
+  height: 1px;
+  width: 45%;
+  background-color: #e0e0e0;
+  margin-top: 5px;
+}
+
+
+.border-line {
+  border-right: 1px solid #eeeeee;
+}
+
+/* ---------------------------------------------- quickacces */
 span {
   color: white;
+
   strong {
     text-transform: uppercase;
     font-weight: bold;
   }
 }
+
 .button-53 {
-    background-color: #3DD1E7;
-    border: 0 solid #E5E7EB;
-    box-sizing: border-box;
-    color: #000000;
-    display: flex;
-    font-family: ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
-    font-size: 1rem;
-    font-weight: 700;
-    justify-content: center;
-    line-height: 1.75rem;
-    padding: .75rem 1.65rem;
-    position: relative;
-    text-align: center;
-    text-decoration: none #000000 solid;
-    text-decoration-thickness: auto;
-    width: 100%;
-    max-width: 460px;
-    position: relative;
-    cursor: pointer;
-    transform: rotate(-2deg);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  .button-53:focus {
-    outline: 0;
-  }
-  
-  .button-53:after {
-    content: '';
-    position: absolute;
-    border: 1px solid #000000;
-    bottom: 4px;
-    left: 4px;
-    width: calc(100% - 1px);
-    height: calc(100% - 1px);
-  }
-  
-  .button-53:hover:after {
-    bottom: 2px;
-    left: 2px;
-  }
-  
-  @media (min-width: 768px) {
-    .button-53 {
-      padding: .75rem 3rem;
-      font-size: 1.25rem;
-    }
-  }
+  background-color: #3DD1E7;
+  border: 0 solid #E5E7EB;
+  box-sizing: border-box;
+  color: #000000;
+  display: flex;
+  font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.75rem;
+  padding: .75rem 1.65rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none #000000 solid;
+  text-decoration-thickness: auto;
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  cursor: pointer;
+  transform: rotate(-2deg);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 
-  /* ---------------------------------------------- login */
-  swiper-container {
-    width: 170px;
-    height: 170px;
-    position: relative;
-    
-  }
+.button-53:focus {
+  outline: 0;
+}
 
-  swiper-slide {
-    background-position: center;
-    background-size: cover;
-  }
+.button-53:after {
+  content: '';
+  position: absolute;
+  border: 1px solid #000000;
+  bottom: 4px;
+  left: 4px;
+  width: calc(100% - 1px);
+  height: calc(100% - 1px);
+}
 
-  swiper-slide img {
-    display: block;
-    width: 100%;
+.button-53:hover:after {
+  bottom: 2px;
+  left: 2px;
+}
+
+@media (min-width: 768px) {
+  .button-53 {
+    padding: .75rem 3rem;
+    font-size: 1.25rem;
   }
+}
+
+/* ---------------------------------------------- login */
+swiper-container {
+  width: 170px;
+  height: 170px;
+  position: relative;
+
+}
+
+swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
 /* ---------------------------------------------- modal */
-  ion-modal#example-modal {
-    --width: fit-content;
-    --min-width: 250px;
-    --height: fit-content;
-    --border-radius: 6px;
-    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
-  }
+ion-modal#example-modal {
+  --width: fit-content;
+  --min-width: 250px;
+  --height: fit-content;
+  --border-radius: 6px;
+  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+}
 
-  .wrapper {
-    background: #4363AC;
-    border-radius: 15px;
-    border: 3px solid #fff;
-  }
+.wrapper {
+  background: #4363AC;
+  border-radius: 15px;
+  border: 3px solid #fff;
+}
