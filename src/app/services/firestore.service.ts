@@ -56,9 +56,6 @@ export class FirestoreService {
       'usuarios',
       (ref) => ref.where('rol', '==', rol)
     );
-    collection.valueChanges().subscribe(data => {
-      //console.log("xxx:", data);
-    });
 
     return collection.valueChanges();
   }
@@ -68,9 +65,6 @@ export class FirestoreService {
       'usuarios',
       (ref) => ref.where('perfil', '==', perfil)
     );
-    collection.valueChanges().subscribe(data => {
-      //console.log("xxx:", data);
-    });
 
     return collection.valueChanges();
   }
