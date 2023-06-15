@@ -1,391 +1,404 @@
 ion-header {
-    --ion-background-color: linear-gradient(0deg,
-            #4363AC 0%,
-            #00AFEF 100%);
+  --ion-background-color: linear-gradient(0deg,
+      #4363AC 0%,
+      #00AFEF 100%);
 
-    img {
-        width: 50px;
-    }
+  img {
+    width: 50px;
+  }
 }
 
 .white-text {
-    --color: white;
-  }
+  --color: white;
+}
 
 ion-content {
-    --ion-background-color: linear-gradient(0deg,
-            #4363AC 0%,
-            #00AFEF 100%);
+  --ion-background-color: linear-gradient(0deg,
+      #4363AC 0%,
+      #00AFEF 100%);
 }
 
 ion-card {
-    --ion-background-color: linear-gradient(0deg,
-            #4363AC 0%,
-            #00AFEF 100%);
+  --ion-background-color: linear-gradient(0deg,
+      #4363AC 0%,
+      #00AFEF 100%);
 }
 
 ion-footer {
-    --ion-background-color: linear-gradient(0deg,
-            #4363AC 0%,
-            #00AFEF 100%);
+  --ion-background-color: linear-gradient(0deg,
+      #4363AC 0%,
+      #00AFEF 100%);
 }
 
 .scanner-activo {
-    --background: transparent;
-    --ion-background-color: transparent;
+  --background: transparent;
+  --ion-background-color: transparent;
 }
-.visor {
-    margin-top: 5rem;
-    display: grid;
-    place-content: center;
-  }
-  .monto {
-    border: 5px dotted #000;
-    background: rgb(91, 88, 88);
-    background: linear-gradient(
-      0deg,
-      rgba(91, 88, 88, 1) 0%,
-      rgba(94, 245, 4, 1) 100%
-    );
-    width: 21rem;
-    height: 23rem;
-    font-size: 9rem;
-    display: grid;
-    place-content: center;
-    font-family: fantasy;
-    color: #fff;
-    text-shadow: 3px 3px 3px #000;
-    border-radius: 30px;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    box-shadow: 8px 8px 4px #000;
-  }
-  .centrado {
-    display: grid;
-    place-content: center;
-  }
-  .escanear {
-    display: grid;
-    place-content: center;
-    width: 15rem;
-    height: 4rem;
-    border-radius: 30px;
-    box-shadow: 3px 3px 4px #000;
-    color: black;
-    font-size: 1.7rem;
-    font-family: fantasy;
-    margin-top: 1rem;
-    background: #0e8ec9;
-  }
-  .escanear:active {
-    transform: scale(1.1);
-    background: #000;
-    box-shadow: 0 0 12px rgb(255, 255, 255);
-    transition: transform 0.5s, background 0.5s;
-  }
-  .titulo {
-    display: grid;
-    place-content: center;
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-    font-family: fantasy;
-    margin-top: 0px;
-    color: #fff;
-    text-shadow: 3px 3px 3px #000;
-  }
-.scanner-activo-visor {
-    border: 5px groove #fff;
-    color: transparent;
-    text-shadow: 3px 3px 3px transparent;
-    background: transparent;
-    background-color: transparent;
-    position: relative;
 
-    span {
-        position: absolute;
-        top: 0%;
-        width: 100%;
-        height: 3px;
-        background: red;
-        animation-name: move-bar;
-        animation-duration: 0.75s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-        box-shadow: 0 0 20px red;
-    }
+.visor {
+  margin-top: 5rem;
+  display: grid;
+  place-content: center;
+}
+
+.monto {
+  border: 5px dotted #000;
+  background: rgb(91, 88, 88);
+  background: linear-gradient(0deg,
+      rgba(91, 88, 88, 1) 0%,
+      rgba(94, 245, 4, 1) 100%);
+  width: 21rem;
+  height: 23rem;
+  font-size: 9rem;
+  display: grid;
+  place-content: center;
+  font-family: fantasy;
+  color: #fff;
+  text-shadow: 3px 3px 3px #000;
+  border-radius: 30px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  box-shadow: 8px 8px 4px #000;
+}
+
+.centrado {
+  display: grid;
+  place-content: center;
+}
+
+.escanear {
+  display: grid;
+  place-content: center;
+  width: 15rem;
+  height: 4rem;
+  border-radius: 30px;
+  box-shadow: 3px 3px 4px #000;
+  color: black;
+  font-size: 1.7rem;
+  font-family: fantasy;
+  margin-top: 1rem;
+  background: #0e8ec9;
+}
+
+.escanear:active {
+  transform: scale(1.1);
+  background: #000;
+  box-shadow: 0 0 12px rgb(255, 255, 255);
+  transition: transform 0.5s, background 0.5s;
+}
+
+.titulo {
+  display: grid;
+  place-content: center;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-family: fantasy;
+  margin-top: 0px;
+  color: #fff;
+  text-shadow: 3px 3px 3px #000;
+}
+
+.scanner-activo-visor {
+  border: 5px groove #fff;
+  color: transparent;
+  text-shadow: 3px 3px 3px transparent;
+  background: transparent;
+  background-color: transparent;
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 3px;
+    background: red;
+    animation-name: move-bar;
+    animation-duration: 0.75s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    box-shadow: 0 0 20px red;
+  }
 }
 
 @keyframes move-bar {
-    0% {
-        top: 0%;
-    }
+  0% {
+    top: 0%;
+  }
 
-    100% {
-        top: 100%;
-    }
+  100% {
+    top: 100%;
+  }
 }
 
 .ingreso {
-    background: #00AFEF;
+  background: #00AFEF;
 }
 
 h1 {
-    color: white;
+  color: white;
 }
 
 .foto {
-    width: 110px;
-    height: 96px;
-    display: inline-flex;
+  width: 110px;
+  height: 96px;
+  display: inline-flex;
 
 }
 
 .position {
-    display: inline-block;
-    position: relative;
+  display: inline-block;
+  position: relative;
 }
 
 .position ion-button {
-    position: absolute;
-    bottom: -1.5em;
-    right: -4em;
-    border-radius: 1.5em;
-    padding: 1em 1.5em;
+  position: absolute;
+  bottom: -1.5em;
+  right: -4em;
+  border-radius: 1.5em;
+  padding: 1em 1.5em;
 
 }
 
 ion-fab-button[data-desc2] {
-    position: relative;
-    width: 81px;
-    height: 74px;
-    margin-bottom: 22%;
-    margin-left: -6.8px;
-    --background: #142752;
+  position: relative;
+  width: 81px;
+  height: 74px;
+  margin-bottom: 22%;
+  margin-left: -6.8px;
+  --background: #142752;
 
 }
 
 ion-fab-button[data-desc] {
-    position: relative;
-    width: 67px;
-    height: 65px;
-    margin-bottom: 30%;
-    --background: white;
-    --background-activated: #87d361;
-    --background-hover: #a3e681;
-    --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-    --color: black;
+  position: relative;
+  width: 67px;
+  height: 65px;
+  margin-bottom: 30%;
+  --background: white;
+  --background-activated: #87d361;
+  --background-hover: #a3e681;
+  --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --color: black;
 }
 
 ion-fab-button[data-desc]::after {
-    position: absolute;
-    content: attr(data-desc);
-    z-index: 1;
-    right: -14px;
-    bottom: -30px;
-    padding: 9px;
-    border-radius: 15px;
-    color: #ffffff;
+  position: absolute;
+  content: attr(data-desc);
+  z-index: 1;
+  right: -14px;
+  bottom: -30px;
+  padding: 9px;
+  border-radius: 15px;
+  color: #ffffff;
 }
 
 ion-card {
-    box-shadow: 8px 10px 10px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 8px 10px 10px 1px rgba(0, 0, 0, 0.5);
 }
 
 
 .form-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 50px; /* Ajusta el valor para dejar espacio suficiente para <app-barra> */
-    z-index: 1;
-    padding: 10px;
-    overflow-y: auto; /* Agrega scroll si el formulario es demasiado largo */
-  }
-
-
-  on-select {
-    background-color: white;
-    --placeholder-color: white;
-    --placeholder-opacity: 1;
-    width: 100%;
-    justify-content: center;
-    
-  }
-  
-  ion-select::part(placeholder),
-  ion-select::part(text) {
-    flex: 0 0 auto;
-    color: white;
-  }
-  
-  ion-select::part(text) {
-    color: white;
-    font-weight: 300;
-        
-  }
-  .centrado {
-    display: grid;
-    place-content: center;
-  }
-
-  .scanner-activo {
-    --background: transparent;
-    --ion-background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 50px;
+  /* Ajusta el valor para dejar espacio suficiente para <app-barra> */
+  z-index: 1;
+  padding: 10px;
+  overflow-y: auto;
+  /* Agrega scroll si el formulario es demasiado largo */
 }
-.visor {
-    margin-top: 5rem;
-    display: grid;
-    place-content: center;
-  }
-  .monto {
-    border: 5px dotted #000;
-    background: rgb(91, 88, 88);
-    background: linear-gradient(
-      0deg,
-      rgba(91, 88, 88, 1) 0%,
-      rgba(94, 245, 4, 1) 100%
-    );
-    width: 21rem;
-    height: 23rem;
-    font-size: 9rem;
-    display: grid;
-    place-content: center;
-    font-family: fantasy;
-    color: #fff;
-    text-shadow: 3px 3px 3px #000;
-    border-radius: 30px;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    box-shadow: 8px 8px 4px #000;
-  }
-  .centrado {
-    display: grid;
-    place-content: center;
-  }
-  .escanear {
-    display: grid;
-    place-content: center;
-    width: 15rem;
-    height: 4rem;
-    border-radius: 30px;
-    box-shadow: 3px 3px 4px #000;
-    color: black;
-    font-size: 1.7rem;
-    font-family: fantasy;
-    margin-top: 1rem;
-    background: #0e8ec9;
-  }
-  .escanear:active {
-    transform: scale(1.1);
-    background: #000;
-    box-shadow: 0 0 12px rgb(255, 255, 255);
-    transition: transform 0.5s, background 0.5s;
-  }
-  .titulo {
-    display: grid;
-    place-content: center;
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-    font-family: fantasy;
-    margin-top: 0px;
-    color: #fff;
-    text-shadow: 3px 3px 3px #000;
-  }
-.scanner-activo-visor {
-    border: 5px groove #fff;
-    color: transparent;
-    text-shadow: 3px 3px 3px transparent;
-    background: transparent;
-    background-color: transparent;
-    position: relative;
 
-    span {
-        position: absolute;
-        top: 0%;
-        width: 100%;
-        height: 3px;
-        background: red;
-        animation-name: move-bar;
-        animation-duration: 0.75s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-        box-shadow: 0 0 20px red;
-    }
+
+on-select {
+  background-color: white;
+  --placeholder-color: white;
+  --placeholder-opacity: 1;
+  width: 100%;
+  justify-content: center;
+
+}
+
+ion-select::part(placeholder),
+ion-select::part(text) {
+  flex: 0 0 auto;
+  color: white;
+}
+
+ion-select::part(text) {
+  color: white;
+  font-weight: 300;
+
+}
+
+.centrado {
+  display: grid;
+  place-content: center;
+}
+
+.scanner-activo {
+  --background: transparent;
+  --ion-background-color: transparent;
+}
+
+.visor {
+  margin-top: 5rem;
+  display: grid;
+  place-content: center;
+}
+
+.monto {
+  border: 5px dotted #000;
+  background: rgb(91, 88, 88);
+  background: linear-gradient(0deg,
+      rgba(91, 88, 88, 1) 0%,
+      rgba(94, 245, 4, 1) 100%);
+  width: 21rem;
+  height: 23rem;
+  font-size: 9rem;
+  display: grid;
+  place-content: center;
+  font-family: fantasy;
+  color: #fff;
+  text-shadow: 3px 3px 3px #000;
+  border-radius: 30px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  box-shadow: 8px 8px 4px #000;
+}
+
+.centrado {
+  display: grid;
+  place-content: center;
+}
+
+.escanear {
+  display: grid;
+  place-content: center;
+  width: 15rem;
+  height: 4rem;
+  border-radius: 30px;
+  box-shadow: 3px 3px 4px #000;
+  color: black;
+  font-size: 1.7rem;
+  font-family: fantasy;
+  margin-top: 1rem;
+  background: #0e8ec9;
+}
+
+.escanear:active {
+  transform: scale(1.1);
+  background: #000;
+  box-shadow: 0 0 12px rgb(255, 255, 255);
+  transition: transform 0.5s, background 0.5s;
+}
+
+.titulo {
+  display: grid;
+  place-content: center;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
+  font-family: fantasy;
+  margin-top: 0px;
+  color: #fff;
+  text-shadow: 3px 3px 3px #000;
+}
+
+.scanner-activo-visor {
+  border: 5px groove #fff;
+  color: transparent;
+  text-shadow: 3px 3px 3px transparent;
+  background: transparent;
+  background-color: transparent;
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 3px;
+    background: red;
+    animation-name: move-bar;
+    animation-duration: 0.75s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    box-shadow: 0 0 20px red;
+  }
 }
 
 @keyframes move-bar {
-    0% {
-        top: 0%;
-    }
+  0% {
+    top: 0%;
+  }
 
-    100% {
-        top: 100%;
-    }
+  100% {
+    top: 100%;
+  }
 }
 
 .ingreso {
-    background: #00AFEF;
+  background: #00AFEF;
 }
 
 h2 {
-    color: white;
+  color: white;
 }
 
 .foto {
-    width: 110px;
-    height: 96px;
-    display: inline-flex;
+  width: 110px;
+  height: 96px;
+  display: inline-flex;
 
 }
 
 .position {
-    display: inline-block;
-    position: relative;
+  display: inline-block;
+  position: relative;
 }
 
 .position ion-button {
-    position: absolute;
-    bottom: -1.5em;
-    right: -4em;
-    border-radius: 1.5em;
-    padding: 1em 1.5em;
+  position: absolute;
+  bottom: -1.5em;
+  right: -4em;
+  border-radius: 1.5em;
+  padding: 1em 1.5em;
 
 }
 
 ion-fab-button[data-desc2] {
-    position: relative;
-    width: 81px;
-    height: 74px;
-    margin-bottom: 22%;
-    margin-left: -6.8px;
-    --background: #142752;
+  position: relative;
+  width: 81px;
+  height: 74px;
+  margin-bottom: 22%;
+  margin-left: -6.8px;
+  --background: #142752;
 
 }
 
 ion-fab-button[data-desc] {
-    position: relative;
-    width: 67px;
-    height: 65px;
-    margin-bottom: 30%;
-    --background: white;
-    --background-activated: #87d361;
-    --background-hover: #a3e681;
-    --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-    --color: black;
+  position: relative;
+  width: 67px;
+  height: 65px;
+  margin-bottom: 30%;
+  --background: white;
+  --background-activated: #87d361;
+  --background-hover: #a3e681;
+  --box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --color: black;
 }
 
 ion-fab-button[data-desc]::after {
-    position: absolute;
-    content: attr(data-desc);
-    z-index: 1;
-    right: -14px;
-    bottom: -30px;
-    padding: 9px;
-    border-radius: 15px;
-    color: #ffffff;
+  position: absolute;
+  content: attr(data-desc);
+  z-index: 1;
+  right: -14px;
+  bottom: -30px;
+  padding: 9px;
+  border-radius: 15px;
+  color: #ffffff;
 }

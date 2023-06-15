@@ -15,6 +15,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { QrscannerService } from 'src/app/services/qrscanner.service';
 import { BarraComponent } from 'src/app/barra/barra.component';
 import { SpinnerComponent } from 'src/app/spinner/spinner.component';
+import Swal from 'sweetalert2';
 
 
 
@@ -34,7 +35,7 @@ export class AltaEmpleadoPage implements OnInit {
   formData: FormGroup;
   scanActive: boolean = false;
 
-  
+
   constructor(private fb: FormBuilder,
     private firestore: FirestoreService,
     private firestorage: AngularFireStorage,
@@ -53,7 +54,7 @@ export class AltaEmpleadoPage implements OnInit {
       'dni': ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]],
       'cuil': ['', [Validators.required]],
       'confirmPassword': ['', Validators.required],
-      'rol':['', [Validators.required]],
+      'rol': ['', [Validators.required]],
 
     });
   }
@@ -61,31 +62,73 @@ export class AltaEmpleadoPage implements OnInit {
   async Registro() {
     const form = this.formData.value;
     this.spinner = true;
-    const user = await this.authSrv.registerUser(form.correo, form.password).then((resp) => {
-        console.log('esto es respuesta auth', resp);
-        let datos: User2 = {
-          nombre: form.nombre,
-          apellido: form.apellido,
-          dni: form.dni,
-          img: this.dataUrl,
-          estado: 'ACEPTADO',
-          correo: form.correo,
-          password: form.password,
-          perfil: 'EMPLEADO',
-          fechaCreacion: new Date().getDate(),
-          rol: form.rol,
-          uid: resp.user.uid
-        }
-        this.firestore.addUser(datos, resp.user.uid);
-        this.emailSrv.notificationInabled(datos);
-    }).catch(err => {
-      console.log(err);
-    })
-    if(user!=null){
-      this.router.navigate(['/home']);
+    if (form.password === form.confirmPassword) {
+      if (this.dataUrl !== '../../../assets/images/clientes/usuario.png') {
+
+        const user = await this.authSrv.registerUser(form.correo, form.password).then((resp) => {
+          let datos: User2 = {
+            nombre: form.nombre,
+            apellido: form.apellido,
+            dni: form.dni,
+            img: this.dataUrl,
+            estado: 'ACEPTADO',
+            correo: form.correo,
+            password: form.password,
+            perfil: 'EMPLEADO',
+            fechaCreacion: new Date().getTime(),
+            rol: form.rol,
+            uid: resp.user.uid
+          }
+          this.firestore.addUser(datos, resp.user.uid);
+          this.emailSrv.notificationInabled(datos);
+          this.toast(`${form.rol}  creado correctamente`, 'success');
+          this.spinner = false;
+
+        }).catch(err => {
+          this.manejoErrores(err.code);
+          this.spinner = false;
+        })
+      } else {
+        this.toast('Debes cargar tu foto', 'info');
+      }
     } else {
-      //alert de error
+      this.toast('Las contraseñas deben coincidir', 'info');
+
     }
+
+  }
+  manejoErrores(err: string) {
+    switch (err) {
+      case 'auth/email-already-in-use':
+        this.toast('El usuario ya existe', 'error')
+        break;
+      case 'auth/invalid-email':
+        this.toast('El email ingresado no es correcto', 'error')
+
+        break;
+      case 'auth/user-not-found':
+        this.toast('No existe registro con ese usuario', 'error')
+
+        break;
+      default:
+        this.toast('Error al Registrarse', 'error')
+        break;
+    }
+  }
+
+  async toast(title: string, icono: any, text?: string) {
+    await Swal.fire({
+      title: title,
+      text: text,
+      icon: icono,
+      timer: 3000,
+      toast: true,
+      position: 'top',
+      grow: 'row',
+      showConfirmButton: false,
+      timerProgressBar: true
+    })
+    this.spinner = false;
   }
 
   async SacarFoto() {
@@ -118,18 +161,18 @@ export class AltaEmpleadoPage implements OnInit {
 
       this.formData.patchValue({
         apellido:
-            this.currentScan[1].charAt(0) +
-            this.currentScan[1].slice(1).toLocaleLowerCase(),
-          nombre:
-            this.currentScan[2].split(' ')[0].charAt(0) +
-            this.currentScan[2].split(' ')[0].slice(1).toLocaleLowerCase() +
-            ' ' +
-            this.currentScan[2].split(' ')[1].charAt(0) +
-            this.currentScan[2].split(' ')[1].slice(1).toLocaleLowerCase(),
-          dni: this.currentScan[4],
-          correo: this.formData.getRawValue().correo,
-          clave1: this.formData.getRawValue().password,
-          clave2: this.formData.getRawValue().confirmPassword,
+          this.currentScan[1].charAt(0) +
+          this.currentScan[1].slice(1).toLocaleLowerCase(),
+        nombre:
+          this.currentScan[2].split(' ')[0].charAt(0) +
+          this.currentScan[2].split(' ')[0].slice(1).toLocaleLowerCase() +
+          ' ' +
+          this.currentScan[2].split(' ')[1].charAt(0) +
+          this.currentScan[2].split(' ')[1].slice(1).toLocaleLowerCase(),
+        dni: this.currentScan[4],
+        correo: this.formData.getRawValue().correo,
+        clave1: this.formData.getRawValue().password,
+        clave2: this.formData.getRawValue().confirmPassword,
       });
       this.scanActive = false;
 
