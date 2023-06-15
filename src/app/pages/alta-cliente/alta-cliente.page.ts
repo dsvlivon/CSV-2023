@@ -85,21 +85,24 @@ export class AltaClientePage implements OnInit {
 
       }
     } else {
-      let datos: User2 = {
-        nombre: form.nombre,
-        apellido: form.apellido,
-        dni: form.dni,
-        img: this.dataUrl,
-        correo: form.correo,
-        password: form.password,
-        perfil: 'CLIENTE',
-        fechaCreacion: Date.now(),
-        estado: 'PENDIENTE'
-      }
+      
+      
       if (form.password === form.confirmPassword) {
         if (this.dataUrl !== '../../../assets/images/clientes/usuario.png') {
 
           const user = await this.authSrv.registerUser(form.correo, form.password).then((resp) => {
+            let datos: User2 = {
+              nombre: form.nombre,
+              apellido: form.apellido,
+              dni: form.dni,
+              img: this.dataUrl,
+              correo: form.correo,
+              password: form.password,
+              perfil: 'CLIENTE',
+              fechaCreacion: Date.now(),
+              estado: 'PENDIENTE',
+              uid: resp.user.uid
+            }
             this.toast('Registro exitoso', 'success', 'Su registro quedo pendiente de aprobación');
             setTimeout(() => {
               this.spinner = false;

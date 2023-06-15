@@ -47,7 +47,9 @@ export class LoginPage implements OnInit {
     this.spinner = true;
 
     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
+      console.log(resp);
       const sub = this.firestoreService.getByMail(resp.user.email).subscribe((data) => {
+        console.log(data[0]);
         if (data[0]['estado'] === 'ACEPTADO') {
           this.pnService.getUser(data[0]);
 

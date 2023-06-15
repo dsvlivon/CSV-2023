@@ -9,6 +9,6 @@ export interface User2 {
     estado?: 'ACEPTADO' | 'PENDIENTE' | 'RECHAZADO';
     perfil: 'DUENIO' | 'SUPERVISOR' | 'EMPLEADO' | 'CLIENTE' | 'ANONIMO';
     rol?: 'METRE' | 'MOZO' | 'COCINERO' | 'BARTENDER';
-    cuil?: number;
-    
+    cuil?: number,
+    uid?: string;
 }
