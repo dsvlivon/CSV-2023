@@ -20,8 +20,9 @@ import { QrscannerService } from '../services/qrscanner.service';
 export class HomePage implements OnInit {
   user: any = null;
   spinner: boolean = false;
+
   waitlist = false;
-  grid = true;
+  grid = false;
 
   scanActive = false;
   currentScan:string[];
