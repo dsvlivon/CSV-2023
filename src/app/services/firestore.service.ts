@@ -43,6 +43,7 @@ export class FirestoreService {
   }
 
   getByMail(mail: string) {
+    
     const collection = this.angularFirestore.collection<any>(
       'usuarios',
       (ref) => ref.where('correo', '==', mail)

@@ -24,11 +24,11 @@ import { provideFirebaseApp, initializeApp, firebaseApp$ } from '@angular/fire/a
 import { HttpClientModule } from '@angular/common/http';
 
 
-
-if (environment.production) {
+enableProdMode();
+/* if (environment.production) {
   enableProdMode();
 }
-
+ */
 /*
 Si es ahí abajo del providers: [ 
 Flashlight, 

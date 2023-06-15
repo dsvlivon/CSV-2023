@@ -18,6 +18,7 @@ import { ModalController } from '@ionic/angular';
 
 export class BarraComponent  implements OnInit {
 
+  user: any = null;
   mostrarComponente: boolean = false;
   mostrarColapsar: boolean = false;
   mostrarBotonesFlotantes = false;
@@ -31,7 +32,16 @@ export class BarraComponent  implements OnInit {
     private modalController: ModalController
 ) {}
 
-ngOnInit() {}
+ngOnInit() {
+  this.authService.user$.subscribe(data => {
+    this.user = data
+  });
+  let ls = localStorage.getItem('user');
+  if(ls != null) {
+    let user = JSON.parse(ls);
+    this.user = user;
+  }
+}
 
 goAltas(){ this.router.navigate(['/altas']); }
 
@@ -47,7 +57,7 @@ goQr(){ this.router.navigate(['/lector-qr']); }
 
 goHome(){ this.router.navigate(['/home']); }
 
-logOut() { this.authService.signOut(); }
+logOut() { this.authService.signOut(); localStorage.removeItem('user'); }
 
 
 

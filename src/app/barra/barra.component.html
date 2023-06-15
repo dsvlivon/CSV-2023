@@ -18,7 +18,7 @@
         <ion-grid>
         
           <ion-row>
-            <button expand="full" class="btn btn-primary" style="
+            <button *ngIf="user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" expand="full" class="btn btn-primary" style="
               margin: 1rem;
               width: 13rem;
               font-size: 1.3rem;
@@ -28,17 +28,17 @@
           </ion-row>
 
           <ion-row>
-            <button expand="full" class="btn btn-primary" style="
+            <button *ngIf="user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" expand="full" class="btn btn-primary" style="
               margin: 1rem;
               width: 13rem;
               font-size: 1.3rem;
               text-shadow: 1px 1px 1px #000;
               box-shadow: 2px 2px 4px #000;
-            " (click)="modal.dismiss()" (click)="altaSupervisor()">Alta Supervisor</button>
+            " (click)="modal.dismiss()" (click)="altaSupervisor()">Alta Supervisor/Dueño</button>
           </ion-row>
 
           <ion-row>
-            <button expand="full" class="btn btn-light" style="
+            <button *ngIf="user.perfil === 'METRE'" expand="full" class="btn btn-light" style="
               margin: 1rem;
               width: 13rem;
               font-size: 1.3rem;
@@ -61,12 +61,12 @@
       <ion-label>Inicio</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button id="open-custom-dialog" (click)="modal.present()">
+    <ion-tab-button id="open-custom-dialog" *ngIf="user.perfil === 'METRE' || user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" (click)="modal.present()">
       <ion-icon color="light" name="add-circle-outline" aria-hidden="true"></ion-icon>
       <ion-label>Altas</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button (click)="goEncuestas()">
+    <ion-tab-button *ngIf="user.perfil === 'METRE' || user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" (click)="goEncuestas()">
       <ion-icon color="light" name="cash" aria-hidden="true"></ion-icon>
       <ion-label>Encuestas</ion-label>
     </ion-tab-button>

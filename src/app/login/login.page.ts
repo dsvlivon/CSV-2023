@@ -47,43 +47,48 @@ export class LoginPage implements OnInit {
     this.spinner = true;
 
     const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
-      this.toast('Ingreso exitoso', 'success');
       const sub = this.firestoreService.getByMail(resp.user.email).subscribe((data) => {
+        console.log('entro en data ');
+        console.log(data);
         if (data[0]['estado'] === 'ACEPTADO') {
+          sub.unsubscribe();
+          this.toast('Ingreso exitoso', 'success');
           this.pnService.getUser(data[0]);
 
-          setTimeout(() => {
-            this.router.navigateByUrl('home', { replaceUrl: true }).then(() => {
-              sub.unsubscribe();
-              this.spinner = false;
-  
-            })
-            
-          }, 3000);
+          this.router.navigateByUrl('home', { replaceUrl: true }).then(() => {
+            this.spinner = false;
+          })
+
         } else if (data[0]['estado'] === 'PENDIENTE') {
           this.mailService.notificationStatus(data[0]);
           this.toast('Error en el ingreso', 'info', 'Tu solicitud de registro aún no fue aceptada')
-
+          localStorage.removeItem('user');
           this.spinner = false;
+          sub.unsubscribe();
         } else if (data[0]['estado'] === 'RECHAZADO') {
 
           this.mailService.notificationStatus(data[0]);
           this.toast('Error en el ingreso', 'error', 'Tu solicitud de registro fue rechazada')
           this.spinner = false;
+          localStorage.removeItem('user');
+          sub.unsubscribe();
 
         } else {
           this.toast('Error en el ingreso', 'error')
           this.spinner = false;
+          localStorage.removeItem('user');
+          sub.unsubscribe();
         }
 
       });
-      //sub.unsubscribe();
 
 
     }).catch(err => {
       console.log(err);
       this.toast('Error en el ingreso', 'error', 'El usuario no existe')
       this.formData.reset();
+      localStorage.removeItem('user');
+
       this.error = true;
       setTimeout(() => {
         this.spinner = false;
