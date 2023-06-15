@@ -14,6 +14,7 @@ import { FirestorageService } from 'src/app/services/firestorage.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { QrscannerService } from 'src/app/services/qrscanner.service';
 import { BarraComponent } from 'src/app/barra/barra.component';
+import { SpinnerComponent } from 'src/app/spinner/spinner.component';
 
 
 
@@ -22,13 +23,13 @@ import { BarraComponent } from 'src/app/barra/barra.component';
   templateUrl: './alta-empleado.page.html',
   styleUrls: ['./alta-empleado.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, BarraComponent]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, BarraComponent, SpinnerComponent]
 })
 
 export class AltaEmpleadoPage implements OnInit {
   authSrv = inject(AuthService);
   currentScan: string[];
-
+  spinner = false;
   dataUrl = '../../../assets/images/clientes/usuario.png'
   formData: FormGroup;
   scanActive: boolean = false;
@@ -59,7 +60,7 @@ export class AltaEmpleadoPage implements OnInit {
 
   async Registro() {
     const form = this.formData.value;
-          
+    this.spinner = true;
     const user = await this.authSrv.registerUser(form.correo, form.password).then((resp) => {
         console.log('esto es respuesta auth', resp);
         let datos: User2 = {
