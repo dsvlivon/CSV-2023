@@ -4,5 +4,5 @@ export class Producto {
     tiempo: number;
     precio: number;
     tipo: 'BEBIDA' | 'COMIDA' | 'POSTRE';
-    img: string;
+    img: string[];
 }
