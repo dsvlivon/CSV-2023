@@ -81,6 +81,21 @@ export class FirestoreService {
       });
   }
 
+  getClientes(){
+    const collection = this.angularFirestore.collection<any>('usuarios',(ref)=> ref.where('perfil','==','CLIENTE'));
+    return collection.valueChanges();
+  }
+
+  async updateEstadoUsuario(usuario: any){
+    await this.angularFirestore
+      .doc<any>(`usuarios/${usuario.uid}`)
+      .update(usuario)
+      .then(() => {console.log("actualizo")})
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }
+
   /*  createMonthlyControl(control: any) {
      return this.angularFirestore
        .collection<any>('controlesMensuales')
