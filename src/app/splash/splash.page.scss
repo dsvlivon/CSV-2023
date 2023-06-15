@@ -1,4 +1,5 @@
 ion-content {
+<<<<<<< HEAD
         background: rgb(0, 0, 0);
         //background: 
         font-family: Georgia, Times, "Times New Roman", serif;
@@ -7,6 +8,10 @@ ion-content {
             #4363AC 0%,
             #00AFEF 100%);
       
+=======
+--ion-background-color: linear-gradient(0deg, #4363AC 0%,#00AFEF 100%);
+  
+>>>>>>> e5f748a44204c774976480ab11f23c07f47c387d
   display: flex;
   justify-content: center;
   align-items: center;

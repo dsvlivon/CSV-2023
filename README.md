@@ -18,8 +18,8 @@
 |          |  **Sprint 2: Implementación de Altas**               |            | prox. fecha:|  03/06/23  |
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
 | **1.b**  | **Diseñar componenetes menu Flotante**               |    Alfa    |   Daniel    |**Resuelto**|
-| **2.a**  | **Corrección de Icóno**                              |    Alfa    |   Daniel    |**Pendiente**|
-| **4.a**  | **Corrección de splash 1 y 2**                       |    Alfa    |   Daniel    |**Pendiente**|
+| **2.a**  | **Corrección de Icóno**                              |    Alfa    |   Daniel    |**Resuelto**|
+| **4.a**  | **Corrección de splash 1 y 2**                       |    Alfa    |   Daniel    |**Resuelto**|
 | **7**    | **Crear la página de inicio de sesión**              |    Gamma   |   Ignacio   |**Resuelto**|
 |  8       | Crear sistema de Roles y Permisos                    |    Beta    |   Sergio    |  Resuelto  |
 |  9       | Resolver funcionalidad de fotos y scan QR            |    Gamma   |   Ignacio   |  Resuelto  |
@@ -27,16 +27,16 @@
 |  9.b     |    Implementar servicio de QR                        |    Beta    |   Sergio    |  Resuelto  |
 |  10      | Diseñar QRs                                          |    Alfa    |   Daniel    |  Resuelto  |
 |  11      | Implementar Swipe en el Inicio de Sesión             |    Beta    |   Sergio    |  Resuelto  |
-|  12      | Crear Sistema de Altas                               |    Beta    |   Sergio    |   Activo   |
-|  12.a    |    Alta cliente/anónimo                              |    Beta    |   Sergio    |   Activo   |
-|  12.b    |    Alta empleado                                     |    Alfa    |   Daniel    |   Activo   |
-|  12.c    |    Alta supervisor                                   |    Gamma   |   Ignacio   |   Activo   |
+|  12      | Crear Sistema de Altas                               |    Beta    |   Sergio    |  Resuelto  |
+|  12.a    |    Alta cliente/anónimo                              |    Beta    |   Sergio    |  Resuelto  |
+|  12.b    |    Alta empleado                                     |    Alfa    |   Daniel    |  Resuelto  |
+|  12.c    |    Alta supervisor/duenio                            |    Gamma   |   Ignacio   |  Resuelto  |
 |  13      | Crear servicio de mail notification                  |    Alfa    |   Daniel    |  Resuelto  |
 |  13.a    |    Testear funcionmiento                             |    Alfa    |   Daniel    |  Resuelto  |
 |  13.b    |    Implementar servicio de mail notification         |    Beta    |   Sergio    |  Resuelto  |
 |  14      | Crear servicio de push notification                  |    Gamma   |   Ignacio   |  Resuelto  |
 |  14.a    |    Testear funcionmiento                             |    Gamma   |   Ignacio   |  Resuelto  |
-|  14.b    |    Implementar servicio de push notification        |    Beta    |   Sergio    |  Resuelto  |
+|  14.b    |    Implementar servicio de push notification         |    Beta    |   Sergio    |  Resuelto  |
 |  15      | Crear Spinner Component                              |    Alfa    |   Daniel    |  Resuelto  |
 |----------|------------------------------------------------------|------------|-------------|------------|
 |          |  **Sprint 3: Completar Altas**                       |            | prox. fecha:|  17/06/23  |
@@ -48,13 +48,25 @@
 |  15.a    | Problema con Imagen del Spinner                      |    Alfa    |   Daniel    |   Activo    |
 |  12.a.1  |    Crear forma de volver en el Alta cliente/anónimo  |    Beta    |   Sergio    |  Resuelto  |
 |  5.1     | Problema con el retorno en Inicio de sesión          |    Beta    |   Sergio    |  Resuelto  |
-|  16      | Implementar Lista de Espera                          |    Gamma   |   Ignacio   |   Activo    |
-|  17      | Implementar Aprobacion de Supervisores               |    Beta    |   Sergio    |   Nuevo    |
-|  17.a    |    Meet testear func. Alta completa                  |    Alfa    |   Daniel    |   Nuevo    |
-|  18      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
-|  19      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
-|  20      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
-|  21      |                                                      |    Alfa    |   Daniel    |   Nuevo    |
+|  16      | Implementar Lista de Espera                          |    Gamma   |   Ignacio   |   Activo   |
+|  17      | Implementar Aprobacion de Supervisores               |    Gamma   |   Ignacio   |   Activo   |
+|  17.a    |    Meet testear func. Alta completa                  |            |             |   Nuevo    |
+|  18      | Crear Mesas                                          |            |             |   Nuevo    |
+|  18.a    |    Crear Model de Mesa                               |            |             |   Nuevo    |
+|  18.b    |    Crear Menu Alta de Mesa                           |            |             |   Nuevo    |
+|  19      | Implementar Lista de Espera de Clientes              |            |             |   Nuevo    |
+|  19.a    |    Crear Menu Metre p/ asignar Mesas                 |            |             |   Nuevo    |
+|  19.b    |    Verificar q/ el cliente no pueda tomar otra mesa  |            |             |   Nuevo    |
+|  20      | Implementar boton "consulta al mozo"                 |            |             |   Nuevo    |
+|  20.a    |    Verificar q/ llegue la PN a todos los mozos       |            |             |   Nuevo    |
+|  20.b    |    Implementar respuesta de mozo                     |            |             |   Nuevo    |
+|  20.c    |    Verificar respuesta como cliente                  |            |             |   Nuevo    |
+|----------|------------------------------------------------------|------------|-------------|------------|
+|          |  **Sprint 4: Fase final**                            |            | prox. fecha:|  24/06/23  |
+|  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
+|  20      | Implementar Lista de Productos                       |            |             |   Nuevo    |
+|  20.a    |    Crear Menu Productos                              |            |             |   Nuevo    |
+|  20.a    |    Implementar seleccion de productos                |            |             |   Nuevo    |
 
 
 *El equipo de CSV trackea sus decisiones, correciones y otros topics con minutas, comúnmente realizadas después de cada clase.
