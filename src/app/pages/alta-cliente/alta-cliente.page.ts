@@ -61,13 +61,14 @@ export class AltaClientePage implements OnInit {
     if (this.authSrv.tipo === 'anonimo') {
       const email = form.nombre + `@anonymous.com`;
       const password = '123456'
-      let datos: User2 = {
-        nombre: form.nombre,
-        img: this.dataUrl,
-        perfil: 'ANONIMO',
-      }
+      
       if (this.dataUrl !== '../../../assets/images/clientes/usuario.png') {
 
+        let datos: User2 = {
+          nombre: form.nombre,
+          img: this.dataUrl,
+          perfil: 'ANONIMO',
+        }
         const user = await this.authSrv.registerUser(email, password).then((resp) => {
           this.toast('Registro exitoso', 'success');
 
@@ -84,8 +85,7 @@ export class AltaClientePage implements OnInit {
         this.toast('Debes cargar tu foto', 'info');
 
       }
-    } else {
-      
+    } else {      
       
       if (form.password === form.confirmPassword) {
         if (this.dataUrl !== '../../../assets/images/clientes/usuario.png') {
@@ -99,7 +99,7 @@ export class AltaClientePage implements OnInit {
               correo: form.correo,
               password: form.password,
               perfil: 'CLIENTE',
-              fechaCreacion: Date.now(),
+              fechaCreacion: new Date().getTime(),
               estado: 'PENDIENTE',
               uid: resp.user.uid
             }
@@ -119,7 +119,6 @@ export class AltaClientePage implements OnInit {
           })
         } else {
           this.toast('Debes cargar tu foto', 'info');
-
         }
 
       } else {

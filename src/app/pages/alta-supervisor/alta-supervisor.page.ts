@@ -22,7 +22,7 @@ import Swal from 'sweetalert2';
   templateUrl: './alta-supervisor.page.html',
   styleUrls: ['./alta-supervisor.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule,ReactiveFormsModule, BarraComponent, SpinnerComponent]
+  imports: [IonicModule, CommonModule, FormsModule, ReactiveFormsModule, BarraComponent, SpinnerComponent]
 })
 export class AltaSupervisorPage implements OnInit {
   authSrv = inject(AuthService);
@@ -56,11 +56,11 @@ export class AltaSupervisorPage implements OnInit {
       'dni': ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]],
       'cuil': ['', [Validators.required]],
       'confirmPassword': ['', Validators.required],
-      'perfil':['', [Validators.required]],
+      'perfil': ['', [Validators.required]],
     });
   }
 
-  async SacarFoto(){
+  async SacarFoto() {
     const form = this.formData.value;
     let foto = {
       img: ''
@@ -82,19 +82,19 @@ export class AltaSupervisorPage implements OnInit {
     })
   }
 
-  async Registro(){
+  async Registro() {
     this.spinner = true;
     const form = this.formData.value;
     let perfil: any = '';
-      if(this.textoSwitch === 'Supervisor'){
-         perfil = 'SUPERVISOR'
-       }
-        else{
-        perfil = 'DUENIO';
-       }
+    if (this.textoSwitch === 'Supervisor') {
+      perfil = 'SUPERVISOR'
+    }
+    else {
+      perfil = 'DUENIO';
+    }
 
-       if (form.password === form.confirmPassword) {
-        if (this.dataUrl !== '../../../assets/images/clientes/usuario.png') {
+    if (form.password === form.confirmPassword) {
+      if (this.dataUrl !== '../../../assets/images/clientes/usuario.png') {
 
         const user = await this.authSrv.registerUser(form.correo, form.password).then((resp) => {
           let datos: User2 = {
@@ -105,22 +105,24 @@ export class AltaSupervisorPage implements OnInit {
             correo: form.correo,
             password: form.password,
             perfil: perfil,
-            fechaCreacion: new Date().getDate(),
+            fechaCreacion: new Date().getTime(),
             estado: 'ACEPTADO',
             uid: resp.user.uid
           }
-      this.firestore.addUser(datos, resp.user.uid);
-      this.emailSrv.notificationInabled(datos);
-      }).catch(err => {
-        this.manejoErrores(err.code);
-      });
-     } else {
-      this.toast('Debes cargar tu foto', 'info');
+          this.toast(`${perfil} creado correctamente`, 'success');
+          this.spinner = false;
+          this.firestore.addUser(datos, resp.user.uid);
+          this.emailSrv.notificationInabled(datos);
+        }).catch(err => {
+          this.manejoErrores(err.code);
+        });
+      } else {
+        this.toast('Debes cargar tu foto', 'info');
 
-    }
+      }
 
     } else {
-    this.toast('Las contraseñas deben coincidir', 'info');
+      this.toast('Las contraseñas deben coincidir', 'info');
     }
   }
 
@@ -142,7 +144,7 @@ export class AltaSupervisorPage implements OnInit {
         break;
     }
   }
-  
+
   async toast(title: string, icono: any, text?: string) {
     await Swal.fire({
       title: title,
@@ -158,12 +160,12 @@ export class AltaSupervisorPage implements OnInit {
     this.spinner = false;
   }
 
-  cambiarPerfil(event: any){
+  cambiarPerfil(event: any) {
     //console.log(event.detail.checked);
-    if(!event.detail.checked){
+    if (!event.detail.checked) {
       this.textoSwitch = "Supervisor"
     }
-    else{
+    else {
       this.textoSwitch = "Dueño"
     }
   }
@@ -176,18 +178,18 @@ export class AltaSupervisorPage implements OnInit {
 
       this.formData.patchValue({
         apellido:
-            this.currentScan[1].charAt(0) +
-            this.currentScan[1].slice(1).toLocaleLowerCase(),
-          nombre:
-            this.currentScan[2].split(' ')[0].charAt(0) +
-            this.currentScan[2].split(' ')[0].slice(1).toLocaleLowerCase() +
-            ' ' +
-            this.currentScan[2].split(' ')[1].charAt(0) +
-            this.currentScan[2].split(' ')[1].slice(1).toLocaleLowerCase(),
-          dni: this.currentScan[4],
-          correo: this.formData.getRawValue().correo,
-          clave1: this.formData.getRawValue().password,
-          clave2: this.formData.getRawValue().confirmPassword,
+          this.currentScan[1].charAt(0) +
+          this.currentScan[1].slice(1).toLocaleLowerCase(),
+        nombre:
+          this.currentScan[2].split(' ')[0].charAt(0) +
+          this.currentScan[2].split(' ')[0].slice(1).toLocaleLowerCase() +
+          ' ' +
+          this.currentScan[2].split(' ')[1].charAt(0) +
+          this.currentScan[2].split(' ')[1].slice(1).toLocaleLowerCase(),
+        dni: this.currentScan[4],
+        correo: this.formData.getRawValue().correo,
+        clave1: this.formData.getRawValue().password,
+        clave2: this.formData.getRawValue().confirmPassword,
       });
       this.scanActive = false;
 

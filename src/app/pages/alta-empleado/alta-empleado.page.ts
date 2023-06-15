@@ -59,21 +59,22 @@ export class AltaEmpleadoPage implements OnInit {
 
   async Registro() {
     const form = this.formData.value;
-    
-    let datos: User2 = {
-      nombre: form.nombre,
-      apellido: form.apellido,
-      dni: form.dni,
-      img: this.dataUrl,
-      correo: form.correo,
-      password: form.password,
-      perfil: 'EMPLEADO',
-      fechaCreacion: new Date().getDate(),
-      rol: form.rol
-    }
-    
+          
     const user = await this.authSrv.registerUser(form.correo, form.password).then((resp) => {
         console.log('esto es respuesta auth', resp);
+        let datos: User2 = {
+          nombre: form.nombre,
+          apellido: form.apellido,
+          dni: form.dni,
+          img: this.dataUrl,
+          estado: 'ACEPTADO',
+          correo: form.correo,
+          password: form.password,
+          perfil: 'EMPLEADO',
+          fechaCreacion: new Date().getDate(),
+          rol: form.rol,
+          uid: resp.user.uid
+        }
         this.firestore.addUser(datos, resp.user.uid);
         this.emailSrv.notificationInabled(datos);
     }).catch(err => {

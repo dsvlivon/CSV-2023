@@ -6,14 +6,12 @@
       <div class="form-container">
         <form [formGroup]="formData" *ngIf="!scanActive">
           
-        <h2>Alta de Dueños/Supervisores</h2>
+        <h2 class="text-center" *ngIf="textoSwitch === 'Supervisor'">Alta Supervisores</h2>
+        <h2 class="text-center" *ngIf="textoSwitch === 'Dueño'">Alta Dueños</h2>
           
     <ion-card>
-      <ion-card-header>
-        <ion-card-subtitle style="color:white">Ingrese sus datos</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content class="ion-padding mt-3">
+    
+      <ion-card-content class="ion-padding">
         <ion-grid fixed>
           <ion-row>
             <ion-col size="6" class="d-flex flex-column justify-content-end">
@@ -64,8 +62,8 @@
 
           <ion-row>
 
-            <ion-col size="6">
-              <div *ngIf="authSrv.tipo === 'cliente'">
+            <ion-col size="12">
+              <div>
                 <ion-input type="number" label="CUIL" label-placement="floating" fill="solid"
                   placeholder="Ingrese su CUIL(Solo números, sin guiones)" formControlName="cuil" required></ion-input>
 
