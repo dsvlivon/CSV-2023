@@ -51,9 +51,8 @@
 |  16      | Implementar Lista de Espera                          |    Gamma   |   Ignacio   |   Activo   |
 |  17      | Implementar Aprobacion de Supervisores               |    Gamma   |   Ignacio   |   Activo   |
 |  17.a    |    Meet testear func. Alta completa                  |            |             |   Nuevo    |
-|  18      | Crear Mesas                                          |            |             |   Nuevo    |
-|  18.a    |    Crear Model de Mesa                               |            |             |   Nuevo    |
-|  18.b    |    Crear Menu Alta de Mesa                           |            |             |   Nuevo    |
+|  18      | Crear Mesas                                          |    Alfa    |   Daniel    |  Resuelto  |
+|  18.a    |    Crear Model de Mesa                               |    Alfa    |   Daniel    |  Resuelto  |
 |  19      | Implementar Lista de Espera de Clientes              |            |             |   Nuevo    |
 |  19.a    |    Crear Menu Metre p/ asignar Mesas                 |            |             |   Nuevo    |
 |  19.b    |    Verificar q/ el cliente no pueda tomar otra mesa  |            |             |   Nuevo    |
