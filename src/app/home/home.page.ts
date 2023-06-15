@@ -20,6 +20,7 @@ export class HomePage implements OnInit {
   user: any = null;
   
   spinner: boolean = false;
+  
 
   constructor(
     private authService: AuthService,
@@ -27,7 +28,12 @@ export class HomePage implements OnInit {
     private firestoreService: FirestoreService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.authService.user$.subscribe(data => {
+      this.user = data
+      console.log(this.user);
+    });
+   }
 
     prueba(){
       this.spinner = true;

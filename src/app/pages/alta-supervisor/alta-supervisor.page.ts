@@ -118,9 +118,7 @@ export class AltaSupervisorPage implements OnInit {
         });
       } else {
         this.toast('Debes cargar tu foto', 'info');
-
       }
-
     } else {
       this.toast('Las contraseñas deben coincidir', 'info');
     }

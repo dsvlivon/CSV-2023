@@ -10,10 +10,7 @@ export const routes: Routes = [
     redirectTo: 'splash',
     pathMatch: 'full',
   },
-  {
-    path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
-  },
+  
   {
     path: 'splash',
     loadComponent: () => import('./splash/splash.page').then( m => m.SplashPage)
@@ -61,7 +58,8 @@ export const routes: Routes = [
   {
     path: 'alta-supervisor',
     loadComponent: () => import('./pages/alta-supervisor/alta-supervisor.page').then( m => m.AltaSupervisorPage)
-  },  {
+  },
+  {
     path: 'lista-usuarios',
     loadComponent: () => import('./pages/lista-usuarios/lista-usuarios.page').then( m => m.ListaUsuariosPage)
   }

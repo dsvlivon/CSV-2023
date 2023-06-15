@@ -29,16 +29,20 @@ export class AuthService {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-         
-          return this.afs
-            .doc<User2>(`usuarios/${user.uid}`)
-            .valueChanges();
+         const usuario = this.afs
+         .doc<User2>(`usuarios/${user.uid}`)
+         .valueChanges();
+          return usuario;
         } else {
           return of(null);
         }
       })
     );
-
+    this.user$.subscribe(data => {
+      localStorage.setItem('user', JSON.stringify(data));
+        JSON.parse(localStorage.getItem('user'));
+    })
+    
     this.afAuth.authState.subscribe((user) => {
 
       if(user){
