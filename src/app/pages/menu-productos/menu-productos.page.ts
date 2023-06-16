@@ -10,6 +10,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { Router } from '@angular/router';
 
 import { ProductoService } from 'src/app/services/productos.service';
+import { Producto } from 'src/app/shared/producto.interface';
 
 @Component({
   selector: 'app-menu-productos',
@@ -25,6 +26,7 @@ export class MenuProductosPage implements OnInit {
     { val: 'Productos' },
   ]
 
+  productsSelected: any[] = [];
   prodSelected: any;
 
   constructor(private firestoreService: FirestoreService, private router: Router, private productoService: ProductoService) { }
@@ -32,12 +34,15 @@ export class MenuProductosPage implements OnInit {
   ngOnInit() {
     this.prodSelected = this.productos[0];
     this.getProds(this.prodSelected.val);
+    this.productoService.getAll().subscribe((data)=>{
+       console.log(data);
+    });
   }
 
   getProds(filter: string) {
     switch (filter) {
 
-      case 'ClieProductosntes':
+      case 'Productos':
         this.prods$ = this.productoService.getAll();
         break;
     }
@@ -45,6 +50,60 @@ export class MenuProductosPage implements OnInit {
 
   navigateBack(){
     this.router.navigateByUrl('/home', { replaceUrl: true });
+  }
+  
+  setQuantity(model: any, action: '+' | '-') {
+    
+    if (action == '+') {
+      model.quantity = this.getQuantity(model) + 1;
+    }
+    else {
+      const quaa = this.getQuantity(model) - 1;
+      if (quaa == -1) { model.quantity = 0; }
+      else { model.quantity = quaa; }
+    }
+
+    if (model.quantity == 0) {
+      let a = this.productsSelected.find(x => x.id == model.id);
+      let index = this.productsSelected.indexOf(a);
+      this.productsSelected.splice(index, 1);
+    }
+    else {
+      this.productsSelected.push(model);
+    }
+  }
+  getQuantity(model: Producto) {
+    let quantity = 0;
+
+    if (this.productsSelected) {
+      this.productsSelected.forEach(p => {
+
+        if (p.id == model.id) {
+          quantity = p.quantity;
+        }
+      });
+    }
+    return quantity;
+  }
+
+  clickDetails(model: Producto) {
+    //Aqui iria el modal para mostrar las imagenes
+  }
+
+  clickBeforeConfirm() {
+   //Aca te redirecciona para el pedido
+  }
+
+  getAcum() {
+    let a = 0;
+    this.productsSelected.forEach(p => { a += (p.quantity * p.precio); });
+    return a;
+  }
+
+  getAproxFinish() {
+    let minutos: number = 0;
+    this.productsSelected.forEach(p => { minutos += p.tiempo; });
+    return minutos;
   }
 
 

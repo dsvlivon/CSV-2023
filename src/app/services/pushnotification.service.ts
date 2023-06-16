@@ -152,11 +152,15 @@ export class PushnotificationService {
           /* console.log('token', element.token); */
         });
         /* console.log('usuariosTokens', usuariosTokens); */
+      let idHora = new Date();
       let push = this.sendPushNotification({
         registration_ids: usuariosTokens,
         notification:{
           title: titulo,
-          body: body
+          body: body,
+          data: {
+              id: idHora.getTime()
+          }
         }
       }).subscribe((data) => {
         /* console.log(data); */
