@@ -9,43 +9,35 @@
 </ion-header>
 
 <ion-content>
-  <div class="container-cards">
-    <ion-card>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th><p style="font-size: 14px;color:white">NOMBRE</p></th>
-            <th><p style="font-size: 14px;color:white">PRECIO</p></th>
-            <th><p style="font-size: 14px;color:white">CANTIDAD</p></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let product of this.prods$ | async">
-            <td><ion-button (click)="clickDetails(product)">Ver</ion-button></td>
-            <td><p style="font-size: 20px;color:white">{{ product.descripcion }}</p></td>
-            <td><p style="font-size: 20px;color:white">{{product.precio | currency }}</p></td>
-
-            <td>
-              <div class="container-btn">
-                <ion-button id="btn-add" (click)="setQuantity(product, '+')">+</ion-button>
-                <p style="font-size: 15px; color: white">{{ getQuantity(product) }}</p>
-                <ion-button id="btn-less" (click)="setQuantity(product, '-')">-</ion-button>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-
-      </table>
-    </ion-card>
-  </div>
-
-  <div (click)="clickBeforeConfirm()" *ngIf="this.getAcum() > 0" class="container-cards container-resume">
-    <ion-card>
-      <p style="font-size: 23px;">VER PEDIDO <br><br> PRECIO: ({{ this.getAcum() | currency }} )</p>
-      <p style="font-size: 23px;">TIEMPO ESTIMADO: {{ this.getAproxFinish() }} minutos</p>
-    </ion-card>
-  </div>
-
+  <ion-list>
+    <ion-item  class="lista" *ngFor="let product of this.prods$ | async">
+      <ion-button>
+      <ion-icon item-left name="eye-outline"></ion-icon>
+      </ion-button>
+      <ion-label>
+        <h2 text-wrap>{{product.descripcion}}</h2>
+        <p style="color:white">{{product.precio | currency }}</p>
+      </ion-label>
+      <div item-end>
+        <ion-button id="btn-add" color="success" (click)="setQuantity(product, '+')">+</ion-button>
+        <p style="font-size: 15px; color: white">{{ getQuantity(product) }}</p>
+        <ion-button id="btn-less" color="danger" (click)="setQuantity(product, '-')">-</ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+<ion-footer *ngIf="this.getAcum() > 0">
+  <ion-list no-margin>
+    <ion-item no-padding>
+      <ion-label padding-left>
+        <strong>TOTAL: </strong>
+        <span>{{ this.getAcum() | currency }}</span>
+      </ion-label>
+      <ion-button [disabled]="this.getAcum() < 0" item-end ion-button color="danger" (click)="clickBeforeConfirm()" icon-left>
+        <ion-icon name="cart"></ion-icon>
+        Finalizar Pedido
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-footer>
