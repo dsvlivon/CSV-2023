@@ -1,31 +1,68 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round"
-    color="saffron">
+    <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round" color="saffron">
       <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-  </ion-buttons>
+    </ion-buttons>
     <ion-title>Menu</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item  class="lista" *ngFor="let product of this.prods$ | async">
-      <ion-button>
-      <ion-icon item-left name="eye-outline"></ion-icon>
-      </ion-button>
+    <ion-item *ngFor="let product of this.prods$ | async">
+
+      <ion-grid>
+        <ion-row>
+          <div class="thumbnail-container">
+
+            <ion-col>
+              <button class="thumbnail-button" (click)="expandImage(product.img[0])">
+                <ion-icon item-left name="eye-outline"></ion-icon>
+              </button>
+            </ion-col>
+
+            <ion-col>
+              <button class="thumbnail-button" (click)="expandImage(product.img[1])">
+                <ion-icon item-left name="eye-outline"></ion-icon>
+              </button>
+            </ion-col>
+
+            <ion-col>
+              <button class="thumbnail-button" (click)="expandImage(product.img[2])">
+                <ion-icon item-left name="eye-outline"></ion-icon>
+              </button>
+            </ion-col>
+
+          </div>
+        </ion-row>
+      </ion-grid>
+
       <ion-label>
-        <h2 text-wrap>{{product.descripcion}}</h2>
-        <p style="color:white">{{product.precio | currency }}</p>
+        <h2 text-wrap style="text-transform: uppercase; color: white; ">{{product.descripcion}}</h2>
+        <p style="color:white; font-size: 20px;">{{product.precio | currency }}</p>
       </ion-label>
+
       <div item-end>
-        <ion-button id="btn-add" color="success" (click)="setQuantity(product, '+')">+</ion-button>
-        <p style="font-size: 15px; color: white">{{ getQuantity(product) }}</p>
-        <ion-button id="btn-less" color="danger" (click)="setQuantity(product, '-')">-</ion-button>
+        <ion-button id="btn-add" style="font-size: 15px;" color="success" (click)="setQuantity(product, '+')"><b>+</b></ion-button>
+        <p style="font-size: 15px; color: white"><b>{{ getQuantity(product) }}</b></p>
+        <ion-button id="btn-less" style="font-size: 15px;" color="danger" (click)="setQuantity(product, '-')"><b>-</b></ion-button>
       </div>
+
     </ion-item>
   </ion-list>
+
+
+  <div>
+    <div class="expanded-image-container" *ngIf="expandedImage">
+      <img [src]="expandedImage" alt="Imagen Ampliada" class="expanded-image">
+      <ion-button fill="clear" (click)="closeExpandedImage()" class="close-button">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
 </ion-content>
+
 
 <ion-footer *ngIf="this.getAcum() > 0">
   <ion-list no-margin>
@@ -34,7 +71,8 @@
         <strong>TOTAL: </strong>
         <span>{{ this.getAcum() | currency }}</span>
       </ion-label>
-      <ion-button [disabled]="this.getAcum() < 0" item-end ion-button color="danger" (click)="clickBeforeConfirm()" icon-left>
+      <ion-button [disabled]="this.getAcum() < 0" item-end ion-button color="danger" (click)="clickBeforeConfirm()"
+        icon-left>
         <ion-icon name="cart"></ion-icon>
         Finalizar Pedido
       </ion-button>

@@ -8,7 +8,7 @@ import { SpinnerComponent } from 'src/app/spinner/spinner.component';
 import { Observable } from 'rxjs';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Router } from '@angular/router';
-
+import Swiper from 'swiper';
 import { ProductoService } from 'src/app/services/productos.service';
 import { Producto } from 'src/app/shared/producto.interface';
 
@@ -106,6 +106,14 @@ export class MenuProductosPage implements OnInit {
     return minutos;
   }
 
+  expandedImage: string | null = null;
 
+  expandImage(imageUrl: string): void {
+    this.expandedImage = imageUrl;
+  }
+  
+  closeExpandedImage(): void {
+    this.expandedImage = null;
+  }
 
 }

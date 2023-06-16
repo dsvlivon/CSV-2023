@@ -33,3 +33,43 @@ img {
   .container-cards {
     margin-bottom: 0%;
   }
+
+  //foto individual de productos
+  .expanded-image-container {
+    position: fixed;
+    top: 20%; /* Ajusta el valor para cambiar la posición vertical */
+    left: 0;
+    right: 0;
+    bottom: 20%; /* Ajusta el valor para cambiar la posición vertical */
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .expanded-image {
+    max-width: 80%; /* Ajusta el tamaño de la imagen */
+    max-height: 80%; /* Ajusta el tamaño de la imagen */
+      
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+  }
+
+  .thumbnail-container {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .thumbnail-button {
+    transform: scale(1.1);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+      // margin-right: 10px; /* Ajusta el valor según sea necesario */
+  }
