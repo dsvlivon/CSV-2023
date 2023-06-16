@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { Producto } from '../shared/producto.interface';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })

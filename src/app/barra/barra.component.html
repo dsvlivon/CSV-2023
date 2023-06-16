@@ -135,6 +135,11 @@
       <ion-label>Altas</ion-label>
     </ion-tab-button>
 
+    <ion-tab-button id="open-custom-dialog" *ngIf="user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" (click)="goGestion()">
+      <ion-icon color="secondary" name="person-add-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Clientes</ion-label>
+    </ion-tab-button>
+
     <ion-tab-button *ngIf="user.perfil === 'METRE' || user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" (click)="goEncuestas()">
       <ion-icon color="secondary" name="cash" aria-hidden="true"></ion-icon>
       <ion-label>Encuestas</ion-label>

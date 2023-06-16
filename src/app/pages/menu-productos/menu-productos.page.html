@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round"
+    color="saffron">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+  </ion-buttons>
+    <ion-title>Menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-cards">
+    <!-- <div style="all:unset;" *ngFor="let user of this.users$ | async">
+      <ion-card class="card-shadow">
+        <img src="{{ user.img }}" height="170px" width="100%"/>
+
+        <div class="details">
+          <p>{{user.nombre}} {{user.apellido}}</p>
+          <p>{{ user.perfil }}</p>
+          <p>{{ user.correo }}</p>
+
+          <ion-select value="{{ user.estado }}" cancelText="Cancelar" okText="Confirmar"
+            (ionChange)="setStatus($event, user)">
+            <ion-select-option *ngFor="let sta of this.status">{{ sta.val }}</ion-select-option>
+          </ion-select>
+
+        </div>
+      </ion-card>
+    </div> -->
+  </div>
+
+</ion-content>

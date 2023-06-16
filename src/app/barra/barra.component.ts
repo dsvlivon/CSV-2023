@@ -47,7 +47,7 @@ export class BarraComponent implements OnInit {
 
   goEncuestas() { this.router.navigate(['/encuestas']); }
 
-  goGestion() { this.router.navigate(['/gestion']); }
+  goGestion() { this.router.navigate(['/lista-usuarios']); }
 
   goDelivery() { this.router.navigate(['/delivery']); }
 
