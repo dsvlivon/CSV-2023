@@ -67,7 +67,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
       estado: 'PENDIENTE',
       correo: this.user.correo,
       date_created: new Date().getTime(),
-      user_uid: this.user.id
+      user_uid: this.user.uid
     }
 
     return m;
@@ -86,24 +86,22 @@ export class ScannerComponent implements OnInit, OnDestroy {
     })
   }
   async escanearQR() {
-    console.log('entro');
     this.escanear = true;
-    console.log(this.escanear);
     this.qrSrv.startScan().then((result) => {
-      this.data = result;
+      const datos = result.split(' ');
+      this.data = { name: datos[0] }
       console.log(this.data);
-      if (!this.data) {
-        switch (this.data) {
+      if (this.data) {
+        switch (this.data.name) {
 
           case 'ENTRADALOCAL':
-            console.log('entro al switch');
-            console.log(this.hasWait);
+            
             if (!this.hasWait) {
+              this.toast('Ingreso al local', 'Aguarde mientras se le asigna una mesa', 'success');
+              this.addToWaitList();
+              this.pnSrv.enviarNotificacionUsuarios('METRE', 'Ingreso al local', 'Un cliente solicitó la entrada al local', true);
               this.listaEspera = true;
               this.qrHide = false;
-              this.toast('Ingreso al local', 'Aguarde mientras se le asigna una mesa', 'success');
-              this.pnSrv.enviarNotificacionUsuarios('METRE', 'Ingreso al local', 'Un cliente solicitó la entrada al local', true);
-              this.addToWaitList();
               this.escanear = false;
               
             } else if(this.hasWait === 'PENDIENTE'){

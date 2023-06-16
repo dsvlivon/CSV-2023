@@ -24,10 +24,11 @@
       <ion-row style="flex-grow: 1; margin-bottom: 1rem; height: auto;" *ngIf="user.perfil === 'CLIENTE'">
         <div  *ngIf="!grid">
 
-          <ion-col class="button" (click)="escanearQR()">
-            <div>
+          <ion-col  >
+            <app-scanner [escanear]="scanActive" [listaEspera]="waitlist" [qrHide]="grid"></app-scanner>
+            <!-- <div>
               <ion-icon name="qr-code-outline" style="font-size: 20rem;"></ion-icon>
-            </div>
+            </div> -->
           </ion-col>
           <ion-col>
             <ion-card>

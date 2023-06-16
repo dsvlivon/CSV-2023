@@ -9,13 +9,14 @@ import { FirestoreService } from '../services/firestore.service';
 import { BarraComponent } from 'src/app/barra/barra.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { QrscannerService } from '../services/qrscanner.service';
+import { ScannerComponent } from '../component/scanner/scanner.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule, BarraComponent, SpinnerComponent]
+  imports: [IonicModule, CommonModule, FormsModule, BarraComponent, SpinnerComponent, ScannerComponent]
 })
 export class HomePage implements OnInit, OnDestroy {
   user: any = null;
@@ -65,10 +66,10 @@ export class HomePage implements OnInit, OnDestroy {
 
     })
   } */
-  /* stopScan() {
+  stopScan() {
     this.scanActive = false;
     this.qrSrv.stopScanner();
-  } */
+  }
 }
 
 
