@@ -16,7 +16,7 @@ import { ModalController } from '@ionic/angular';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 
-export class BarraComponent  implements OnInit {
+export class BarraComponent implements OnInit {
 
   user: any = null;
   mostrarComponente: boolean = false;
@@ -27,115 +27,96 @@ export class BarraComponent  implements OnInit {
 
   constructor(
     private animationCtrl: AnimationController,
-    private authService: AuthService, 
+    private authService: AuthService,
     private router: Router,
     private modalController: ModalController
-) {}
+  ) { }
 
-ngOnInit() {
-  this.authService.user$.subscribe(data => {
-    this.user = data
-  });
-  let ls = localStorage.getItem('user');
-  if(ls != null) {
-    let user = JSON.parse(ls);
-    this.user = user;
+  ngOnInit() {
+    this.authService.user$.subscribe(data => {
+      this.user = data
+    });
+    let ls = localStorage.getItem('user');
+    if (ls != null) {
+      let user = JSON.parse(ls);
+      this.user = user;
+    }
   }
-}
 
-goAltas(){ this.router.navigate(['/altas']); }
+  goAltas() { this.router.navigate(['/altas']); }
 
-goEncuestas(){ this.router.navigate(['/encuestas']); } 
+  goEncuestas() { this.router.navigate(['/encuestas']); }
 
-goGestion(){ this.router.navigate(['/gestion']); }
+  goGestion() { this.router.navigate(['/gestion']); }
 
-goDelivery(){ this.router.navigate(['/delivery']); }
+  goDelivery() { this.router.navigate(['/delivery']); }
 
-goJuegos(){ this.router.navigate(['/juegos']); }
+  goJuegos() { this.router.navigate(['/juegos']); }
 
-goQr(){ this.router.navigate(['/lector-qr']); }
+  goQr() { this.router.navigate(['/lector-qr']); }
 
-goHome(){ this.router.navigate(['/home']); }
+  goHome() { this.router.navigate(['/home']); }
 
-logOut() { this.authService.signOut(); localStorage.removeItem('user'); }
-
-
-
-
-
-expandir() {
-  this.mostrarComponente = true;
-  this.mostrarColapsar = true;
-}
-
-colapsar() {
-  this.mostrarComponente = false;
-  this.mostrarColapsar = false;
-}
-
-enterAnimation = (baseEl: HTMLElement) => {
-  const root = baseEl.shadowRoot;
-
-  const backdropAnimation = this.animationCtrl
-    .create()
-    .addElement(root.querySelector('ion-backdrop')!)
-    .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
-
-  const wrapperAnimation = this.animationCtrl
-    .create()
-    .addElement(root.querySelector('.modal-wrapper')!)
-    .keyframes([
-      { offset: 0, opacity: '0', transform: 'scale(0)' },
-      { offset: 1, opacity: '0.99', transform: 'scale(1)' },
-    ]);
-
-  return this.animationCtrl
-    .create()
-    .addElement(baseEl)
-    .easing('ease-out')
-    .duration(500)
-    .addAnimation([backdropAnimation, wrapperAnimation]);
-};
-
-leaveAnimation = (baseEl: HTMLElement) => {
-  return this.enterAnimation(baseEl).direction('reverse');
-};
-
-altaCliente(tipo: string) {
-  this.authSrv.tipo = tipo;
-  this.router.navigate(['/alta-cliente']);
-}
-
-altaSupervisor() {
-  this.authSrv.tipo = 'anonimo';
-  this.router.navigate(['/alta-supervisor']); 
-}
-
-altaEmpleado() {
-  this.authSrv.tipo = 'anonimo';
-  this.router.navigate(['/alta-empleado']); 
-}
+  logOut() { this.authService.signOut(); localStorage.removeItem('user'); }
 
 
 
 
 
+  expandir() {
+    this.mostrarComponente = true;
+    this.mostrarColapsar = true;
+  }
+
+  colapsar() {
+    this.mostrarComponente = false;
+    this.mostrarColapsar = false;
+  }
+
+  enterAnimation = (baseEl: HTMLElement) => {
+    const root = baseEl.shadowRoot;
+
+    const backdropAnimation = this.animationCtrl
+      .create()
+      .addElement(root.querySelector('ion-backdrop')!)
+      .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+
+    const wrapperAnimation = this.animationCtrl
+      .create()
+      .addElement(root.querySelector('.modal-wrapper')!)
+      .keyframes([
+        { offset: 0, opacity: '0', transform: 'scale(0)' },
+        { offset: 1, opacity: '0.99', transform: 'scale(1)' },
+      ]);
+
+    return this.animationCtrl
+      .create()
+      .addElement(baseEl)
+      .easing('ease-out')
+      .duration(500)
+      .addAnimation([backdropAnimation, wrapperAnimation]);
+  };
+
+  leaveAnimation = (baseEl: HTMLElement) => {
+    return this.enterAnimation(baseEl).direction('reverse');
+  };
+
+  altaCliente(tipo: string) {
+    this.authSrv.tipo = tipo;
+    this.router.navigate(['/alta-cliente']);
+  }
+
+  altaSupervisor() {
+    this.authSrv.tipo = 'anonimo';
+    this.router.navigate(['/alta-supervisor']);
+  }
+
+  altaEmpleado() {
+    this.authSrv.tipo = 'anonimo';
+    this.router.navigate(['/alta-empleado']);
+  }
 
 
-//deprecado
-// async mostrarModalAltas() {
-//     // Abre el modal y configura mostrarBotonesFlotantes en true
-//     this.mostrarBotonesFlotantes = true;
-
-//     const modal = await this.modalController.create({
-//       component: ModalAltasComponent,
-//       cssClass: 'altas-modal'
-//     });
-//     modal.onDidDismiss().then(() => {
-//       this.mostrarBotonesFlotantes = false;
-//     });
-//     return await modal.present();
-//   }
 }
 
 

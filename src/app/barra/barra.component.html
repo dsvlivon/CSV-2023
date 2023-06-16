@@ -1,4 +1,4 @@
-<ion-tabs>
+<!-- <ion-tabs>
   <ion-tab-bar slot="bottom">
     
     <ion-tab-button (click)="expandir()" *ngIf="!mostrarComponente && !mostrarColapsar">
@@ -77,4 +77,73 @@
     </ion-tab-button>
   
   </ion-row>
+</ion-tabs> -->
+
+
+<ion-modal id="example-modal" #modal [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+  <ng-template>
+    <div class="wrapper" style="padding: 10px; padding-bottom: 30px">
+      
+      <ion-grid>
+      
+        <ion-row>
+          <button *ngIf="user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" expand="full" class="btn btn-primary" style="
+            margin: 1rem;
+            width: 13rem;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 1px #000;
+            box-shadow: 2px 2px 4px #000;
+          " (click)="modal.dismiss()" (click)="altaEmpleado()">Alta Empleado</button>
+        </ion-row>
+
+        <ion-row>
+          <button *ngIf="user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" expand="full" class="btn btn-primary" style="
+            margin: 1rem;
+            width: 13rem;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 1px #000;
+            box-shadow: 2px 2px 4px #000;
+          " (click)="modal.dismiss()" (click)="altaSupervisor()">Alta Supervisor/Dueño</button>
+        </ion-row>
+
+        <ion-row>
+          <button *ngIf="user.perfil === 'METRE'" expand="full" class="btn btn-light" style="
+            margin: 1rem;
+            width: 13rem;
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 1px #000;  
+            box-shadow: 2px 2px 4px #000;
+          " (click)="modal.dismiss()" (click)="altaCliente('cliente')">Alta Cliente</button>
+        </ion-row>
+
+      </ion-grid>        
+
+    </div>
+  </ng-template>  
+</ion-modal>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom"  style="background-color: white !important; color: white;">
+
+    <ion-tab-button (click)="goHome()">
+      <ion-icon color="secondary" name="home-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Inicio</ion-label>
+    </ion-tab-button>
+      
+    <ion-tab-button id="open-custom-dialog" *ngIf="user.perfil === 'METRE' || user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" (click)="modal.present()">
+      <ion-icon color="secondary" name="add-circle-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Altas</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button *ngIf="user.perfil === 'METRE' || user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" (click)="goEncuestas()">
+      <ion-icon color="secondary" name="cash" aria-hidden="true"></ion-icon>
+      <ion-label>Encuestas</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button (click)="logOut()">
+      <ion-icon color="danger" name="exit" aria-hidden="true"></ion-icon>
+      <ion-label>Salir</ion-label>
+    </ion-tab-button>
+  
+  </ion-tab-bar>
 </ion-tabs>
