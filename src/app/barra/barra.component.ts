@@ -33,6 +33,7 @@ export class BarraComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.authService.user$.subscribe(data => {
       this.user = data
     });
@@ -41,6 +42,7 @@ export class BarraComponent implements OnInit {
       let user = JSON.parse(ls);
       this.user = user;
     }
+
   }
 
   goAltas() { this.router.navigate(['/altas']); }
@@ -57,7 +59,13 @@ export class BarraComponent implements OnInit {
 
   goHome() { this.router.navigate(['/home']); }
 
-  logOut() { this.authService.signOut(); localStorage.removeItem('user'); }
+  logOut() {
+    this.authService.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigateByUrl('login', { replaceUrl: true})
+
+    });
+  }
 
 
 

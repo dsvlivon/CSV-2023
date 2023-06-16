@@ -22,7 +22,7 @@ import { MailService } from '../services/mail.service';
 export class LoginPage implements OnInit {
   spinner: boolean = false;
   authSrv = inject(AuthService);
-
+  user = null;
   formData: FormGroup;
   error: boolean = false;
   message: string = '';
@@ -35,6 +35,8 @@ export class LoginPage implements OnInit {
     private mailService: MailService) { }
 
   ngOnInit() {
+    this.user = JSON.parse(localStorage.getItem('user'))
+    console.log(this.user);
     this.formData = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],

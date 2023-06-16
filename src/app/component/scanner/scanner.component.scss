@@ -1,0 +1,32 @@
+ion-card {
+    --background: #4363AC;
+    box-shadow: 5px 5px 5px #000;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    h2 {
+        color: white;
+        text-shadow: 2px 2px 4px #000;
+    }
+
+    ion-icon {
+        color: white;
+    }
+
+    ion-card-content {
+        color: white;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgb(0, 0, 0);
+    }
+}
+
+.card {
+    background: #4363AC;
+    opacity: 0.7;
+}
+.escanear:active {
+    transform: scale(0.9);
+    box-shadow: 0 0 16px rgb(0, 0, 0);
+    transition: transform 0.3s;
+}

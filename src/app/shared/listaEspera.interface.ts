@@ -1,4 +1,4 @@
-export class ListaEspera {
+export interface ListaEspera {
     id: string;
     estado: 'PENDIENTE' | 'EN USO' | 'CANCELADO' | 'FINALIZADO';
     correo: string;
