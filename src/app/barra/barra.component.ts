@@ -41,6 +41,7 @@ export class BarraComponent implements OnInit {
     if (ls != null) {
       let user = JSON.parse(ls);
       this.user = user;
+      console.log(user.rol);
     }
 
   }

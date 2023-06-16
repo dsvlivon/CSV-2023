@@ -40,7 +40,6 @@ export class ScannerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.data = null;
-    this.user = null;
   }
 
 
@@ -48,6 +47,7 @@ export class ScannerComponent implements OnInit, OnDestroy {
   private checkWait() {
     const a = this.listSrv.getLastByUser(this.user.correo)
       .subscribe(data => {
+        console.log(data);
         this.hasWait = data;
       });
   }
@@ -86,21 +86,26 @@ export class ScannerComponent implements OnInit, OnDestroy {
     })
   }
   async escanearQR() {
+    console.log('entro');
     this.escanear = true;
+    console.log(this.escanear);
     this.qrSrv.startScan().then((result) => {
-      const data = result;
-      if (data) {
-        switch (data) {
+      this.data = result;
+      console.log(this.data);
+      if (!this.data) {
+        switch (this.data) {
 
           case 'ENTRADALOCAL':
+            console.log('entro al switch');
+            console.log(this.hasWait);
             if (!this.hasWait) {
-              this.escanear = false;
               this.listaEspera = true;
               this.qrHide = false;
               this.toast('Ingreso al local', 'Aguarde mientras se le asigna una mesa', 'success');
               this.pnSrv.enviarNotificacionUsuarios('METRE', 'Ingreso al local', 'Un cliente solicitó la entrada al local', true);
               this.addToWaitList();
-
+              this.escanear = false;
+              
             } else if(this.hasWait === 'PENDIENTE'){
 
             }

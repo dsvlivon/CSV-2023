@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -17,7 +17,7 @@ import { QrscannerService } from '../services/qrscanner.service';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, BarraComponent, SpinnerComponent]
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   user: any = null;
   spinner: boolean = false;
 
@@ -37,16 +37,22 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.authService.user$.subscribe(data => {
       this.user = data
+      console.log(this.user);
     });
     let ls = localStorage.getItem('user');
     if (ls != null) {
+
       let user = JSON.parse(ls);
       this.user = user;
     }
     this.spinner = true;
   }
 
-  escanearQR() {
+  ngOnDestroy(): void {
+    this.user = null;
+    localStorage.removeItem('user');
+  }
+  /* escanearQR() {
     this.scanActive = true;
     this.qrSrv.startScan().then((result) => {
       console.log(result);
@@ -58,11 +64,11 @@ export class HomePage implements OnInit {
       
 
     })
-  }
-  stopScan() {
+  } */
+  /* stopScan() {
     this.scanActive = false;
     this.qrSrv.stopScanner();
-  }
+  } */
 }
 
 
