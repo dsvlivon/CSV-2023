@@ -64,8 +64,15 @@
 |          |  **Sprint 4: Fase final**                            |            | prox. fecha:|  24/06/23  |
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
 |  20      | Implementar Lista de Productos                       |            |             |   Nuevo    |
-|  20.a    |    Crear Menu Productos                              |            |             |   Nuevo    |
-|  20.a    |    Implementar seleccion de productos                |            |             |   Nuevo    |
+|  20.a    |    Crear Modelo Producto y ProductosService          |            |             |   Nuevo    |
+|   X.a    |    Crear coleccion Productos en la BD                |            |             |   Nuevo    |
+|   X.a    |    Cargarr Productos en la BD                |            |             |   Nuevo    |
+|  20.a    | Implementar seleccion de productos                 |            |             |   Nuevo    |
+|    X     |    Crear Modelo de Pedidos                           |            |             |   Nuevo    |
+|   X.a    |      Crear coleccion Pedidos en la BD                |            |             |   Nuevo    |
+|  20.a    |      Crear coleccion Pedidos en la BD                |            |             |   Nuevo    |
+|    X     |    Crear Modelo de Juego y JuegoService                           |            |             |   Nuevo    |
+|    X     | Implementar Pagina de Juegos                         |            |             |   Nuevo    |
 
 
 *El equipo de CSV trackea sus decisiones, correciones y otros topics con minutas, comúnmente realizadas después de cada clase.
