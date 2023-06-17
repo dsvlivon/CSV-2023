@@ -38,6 +38,8 @@
 |  14.a    |    Testear funcionmiento                             |    Gamma   |   Ignacio   |  Resuelto  |
 |  14.b    |    Implementar servicio de push notification         |    Beta    |   Sergio    |  Resuelto  |
 |  15      | Crear Spinner Component                              |    Alfa    |   Daniel    |  Resuelto  |
+|  1.b     |    Corregir problema con posicionamient menu Barra   |    Alfa    |   Daniel    |  Resuelto  |
+|  1.c     |    Mostrar contenido en menu Barra segun usuario     |    Beta    |   Sergio    |  Resuelto  |
 |----------|------------------------------------------------------|------------|-------------|------------|
 |          |  **Sprint 3: Completar Altas**                       |            | prox. fecha:|  17/06/23  |
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
@@ -45,17 +47,17 @@
 |**12.a**  |  **Alta cliente/anónimo**                            |    Beta    |   Sergio    | **Activo** |
 |**12.b**  |  **Alta empleado**                                   |    Alfa    |   Daniel    | **Activo** |
 |**12.c**  |  **Alta supervisor**                                 |    Gamma   |   Ignacio   | **Activo** |
-|  15.a    | Problema con Imagen del Spinner                      |    Alfa    |   Daniel    |   Activo    |
+|  15.a    | Problema con Imagen del Spinner                      |    Alfa    |   Daniel    |  Resuelto  |
 |  12.a.1  |    Crear forma de volver en el Alta cliente/anónimo  |    Beta    |   Sergio    |  Resuelto  |
 |  5.1     | Problema con el retorno en Inicio de sesión          |    Beta    |   Sergio    |  Resuelto  |
-|  16      | Implementar Lista de Espera                          |    Gamma   |   Ignacio   |   Activo   |
-|  17      | Implementar Aprobacion de Supervisores               |    Gamma   |   Ignacio   |   Activo   |
+|  16      | Implementar Lista de Espera                          |    Gamma   |   Ignacio   |  Resuelto  |
+|  17      | Implementar Aprobacion de Supervisores               |    Gamma   |   Ignacio   |  Resuelto  |
+|  17.a    |    Verificar q/ llegue la PN al metre                |    Beta    |   Sergio    |   Activo   |
 |  17.a    |    Meet testear func. Alta completa                  |            |             |   Nuevo    |
 |  18      | Crear Mesas                                          |    Alfa    |   Daniel    |  Resuelto  |
 |  18.a    |    Crear Model de Mesa                               |    Alfa    |   Daniel    |  Resuelto  |
-|  19      | Implementar Lista de Espera de Clientes              |            |             |   Nuevo    |
-|  19.a    |    Crear Menu Metre p/ asignar Mesas                 |            |             |   Nuevo    |
-|  19.b    |    Verificar q/ el cliente no pueda tomar otra mesa  |            |             |   Nuevo    |
+|  19      | Crear Menu Metre p/ asignar Mesas                    |    Gamma   |   Ignacio   |  Resuelto  |
+|  19.a    |    Verificar q/ el cliente no pueda tomar otra mesa  |            |             |   Nuevo    |
 |  20      | Implementar boton "consulta al mozo"                 |            |             |   Nuevo    |
 |  20.a    |    Verificar q/ llegue la PN a todos los mozos       |            |             |   Nuevo    |
 |  20.b    |    Implementar respuesta de mozo                     |            |             |   Nuevo    |
@@ -63,16 +65,19 @@
 |----------|------------------------------------------------------|------------|-------------|------------|
 |          |  **Sprint 4: Fase final**                            |            | prox. fecha:|  24/06/23  |
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
-|  20      | Implementar Lista de Productos                       |            |             |   Nuevo    |
-|  20.a    |    Crear Modelo Producto y ProductosService          |            |             |   Nuevo    |
-|   X.a    |    Crear coleccion Productos en la BD                |            |             |   Nuevo    |
-|   X.a    |    Cargarr Productos en la BD                |            |             |   Nuevo    |
-|  20.a    | Implementar seleccion de productos                 |            |             |   Nuevo    |
-|    X     |    Crear Modelo de Pedidos                           |            |             |   Nuevo    |
-|   X.a    |      Crear coleccion Pedidos en la BD                |            |             |   Nuevo    |
-|  20.a    |      Crear coleccion Pedidos en la BD                |            |             |   Nuevo    |
-|    X     |    Crear Modelo de Juego y JuegoService                           |            |             |   Nuevo    |
-|    X     | Implementar Pagina de Juegos                         |            |             |   Nuevo    |
+|  20      | Implementar Lista de Productos                       |    Gamma   |   Ignacio   |   Activo   |
+|  20.a    |    Crear Modelo Producto y ProductosService          |    Alfa    |   Daniel    |  Resuelto  |
+|  20.b    |    Crear coleccion Productos en la BD                |    Alfa    |   Daniel    |  Resuelto  |
+|  20.c    |    Cargarr Productos en la BD                        |    Alfa    |   Daniel    |  Resuelto  |
+|  20.d    |    Implementar seleccion de productos                |    Gamma   |   Ignacio   |   Activo   |
+|   21     |  Crear Modelo de Pedido y PedidosService             |    Alfa    |   Daniel    |  Resuelto  |
+|  21.a    |    Crear coleccion Pedidos en la BD                  |            |             |   Nuevo    |
+|  21.b    |    verificar la carga de Pedidos en la BD            |            |             |   Nuevo    |
+|  21.b    |    verificar vinculaciónes del Pedido                |            |             |   Nuevo    |
+|    X     | Crear Modelo de Juego y JuegoService                 |    Alfa    |   Daniel    |  Resuelto  |
+|    X     |    Implementar Pagina de Juegos                      |    Alfa    |   Daniel    |  Resuelto  |
+|    X     |    Implementar vinc. c/ cliente y asig. recompensa   |    Alfa    |   Daniel    |   Activo   |
+
 
 
 *El equipo de CSV trackea sus decisiones, correciones y otros topics con minutas, comúnmente realizadas después de cada clase.
