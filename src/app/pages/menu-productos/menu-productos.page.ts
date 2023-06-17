@@ -34,9 +34,13 @@ export class MenuProductosPage implements OnInit {
   ngOnInit() {
     this.prodSelected = this.productos[0];
     this.getProds(this.prodSelected.val);
-    this.productoService.getAll().subscribe((data)=>{
-       console.log(data);
-    });
+    //Si cliente volvio para atras y quiere cambiar algo del pedido
+    this.checkProductsSelected();
+  }
+
+  private checkProductsSelected() {
+    let a = JSON.parse(localStorage.getItem('products'));
+    if (a) { this.productsSelected = a; }
   }
 
   getProds(filter: string) {
@@ -86,12 +90,9 @@ export class MenuProductosPage implements OnInit {
     return quantity;
   }
 
-  clickDetails(model: Producto) {
-    //Aqui iria el modal para mostrar las imagenes
-  }
-
   clickBeforeConfirm() {
    //Aca te redirecciona para el pedido
+   localStorage.setItem('products', JSON.stringify(this.productsSelected));
   }
 
   getAcum() {

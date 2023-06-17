@@ -70,6 +70,9 @@
       <ion-label padding-left>
         <strong>TOTAL: </strong>
         <span>{{ this.getAcum() | currency }}</span>
+        <br>
+        <strong>Estimado:</strong>
+        <span>{{ this.getAproxFinish() }} minutos</span>
       </ion-label>
       <ion-button [disabled]="this.getAcum() < 0" item-end ion-button color="danger" (click)="clickBeforeConfirm()"
         icon-left>
