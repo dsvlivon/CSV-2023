@@ -15,6 +15,7 @@ export class JuegoService {
   game(
     userChoice: string
   ): {
+    turnos: number;
     message: string;
     userAdd: number;
     compAdd: number;
@@ -25,7 +26,9 @@ export class JuegoService {
       message: string;
       userAdd: number;
       compAdd: number;
+      turnos: number;
     };
+    
     switch (playUserComp) {
       // Ganamos
       case 'rs':
@@ -35,6 +38,7 @@ export class JuegoService {
           message: 'Ganas a la computadora',
           userAdd: 1,
           compAdd: 0,
+          turnos: 1
         };
         break;
       // Gana la computadora
@@ -45,6 +49,7 @@ export class JuegoService {
           message: 'Gana la computadora',
           userAdd: 0,
           compAdd: 1,
+          turnos: 1
         };
         break;
       // Empatamos
@@ -55,6 +60,7 @@ export class JuegoService {
           message: 'Habéis elegido la misma jugada y habéis empatado',
           userAdd: 0,
           compAdd: 0,
+          turnos: 0
         };
         break;
     }

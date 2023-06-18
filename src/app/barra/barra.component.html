@@ -146,12 +146,12 @@
     </ion-tab-button>
 
     <!-- CLIENTE -->
-    <ion-tab-button *ngIf="(user.perfil === 'CLIENTE')" (click)="goConsultas()">
+    <ion-tab-button *ngIf="(user.perfil === 'CLIENTE')" (click)="goConsultas()"> <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
       <ion-icon color="secondary" name="chatbox-ellipses-outline" aria-hidden="true"></ion-icon>
       <ion-label>Consultas</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button *ngIf="(user.perfil === 'CLIENTE')" (click)="goJuegos()">
+    <ion-tab-button *ngIf="(user.perfil === 'CLIENTE')" (click)="goJuegos()"> <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
       <ion-icon color="secondary" name="game-controller-outline" aria-hidden="true"></ion-icon>
       <ion-label>juegos</ion-label>
     </ion-tab-button>

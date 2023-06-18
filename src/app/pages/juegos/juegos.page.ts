@@ -27,11 +27,15 @@ export class JuegosPage implements OnInit {
 
   spinner = false;
   user: any = null;
-
+  mostrar: boolean = true;
   result: string;
   pointsUser = 0;
   pointsComp = 0;
   turnos = 0;
+  resultado = "";
+  
+  msgTitulo="Vence a nuestro campeón para ganar beneficios!"
+  msgRes = "Reglas: Se juega al mejor de 3 intentos. En caso de empate nadie suma"
 
   constructor(
     private authService: AuthService,
@@ -57,12 +61,27 @@ export class JuegosPage implements OnInit {
     }
   }
 
+  evaluar(){
+    if (this.pointsComp == 2 || this.pointsUser == 2) {
+      if(this.pointsComp>this.pointsUser){
+        this.msgRes="LO SIENTO, ESTA VEZ NO HUBO SUERTE!!!"
+      } else {
+        this.msgRes="FELICITACIONES HAS GANADO!!!"
+      }
+      this.mostrar=false;
+      this.msgTitulo="";
+    }
+  }
+
   play(choice: string): void {
     const result = this.playGame.game(choice);
+
     console.log(result);
     this.result = result.message;
     this.pointsUser += result.userAdd;
     this.pointsComp += result.compAdd;
+    this.turnos += result.turnos;
+    this.evaluar()
   }
 
   private getComputerChoice(): string {
@@ -73,60 +92,6 @@ export class JuegosPage implements OnInit {
 
   navigateBack() {
     this.router.navigateByUrl('/home', { replaceUrl: true });
-  }
-
-
-  game(
-    userChoice: string
-  ): {
-    message: string;
-    userAdd: number;
-    compAdd: number;
-  } {
-    const playUserComp = userChoice + this.getComputerChoice();
-    console.log(`Jugada realizada: ${playUserComp}`);
-    let playStatus: {
-      message: string;
-      userAdd: number;
-      compAdd: number;
-    };
-    if (this.pointsComp < 2 || this.pointsUser < 2) {
-      switch (playUserComp) {
-        // Ganamos
-        case 'rs':
-        case 'sp':
-        case 'pr':
-          playStatus = {
-            message: 'Ganas a la computadora',
-            userAdd: 1,
-            compAdd: 0,
-          };
-          this.turnos += 1;
-          break;
-        // Gana la computadora
-        case 'rp':
-        case 'ps':
-        case 'sr':
-          playStatus = {
-            message: 'Gana la computadora',
-            userAdd: 0,
-            compAdd: 1,
-          };
-          this.turnos += 1;
-          break;
-        // Empatamos
-        case 'rr':
-        case 'pp':
-        case 'ss':
-          playStatus = {
-            message: 'Habéis elegido la misma jugada y habéis empatado',
-            userAdd: 0,
-            compAdd: 0,
-          };
-          break;
-      }
-    }
-    return playStatus;
   }
 
 }

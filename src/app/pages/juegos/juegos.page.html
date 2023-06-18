@@ -10,29 +10,35 @@
 <ion-content>
   
   <div class="title">
-    <h2> Vence a nuestro campeón para ganar beneficios!</h2>
-    <h4>Reglas: Se juega al mejor de 3 intentos. En caso de empate nadie suma.</h4>
+    <h2>{{ msgTitulo }}</h2>
+    <h4>{{ msgRes }}</h4>
     
   </div>
   <div class="score-board">
     <div id="user-label" class="badge">{{ user.nombre }}</div>
     <div id="comp-label" class="badge">CSV</div>
     <span id="user-score">{{ pointsUser }}</span>:<span id="comp-score">{{ pointsComp }}</span>
+    <p class="info-game">Turnos: {{turnos}}</p>
   </div>
-  <p class="info-game">{{result}}</p>
-  <div class="choices">
-      <div class="choice" (click)="play('r')">
-        <img src="../../assets/images/juego/rock.png" />
-      </div>
-      <div class="choice" (click)="play('p')">
-        <img src="../assets/images/juego/paper.png" />
-      </div>
-      <div class="choice" (click)="play('s')">
-        <img src="../assets/images/juego/scissors.png" />
-      </div>
-  </div>
-  <p class="info-game">Selecciona tu jugada</p>
+  
+  <div *ngIf="mostrar">
+    <p class="info-game">{{result}}</p>
+    
+    <div class="choices">
+        <div class="choice" (click)="play('r')">
+          <img src="../../assets/images/juego/rock.png" />
+        </div>
+        <div class="choice" (click)="play('p')">
+          <img src="../assets/images/juego/paper.png" />
+        </div>
+        <div class="choice" (click)="play('s')">
+          <img src="../assets/images/juego/scissors.png" />
+        </div>
+        
+    </div>
+    <p class="info-game">Selecciona tu jugada</p>
 
+  </div>
 
 
 
