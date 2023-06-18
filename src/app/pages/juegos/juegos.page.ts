@@ -87,8 +87,7 @@ export class JuegosPage implements OnInit {
       this.pointsComp = 0;
       this.turnos = 0;
     }
-  }
-  
+  }  
 
   play(choice: string): void {
     const result = this.playGame.game(choice);

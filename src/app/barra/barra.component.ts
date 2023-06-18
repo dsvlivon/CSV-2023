@@ -60,7 +60,7 @@ export class BarraComponent implements OnInit {
 
   goHome() { this.router.navigate(['/home']); }
 
-  goConsultas() { this.router.navigate(['/gestion']); }
+  goConsultas() { this.router.navigate(['/consultas']); }
 
   logOut() {
     this.authService.signOut().then(() => {
@@ -69,10 +69,6 @@ export class BarraComponent implements OnInit {
 
     });
   }
-
-
-
-
 
   expandir() {
     this.mostrarComponente = true;

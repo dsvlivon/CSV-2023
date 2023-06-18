@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round" color="saffron">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <div class="card-header rgba(0, 175, 239, 1)">CONSULTAS</div>
+  </ion-toolbar>
+</ion-header>
+
+
+<section class="chat-container" style="height: 100%">
+
+  <div class="card text-center contenedor-carta-a view-from-right">    
+
+    <div class="card-body-a">
+      <div id="contenedor-mensajes" class="contenedor-mensajes">
+        <p
+          *ngFor="let message of messageListA"
+          class="p-3 mensajes"
+          [ngClass]="
+            user.uid == message.user.uid
+              ? 'mensaje-enviado'
+              : 'mensaje-recibido'
+          "
+        >
+          
+          <span
+            *ngIf="user.uid != message.user.uid"
+            [ngClass]="user.uid == message.user.uid ? 'email-1' : 'email-2'"
+            >{{ message.user.name }}<br
+          /></span>
+          {{ message.text }} <br />
+          <span class="fecha">{{ message.date }}</span>
+        </p>
+      </div>
+    </div>
+
+   
+  </div>
+</section>
+
+<ion-footer>
+  <form class="card-footer card-footer-a text-muted input-group">
+    <input
+      type="text"
+      class="form-control form-control-a"
+      placeholder="Ingrese su consulta"
+      [(ngModel)]="newMessage"
+      [ngModelOptions]="{ standalone: true }"
+    />
+    <div class="input-group-append" (click)="sendMessage()">
+      <span class="input-group-text btn-enviar-a" id="basic-addon2">
+        <span><ion-icon name="send-outline"></ion-icon></span>
+      </span>
+    </div>
+  </form>
+</ion-footer>

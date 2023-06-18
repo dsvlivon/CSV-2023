@@ -156,6 +156,12 @@
       <ion-label>juegos</ion-label>
     </ion-tab-button>
 
+     <!-- CLIENTE -->
+     <ion-tab-button *ngIf="(user.rol === 'MOZO')" (click)="goConsultas()"> 
+      <ion-icon color="secondary" name="chatbox-ellipses-outline" aria-hidden="true"></ion-icon>
+      <ion-label>Consultas</ion-label>
+    </ion-tab-button>
+
 
     <ion-tab-button (click)="logOut()">
       <ion-icon color="danger" name="exit" aria-hidden="true"></ion-icon>
