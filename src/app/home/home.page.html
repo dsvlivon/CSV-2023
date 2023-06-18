@@ -21,10 +21,12 @@
   <ion-grid class="ion-padding barra" style="width: 100%; height: 100%;" *ngIf="!scanActive ">
     <div class="barra">
 
-      <ion-row style="flex-grow: 1; margin-bottom: 1rem; height: auto;" *ngIf="user.perfil === 'CLIENTE'">
-        <div  *ngIf="!grid">
+      <ion-row style="flex-grow: 1; margin-bottom: 1rem; height: auto;"
+        *ngIf="user.perfil === 'CLIENTE' || user.perfil === 'ANONIMO'">
+        <!-- *ngIf="hasWait === undefined " -->
+        <div *ngIf="!grid">
 
-          <ion-col  >
+          <ion-col class="button" (click)="escanearQR()">
             <div>
               <ion-icon name="qr-code-outline" style="font-size: 20rem;"></ion-icon>
             </div>
@@ -38,10 +40,10 @@
           </ion-col>
         </div>
       </ion-row>
-
-        <ion-row *ngIf="user.perfil === 'CLIENTE'">
+      <div *ngIf="user.perfil === 'CLIENTE' || user.perfil === 'ANONIMO'">
+        <ion-row>
           <ion-col *ngIf="waitlist">
-            <ion-card>              
+            <ion-card>
               <ion-card-content>
                 <app-spinner *ngIf="spinner"></app-spinner>
                 Espera mientras se te asigna una mesa...
@@ -50,6 +52,16 @@
           </ion-col>
         </ion-row>
       </div>
+      <ion-row>
+        <ion-col class="container-datos">
+          <div class="texto" >
+              <h1>Mesa <b></b></h1>
+              <h4>Escanee el QR de la mesa para realizar su pedido o ver el estado de su pedido y hacer consultas al
+                mozo.</h4>
+            </div>
+        </ion-col>
+      </ion-row>
+    </div>
 
     <ion-row>
       <div></div>

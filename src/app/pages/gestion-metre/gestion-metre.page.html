@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title size="small">Listado Clientes en Espera ({{ this.kyndSelected.val }})</ion-title>
+    <p *ngIf="this.waitSelected"> ( Seleccione Mesa )</p>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <div *ngIf="!this.waitSelected" id="container-users" class="container-cards">
+    <div *ngFor="let w of this.waits$ | async as waits">
+      <ion-card class="card-shadow">
+
+        <div class="details">
+          <p>{{ w.correo }}</p>
+          <p>{{ w.estado }}</p>
+          <p>{{ w.date_created | date:'short' }}</p>
+        </div>
+
+        <div class="buttons">
+          <ion-button (click)="clickRequest(w)" *ngIf="w.estado == 'PENDIENTE'">
+            Reservar
+          </ion-button>
+          <ion-button color="danger" (click)="clickCancel(w)" *ngIf="w.estado == 'PENDIENTE' || w.estado == 'EN USO'">
+            Cancelar
+          </ion-button>
+        </div>
+
+      </ion-card>
+
+      <p *ngIf="!waits">No hay clientes en espera por aquí</p>
+    </div>
+  </div>
+
+  <div *ngIf="this.waitSelected" class="container-cards">
+    <div style="all:unset;" *ngFor="let w of this.tables$ | async">
+      <ion-card class="card-shadow">
+        <div class="buttons">
+          <ion-button (click)="clickConfirm(w)">
+            Reservar
+          </ion-button>
+        </div>
+
+        <div class="details">
+          <p>Número: {{ w.numero }}</p>
+          <p>Máximo: ({{ w.cantidad }})</p>
+          <p>Tipo: {{ w.tipo }}</p>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+
+  <ion-fab (click)="redirectTo('home')" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="home"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab (click)="clickBack()" *ngIf="this.waitSelected" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab *ngIf="!this.waitSelected" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>{{ this.kyndSelected.val }}</ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngFor="let p of this.kynds" (click)="setFilter(p)">
+        <p>{{p.val}}</p>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>

@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 import { ListaEspera } from '../shared/listaEspera.interface';
 import { PushnotificationService } from '../services/pushnotification.service';
 import { ListaEsperaService } from '../services/lista-espera.service';
+import { PedidoService } from '../services/pedido.service';
 
 @Component({
   selector: 'app-home',
@@ -23,28 +24,31 @@ import { ListaEsperaService } from '../services/lista-espera.service';
 })
 export class HomePage implements OnInit, OnDestroy {
   user: any = null;
+  data: any = null;
   spinner: boolean = false;
 
   waitlist = false;
   grid = false;
 
   hasWait: any = null;
+  hasRequest: any = null;
+
   scanActive = false;
-  currentScan:string[];
+  currentScan: string[];
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private firestoreService: FirestoreService,
     private qrSrv: QrscannerService,
     private pnSrv: PushnotificationService,
-    private listSrv: ListaEsperaService
+    private listSrv: ListaEsperaService,
+    private pedidoSrv: PedidoService
   ) { }
 
   ngOnInit() {
+    this.data = null;
     this.authService.user$.subscribe(data => {
       this.user = data
-      console.log(this.user);
     });
     let ls = localStorage.getItem('user');
     if (ls != null) {
@@ -53,6 +57,8 @@ export class HomePage implements OnInit, OnDestroy {
       this.user = user;
     }
     this.spinner = true;
+    this.checkWait();
+    this.checkRequest();
   }
 
   ngOnDestroy(): void {
@@ -63,9 +69,19 @@ export class HomePage implements OnInit, OnDestroy {
     const a = this.listSrv.getLastByUser(this.user.correo)
       .subscribe(data => {
         this.hasWait = data;
+
+        console.log('esto es haswait', this.hasWait);
+        a.unsubscribe();
       });
   }
-
+  private checkRequest() {
+    const a = this.pedidoSrv.getLastByUser(this.user.correo)
+      .subscribe(data => {
+        this.hasRequest = data;
+        console.log('esto es request', this.hasRequest)
+        a.unsubscribe();
+      });
+  }
   private addToWaitList() {
     try {
       const m = this.createModelWait();
@@ -102,16 +118,81 @@ export class HomePage implements OnInit, OnDestroy {
   escanearQR() {
     this.scanActive = true;
     this.qrSrv.startScan().then((result) => {
-      console.log(result);
+      const mesa = result.substring(0, 4);
+      console.log('esto es mesa', mesa)
+      const id = result.substring(4);
+      console.log('esto es id');
+      this.data = { name: mesa, id: id };
+      console.log(this.data);
       if (result === 'ENTRADALOCAL') {
-        if(!this.hasWait) {
-          this.scanActive = false;
+        this.scanActive = false;
+        if (!this.hasWait) {
           this.waitlist = true;
           this.grid = false
-          this.toast('Ingreso al local', 'Aguarde mientras se le asigna una mesa', 'success');
+          this.toast('Ingreso al local', 'success', 'Aguarde mientras se le asigna una mesa');
           this.addToWaitList();
           this.pnSrv.enviarNotificacionUsuarios('METRE', 'Ingreso al local', 'Un cliente solicitó la entrada al local', true);
+        } else if (this.hasWait.estado == 'PENDIENTE') {
+          this.toast('Ya solicitó ingreso al local, espere mientras se evalúa', 'info');
+          // this.toastr.warning('Previamente usted ya solicitó una mesa, en breves se le acercará un recepcionista', 'Lista de espera');
         }
+        else if (this.hasWait.estado == 'EN USO') {
+          this.toast('Ya tiene una mesa reservada', 'info');
+          // this.toastr.warning('Usted ya tiene una mesa reservada, por favor consulte al empleado más cercano', 'Lista de espera');
+        }
+        else if (this.hasWait.estado == 'FINALIZADO') {
+          this.toast('Ingresó al local, aguarde mientras se le asigna una mesa', 'success');
+          this.addToWaitList();
+        }
+      } else if (this.data.name === 'MESA') {
+        this.scanActive = false;
+        if (!this.hasRequest) { //  If first time in restaurant
+          this.toast('Primero debe ser aprobado para ingresar al local', 'info');
+          // this.toastr.warning('Lo sentimos, primero debe anunciarse en recepción', 'QR');
+        }
+        else if (this.hasRequest.mesa_numero == this.data.id) {
+          switch (this.hasRequest.estado) {
+            case 'PENDIENTE':
+              this.router.navigate(['/menu-productos']);
+              break;
+
+            case 'ACEPTADO': //Paracee en la lista del cocinero
+            case 'PREPARACION'://El cocinero lo pone en preparacion
+            case 'COCINADO':
+            case 'ENTREGADO':
+            case 'CONFIRMADO':
+              this.router.navigate(['/pedido/id/:id' + this.hasRequest.id]);
+              break;
+
+            case 'COBRAR':
+              this.toast('Se acercara un mozo a cobrarle', 'success', 'A cobrar');
+              // this.toastr.warning('En breves se le acercará un mozo a cobrarle', 'QR');
+              break;
+
+            case 'COBRADO':
+              // if ((new Date().getTime() - this.hasRequest.date_updated) >= (10 * 60 * 60 * 1000)) {  //  If pass 10 hours of last pedido
+              //   this.toastr.presentToast('Se le asignó la mesa Numero: ' + this.hasRequest.mesa_numero, 2000, 'success', 'Cobrado');
+              //   // this.toastr.warning('La mesa que se le asignó es: Nº ' + this.hasRequest.mesa_numero, 'QR');
+              // }
+              // else {  //  If is the table selected
+              //   this.router.navigate(['/pedido/id/' + this.hasRequest.id]);
+              // }
+              this.toast('Ya le cobraron, su mesa quedó liberada', 'success');
+              break;
+
+            default:
+              this.toast('Le recomendamos que se dirija a recepción para que le asigne una mesa', 'info');
+              // this.toastr.warning('Le recomendamos que se dirija a recepción para que le asigne una mesa', 'QR');
+              break;
+          }
+        }
+        else {
+          this.toast('Esta no es la mesa que tiene asignada', 'info');
+        }
+
+      } else {
+        this.toast('El QR escaneado es incorrecto', 'error');
+        this.scanActive = false;
       }
     })
   }

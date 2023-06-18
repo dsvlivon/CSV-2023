@@ -77,6 +77,10 @@ export const routes: Routes = [
   },  {
     path: 'consultas',
     loadComponent: () => import('./pages/consultas/consultas.page').then( m => m.ConsultasPage)
+  },
+  {
+    path: 'gestion-metre',
+    loadComponent: () => import('./pages/gestion-metre/gestion-metre.page').then( m => m.GestionMetrePage)
   }
 
 

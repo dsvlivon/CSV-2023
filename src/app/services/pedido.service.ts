@@ -38,7 +38,7 @@ export class PedidoService {
         map(pedidos => pedidos.map(a => a.payload.doc.data()))
       );
     }
-    catch (error) { }
+    catch (error) { return null; }
   }
 
   getById(id: string) {
@@ -46,7 +46,7 @@ export class PedidoService {
       return this.getAll().pipe(
         map(pedidos => pedidos.find(u => u['id'] == id)));
     }
-    catch (error) { }
+    catch (error) { return null; }
   }
 
   getByUser(correo: string, estado?: string) {
@@ -62,7 +62,7 @@ export class PedidoService {
           )));
       }
     }
-    catch (error) { }
+    catch (error) {  return null;}
   }
 
   getLastByUser(correo: string, estado?: string) {
