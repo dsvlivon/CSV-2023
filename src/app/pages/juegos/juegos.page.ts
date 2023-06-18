@@ -33,6 +33,7 @@ export class JuegosPage implements OnInit {
   pointsComp = 0;
   turnos = 0;
   resultado = "";
+  vidas: number = 2;
   
   msgTitulo="Vence a nuestro campeón para ganar beneficios!"
   msgRes = "Reglas: Se juega al mejor de 3 intentos. En caso de empate nadie suma"
@@ -61,17 +62,33 @@ export class JuegosPage implements OnInit {
     }
   }
 
-  evaluar(){
-    if (this.pointsComp == 2 || this.pointsUser == 2) {
-      if(this.pointsComp>this.pointsUser){
-        this.msgRes="LO SIENTO, ESTA VEZ NO HUBO SUERTE!!!"
+  evaluar() {
+    if (this.pointsComp === 2 || this.pointsUser === 2) {
+      if (this.pointsComp > this.pointsUser) {
+        this.vidas--;
+        if (this.vidas === 1) {
+          this.msgTitulo = "TE QUEDA UN INTENTO, VAMOS!!!";
+        } else if (this.vidas === 0) {
+          this.msgTitulo = "LO SIENTO, ESTA VEZ NO HUBO SUERTE!!!";
+          this.mostrar = false;
+        }
       } else {
-        this.msgRes="FELICITACIONES HAS GANADO!!!"
+        if (this.vidas === 2) {
+          this.msgTitulo = "FELICITACIONES HAS GANADO Y HAS GANADO UN PREMIO!!!";
+          //asignar DTO
+        } else {
+          this.msgTitulo = "FELICITACIONES HAS GANADO!!!";
+        }
+        this.mostrar = false;
       }
-      this.mostrar=false;
-      this.msgTitulo="";
+      
+      this.msgRes = "";
+      this.pointsUser = 0;
+      this.pointsComp = 0;
+      this.turnos = 0;
     }
   }
+  
 
   play(choice: string): void {
     const result = this.playGame.game(choice);
@@ -94,4 +111,7 @@ export class JuegosPage implements OnInit {
     this.router.navigateByUrl('/home', { replaceUrl: true });
   }
 
+  getIconArray() {
+    return Array(this.vidas).fill({ color: 'warning' });
+  }
 }

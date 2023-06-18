@@ -10,10 +10,13 @@
 <ion-content>
   
   <div class="title">
-    <h2>{{ msgTitulo }}</h2>
-    <h4>{{ msgRes }}</h4>
-    
+    <h2>{{ msgTitulo }}</h2>    
   </div>
+
+  <div style="margin-top: 10px; margin-left: 10px; font-size: 30px;">
+    <ion-icon *ngFor="let icon of getIconArray()" [color]="icon.color" name="heart-circle-outline"></ion-icon>
+  </div>
+
   <div class="score-board">
     <div id="user-label" class="badge">{{ user.nombre }}</div>
     <div id="comp-label" class="badge">CSV</div>
@@ -35,19 +38,14 @@
           <img src="../assets/images/juego/scissors.png" />
         </div>
         
-    </div>
-    <p class="info-game">Selecciona tu jugada</p>
+    </div>    
+   
 
   </div>
 
-
-
-
-
-
-
-
-
-
 </ion-content>
-
+<ion-footer>
+  <div class="title">
+    <h4>{{ msgRes }}</h4>  
+  </div>
+</ion-footer>
