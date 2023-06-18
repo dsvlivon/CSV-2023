@@ -60,6 +60,8 @@ export class BarraComponent implements OnInit {
 
   goHome() { this.router.navigate(['/home']); }
 
+  goConsultas() { this.router.navigate(['/gestion']); }
+
   logOut() {
     this.authService.signOut().then(() => {
       localStorage.removeItem('user');

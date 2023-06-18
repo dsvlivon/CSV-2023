@@ -1,33 +1,47 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>JUEGOS</ion-title>
+    <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round" color="saffron">
+      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+    </ion-buttons>
+    <ion-title>CSV - Piedra, Papel o Tijera</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">JUEGOS</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-grid style="color: #000">
-    <ion-row>
-      
-    </ion-row>
-    <ion-row>
-      
-    </ion-row>
-    <ion-row>
-      
-    </ion-row>
-    <ion-row>
-      
-    </ion-row>
+<ion-content>
+  
+  <div class="title">
+    <h2> Vence a nuestro campeón para ganar beneficios!</h2>
+    <h4>Reglas: Se juega al mejor de 3 intentos. En caso de empate nadie suma.</h4>
     
-    <ion-row>
-      <div class="divider"></div>
-      <app-barra></app-barra>   
-    </ion-row>
-  </ion-grid>
+  </div>
+  <div class="score-board">
+    <div id="user-label" class="badge">{{ user.nombre }}</div>
+    <div id="comp-label" class="badge">CSV</div>
+    <span id="user-score">{{ pointsUser }}</span>:<span id="comp-score">{{ pointsComp }}</span>
+  </div>
+  <p class="info-game">{{result}}</p>
+  <div class="choices">
+      <div class="choice" (click)="play('r')">
+        <img src="../../assets/images/juego/rock.png" />
+      </div>
+      <div class="choice" (click)="play('p')">
+        <img src="../assets/images/juego/paper.png" />
+      </div>
+      <div class="choice" (click)="play('s')">
+        <img src="../assets/images/juego/scissors.png" />
+      </div>
+  </div>
+  <p class="info-game">Selecciona tu jugada</p>
+
+
+
+
+
+
+
+
+
+
+
 </ion-content>
+
