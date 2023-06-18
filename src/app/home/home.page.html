@@ -18,13 +18,13 @@
 <ion-content [ngClass]="scanActive?'scanner-activo':''">
 
   <!-- HOME CLIENTE -->
-  <ion-grid class="ion-padding barra" style="width: 100%; height: 100%;" *ngIf="!scanActive ">
-    <div class="barra">
+  <ion-grid class="ion-padding" style="width: 100%; height: 100%;" *ngIf="!scanActive ">
+    <div class="barra " *ngFor="let wait of this.wait">
 
       <ion-row style="flex-grow: 1; margin-bottom: 1rem; height: auto;"
         *ngIf="user.perfil === 'CLIENTE' || user.perfil === 'ANONIMO'">
         <!-- *ngIf="hasWait === undefined " -->
-        <div *ngIf="!grid">
+        <div *ngIf="wait['estado'] === 'CANCELADO'">
 
           <ion-col class="button" (click)="escanearQR()">
             <div>
@@ -41,8 +41,8 @@
         </div>
       </ion-row>
       <div *ngIf="user.perfil === 'CLIENTE' || user.perfil === 'ANONIMO'">
-        <ion-row>
-          <ion-col *ngIf="waitlist">
+        <ion-row class="align-items-center">
+          <ion-col *ngIf="wait['estado'] ==='PENDIENTE'" >
             <ion-card>
               <ion-card-content>
                 <app-spinner *ngIf="spinner"></app-spinner>
@@ -52,15 +52,32 @@
           </ion-col>
         </ion-row>
       </div>
-      <ion-row>
-        <ion-col class="container-datos">
-          <div class="texto" >
-              <h1>Mesa <b></b></h1>
-              <h4>Escanee el QR de la mesa para realizar su pedido o ver el estado de su pedido y hacer consultas al
-                mozo.</h4>
+      <div *ngFor="let request of request">
+
+        <ion-row *ngIf="user.perfil === 'CLIENTE' || user.perfil === 'ANONIMO'">
+          <ion-col class="container-datos" *ngIf="request['estado'] ==='PENDIENTE'" >
+            <div class="texto">
+            <ion-card class="flex-column ion-padding" >
+              <ion-card-content>
+                <ion-card class="button ion-padding" (click)="escanearQR()">
+                  <ion-card-content>
+                    <div>
+                      <ion-icon name="qr-code-outline" style="font-size: 15rem;"></ion-icon>
+                    </div>
+                  </ion-card-content>               
+                  
+                </ion-card >
+                <h1>Mesa <b></b></h1>
+                <h4>Escanee el QR de la mesa para realizar su pedido o ver el estado de su pedido y hacer consultas al
+                  mozo.</h4>
+                  
+                </ion-card-content>
+                
+              </ion-card>
             </div>
-        </ion-col>
-      </ion-row>
+          </ion-col>
+        </ion-row>
+      </div>
     </div>
 
     <ion-row>

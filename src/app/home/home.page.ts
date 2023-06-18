@@ -27,14 +27,15 @@ export class HomePage implements OnInit, OnDestroy {
   data: any = null;
   spinner: boolean = false;
 
-  waitlist = false;
+  waitlist = true;
   grid = false;
 
   hasWait: any = null;
   hasRequest: any = null;
 
+  request: Array<any>[] = []
+  wait: Array<any>[] = []
   scanActive = false;
-  currentScan: string[];
 
   constructor(
     private authService: AuthService,
@@ -67,18 +68,21 @@ export class HomePage implements OnInit, OnDestroy {
   }
   private checkWait() {
     const a = this.listSrv.getLastByUser(this.user.correo)
-      .subscribe(data => {
+      .subscribe((data: any[]) => {
+        
         this.hasWait = data;
+        this.wait.push(this.hasWait);
+        console.log('esto es haswait', this.wait);
 
-        console.log('esto es haswait', this.hasWait);
         a.unsubscribe();
       });
   }
   private checkRequest() {
     const a = this.pedidoSrv.getLastByUser(this.user.correo)
-      .subscribe(data => {
+      .subscribe((data: any[]) => {
         this.hasRequest = data;
-        console.log('esto es request', this.hasRequest)
+        console.log('esto es request', this.request)
+        this.request.push(this.hasRequest)
         a.unsubscribe();
       });
   }
@@ -115,6 +119,8 @@ export class HomePage implements OnInit, OnDestroy {
       timerProgressBar: true
     })
   }
+
+  qrMesa = false;
   escanearQR() {
     this.scanActive = true;
     this.qrSrv.startScan().then((result) => {
@@ -146,6 +152,10 @@ export class HomePage implements OnInit, OnDestroy {
         }
       } else if (this.data.name === 'MESA') {
         this.scanActive = false;
+        this.waitlist = false;
+        this.qrMesa = true;
+        this.grid = false;
+
         if (!this.hasRequest) { //  If first time in restaurant
           this.toast('Primero debe ser aprobado para ingresar al local', 'info');
           // this.toastr.warning('Lo sentimos, primero debe anunciarse en recepción', 'QR');

@@ -32,6 +32,8 @@
     z-index: 1;
     padding: 10px;
     overflow-y: auto;
+    display: flex;
+    align-items: center;
   }
   ion-grid {
     
@@ -40,7 +42,7 @@
       --background: #4363AC;
       opacity: 0.7;
       box-shadow: 5px 5px 5px #000;
-
+      color: white;
       ion-card-content {
         color: white;
         font-weight: bold;
