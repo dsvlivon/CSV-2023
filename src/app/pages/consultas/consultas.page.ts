@@ -27,8 +27,7 @@ import * as moment from 'moment';
 export class ConsultasPage implements OnInit {
   user: any = null;
   newMessage: string = '';
-  messageListA: any = [];
-  messageListB: any = [];
+  messageList: any = [];
   pressedButton: boolean = false;
   
   soundSendMessage: any = new Audio('../../assets/audios/sendMessage.mp3');
@@ -49,7 +48,7 @@ export class ConsultasPage implements OnInit {
     });
     this.chatService.getMessagesA().subscribe((messagesA) => {
       if (messagesA !== null) {
-        this.messageListA = messagesA;
+        this.messageList = messagesA;
         setTimeout(() => {
           this.scrollToTheLastElementByClassName();
         }, 100);
@@ -65,16 +64,13 @@ export class ConsultasPage implements OnInit {
     }, 2100);
   } // endo of showChat4A
 
-  goToClassrooms() {
-    this.newMessage = '';
-    this.showSpinner(0);
-  } // end of goToClassrooms
+
 
   sendMessage() {
     if (this.newMessage.trim() == '') {
       this.authService.toast('Debes escribir un mensaje', 'warning');
       return;
-    } else if (this.newMessage.trim().length > 21) {
+    } else if (this.newMessage.trim().length > 50) {
       this.authService.toast(
         'El mensaje no puede tener más de 21 caracteres',
         'warning'

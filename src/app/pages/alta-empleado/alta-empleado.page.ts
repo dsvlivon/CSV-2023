@@ -76,7 +76,7 @@ export class AltaEmpleadoPage implements OnInit {
             password: form.password,
             perfil: 'EMPLEADO',
             fechaCreacion: new Date().getTime(),
-            rol: form.rol,
+            rol: form.rol.toUppercase(),
             uid: resp.user.uid
           }
           this.firestore.addUser(datos, resp.user.uid);

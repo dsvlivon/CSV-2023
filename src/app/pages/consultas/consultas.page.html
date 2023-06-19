@@ -1,3 +1,4 @@
+<ion-content>
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round" color="saffron">
@@ -15,22 +16,16 @@
     <div class="card-body-a">
       <div id="contenedor-mensajes" class="contenedor-mensajes">
         <p
-          *ngFor="let message of messageListA"
+          *ngFor="let message of messageList"
           class="p-3 mensajes"
-          [ngClass]="
-            user.uid == message.user.uid
-              ? 'mensaje-enviado'
-              : 'mensaje-recibido'
-          "
-        >
+          [ngClass]="user.uid == message.user.uid ? 'mensaje-enviado' : 'mensaje-recibido'">
           
-          <span
-            *ngIf="user.uid != message.user.uid"
-            [ngClass]="user.uid == message.user.uid ? 'email-1' : 'email-2'"
-            >{{ message.user.name }}<br
-          /></span>
+          <span *ngIf="user.uid != message.user.uid" [ngClass]="user.uid == message.user.uid ? 'email-1' : 'email-2'">
+            {{ message.user.perfil == 'EMPLEADO' ? 'CSV' : 'Cliente' }}<br/>
+          </span>
           {{ message.text }} <br />
-          <span class="fecha">{{ message.date }}</span>
+          <span class="fecha">{{ message.user.nombre }}</span>
+          
         </p>
       </div>
     </div>
@@ -55,3 +50,4 @@
     </div>
   </form>
 </ion-footer>
+</ion-content>
