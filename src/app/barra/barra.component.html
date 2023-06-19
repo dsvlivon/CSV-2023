@@ -87,7 +87,7 @@
       <ion-grid>
       
         <ion-row>
-          <button *ngIf="user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" expand="full" class="btn btn-primary" style="
+          <button *ngIf="user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO'" expand="full" class="btn btn-primary" style="
             margin: 1rem;
             width: 13rem;
             font-size: 1.3rem;
@@ -97,7 +97,7 @@
         </ion-row>
 
         <ion-row>
-          <button *ngIf="user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" expand="full" class="btn btn-primary" style="
+          <button *ngIf="user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO'" expand="full" class="btn btn-primary" style="
             margin: 1rem;
             width: 13rem;
             font-size: 1.3rem;
@@ -107,7 +107,7 @@
         </ion-row>
 
         <ion-row>
-          <button *ngIf="user.rol === 'METRE'" expand="full" class="btn btn-light" style="
+          <button *ngIf="user?.rol === 'METRE'" expand="full" class="btn btn-light" style="
             margin: 1rem;
             width: 13rem;
             font-size: 1.3rem;
@@ -130,38 +130,38 @@
       <ion-label>Inicio</ion-label>
     </ion-tab-button>
       
-    <ion-tab-button id="open-custom-dialog" *ngIf="user.rol === 'METRE' || user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" (click)="modal.present()">
+    <ion-tab-button id="open-custom-dialog" *ngIf="user?.rol === 'METRE' || user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO'" (click)="modal.present()">
       <ion-icon color="secondary" name="add-circle-outline" aria-hidden="true"></ion-icon>
       <ion-label>Altas</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button id="open-custom-dialog" *ngIf="user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO'" (click)="goGestion()">
+    <ion-tab-button id="open-custom-dialog" *ngIf="user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO'" (click)="goGestion()">
       <ion-icon color="secondary" name="person-add-outline" aria-hidden="true"></ion-icon>
       <ion-label>Clientes</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button id="open-custom-dialog" *ngIf="user.rol === 'METRE'" (click)="goClientes()">
+    <ion-tab-button id="open-custom-dialog" *ngIf="user?.rol === 'METRE'" (click)="goClientes()">
       <ion-icon color="secondary" name="person-add-outline" aria-hidden="true"></ion-icon>
       <ion-label>Clientes</ion-label>
     </ion-tab-button>
-    <ion-tab-button *ngIf="(user.rol === 'METRE') || (user.perfil === 'SUPERVISOR' || user.perfil === 'DUENIO')" (click)="goEncuestas()">
+    <ion-tab-button *ngIf="(user?.rol === 'METRE') || (user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO')" (click)="goEncuestas()">
       <ion-icon color="secondary" name="cash" aria-hidden="true"></ion-icon>
       <ion-label>Encuestas</ion-label>
     </ion-tab-button>
 
     <!-- CLIENTE -->
-    <ion-tab-button *ngIf="(user.perfil === 'CLIENTE')" (click)="goConsultas()"> <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
+    <ion-tab-button *ngIf="(user?.perfil === 'CLIENTE')" (click)="goConsultas()"> <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
       <ion-icon color="secondary" name="chatbox-ellipses-outline" aria-hidden="true"></ion-icon>
       <ion-label>Consultas</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button *ngIf="(user.perfil === 'CLIENTE')" (click)="goJuegos()"> <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
+    <ion-tab-button *ngIf="(user?.perfil === 'CLIENTE')" (click)="goJuegos()"> <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
       <ion-icon color="secondary" name="game-controller-outline" aria-hidden="true"></ion-icon>
       <ion-label>juegos</ion-label>
     </ion-tab-button>
 
      <!-- CLIENTE -->
-     <ion-tab-button *ngIf="(user.rol === 'MOZO')" (click)="goConsultas()"> 
+     <ion-tab-button *ngIf="(user?.rol === 'MOZO')" (click)="goConsultas()"> 
       <ion-icon color="secondary" name="chatbox-ellipses-outline" aria-hidden="true"></ion-icon>
       <ion-label>Consultas</ion-label>
     </ion-tab-button>

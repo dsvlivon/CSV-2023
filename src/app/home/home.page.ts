@@ -69,10 +69,7 @@ export class HomePage implements OnInit, OnDestroy {
   private checkWait() {
     const a = this.listSrv.getLastByUser(this.user.correo)
       .subscribe((data: any[]) => {
-        
         this.hasWait = data;
-        this.wait.push(this.hasWait);
-        console.log('esto es haswait', this.wait);
 
         a.unsubscribe();
       });
@@ -81,8 +78,7 @@ export class HomePage implements OnInit, OnDestroy {
     const a = this.pedidoSrv.getLastByUser(this.user.correo)
       .subscribe((data: any[]) => {
         this.hasRequest = data;
-        console.log('esto es request', this.request)
-        this.request.push(this.hasRequest)
+        console.log(this.hasRequest);
         a.unsubscribe();
       });
   }
@@ -124,17 +120,13 @@ export class HomePage implements OnInit, OnDestroy {
   escanearQR() {
     this.scanActive = true;
     this.qrSrv.startScan().then((result) => {
-      const mesa = result.substring(0, 4);
-      console.log('esto es mesa', mesa)
-      const id = result.substring(4);
-      console.log('esto es id');
-      this.data = { name: mesa, id: id };
-      console.log(this.data);
+      const datos = result.split(' ');
+      this.data = { name: datos[0], id: datos[1], }
       if (result === 'ENTRADALOCAL') {
         this.scanActive = false;
         if (!this.hasWait) {
-          this.waitlist = true;
-          this.grid = false
+          this.checkWait();
+
           this.toast('Ingreso al local', 'success', 'Aguarde mientras se le asigna una mesa');
           this.addToWaitList();
           this.pnSrv.enviarNotificacionUsuarios('METRE', 'Ingreso al local', 'Un cliente solicitó la entrada al local', true);
@@ -152,15 +144,15 @@ export class HomePage implements OnInit, OnDestroy {
         }
       } else if (this.data.name === 'MESA') {
         this.scanActive = false;
-        this.waitlist = false;
-        this.qrMesa = true;
-        this.grid = false;
+        
 
         if (!this.hasRequest) { //  If first time in restaurant
+          this.checkRequest();
           this.toast('Primero debe ser aprobado para ingresar al local', 'info');
           // this.toastr.warning('Lo sentimos, primero debe anunciarse en recepción', 'QR');
         }
         else if (this.hasRequest.mesa_numero == this.data.id) {
+          this.checkRequest();
           switch (this.hasRequest.estado) {
             case 'PENDIENTE':
               this.router.navigate(['/menu-productos']);
