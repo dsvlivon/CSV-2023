@@ -25,30 +25,30 @@ export class FirestoreService {
 
   async addUser(user: User2, id?: string) {
     try {
-      
+
       return this.ref.doc(id).set({ ...user });
     } catch (error) {
       console.log(error)
     }
   }
 
-  
-  async addToken(token: any){
-    try{
-        return this.ref2.doc().set(token);
+
+  async addToken(token: any) {
+    try {
+      return this.ref2.doc().set(token);
     }
-    catch(error){
+    catch (error) {
       console.log(error);
     }
   }
 
   getByMail(mail: string) {
-    
+
     const collection = this.angularFirestore.collection<any>(
       'usuarios',
       (ref) => ref.where('correo', '==', mail)
     );
-   
+
     return collection.valueChanges();
   }
 
@@ -76,22 +76,22 @@ export class FirestoreService {
     await this.angularFirestore
       .doc<any>(`usuarios/${id}`)
       .update(token)
-      .then(() => {})
+      .then(() => { })
       .catch((error) => {
         //console.log(error.message);
       });
   }
 
-  getClientes(){
-    const collection = this.angularFirestore.collection<any>('usuarios',(ref)=> ref.where('perfil','==','CLIENTE'));
+  getClientes() {
+    const collection = this.angularFirestore.collection<any>('usuarios', (ref) => ref.where('perfil', '==', 'CLIENTE'));
     return collection.valueChanges();
   }
 
-  async updateEstadoUsuario(usuario: any){
+  async updateEstadoUsuario(usuario: any) {
     await this.angularFirestore
       .doc<any>(`usuarios/${usuario.uid}`)
       .update(usuario)
-      .then(() => {console.log("actualizo")})
+      .then(() => { console.log("actualizo") })
       .catch((error) => {
         console.log(error.message);
       });
@@ -136,4 +136,8 @@ export class FirestoreService {
          console.log(error.message);
        });
    } */ // end of updateUser
+
+  public addData(collection: string, json) {
+    this.angularFirestore.collection(collection).add(json);
+  }
 }

@@ -7,6 +7,7 @@ import * as auth from 'firebase/auth';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 
 @Injectable({
@@ -57,19 +58,20 @@ export class AuthService {
     })  
   }
 
-  async toast(message, status) {
-    try {
-      const toast = await this.toastController.create({
-        message: message,
-        color: status,
-        position: 'top',
-        duration: 2000,
-      });
-      toast.present();
-    } catch (error) {
-      console.log(error.message);
-    }
-  } // end of toast
+  async toast(title: string, icono: any, text?: string) {
+    await Swal.fire({
+      title: title,
+      text: text,
+      icon: icono,
+      timer: 3000,
+      toast: true,
+      position: 'top',
+      grow: 'row',
+      showConfirmButton: false,
+      timerProgressBar: true
+    })
+  }
+  
 
   signIn(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password);

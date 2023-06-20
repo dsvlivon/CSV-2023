@@ -81,6 +81,10 @@ export const routes: Routes = [
   {
     path: 'gestion-metre',
     loadComponent: () => import('./pages/gestion-metre/gestion-metre.page').then( m => m.GestionMetrePage)
+  },
+  {
+    path: 'encuesta-cliente',
+    loadComponent: () => import('./pages/encuesta-cliente/encuesta-cliente.page').then( m => m.EncuestaClientePage)
   }
 
 

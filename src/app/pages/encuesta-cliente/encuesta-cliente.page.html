@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button (click)="navigateBack()" slot="start"></ion-back-button>
+    <ion-title>Encuesta Cliente</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="this.request$ | async as request ">
+
+    <p class="text-center ion-no-margin ion-padding">
+      Tu opinión es importante para nosotros. Llena el formulario y haznos saber lo que opinas.
+    </p>
+
+    <ion-grid class="ion-no-padding">
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-content>
+              <ion-label>
+                ¿QUE TAN SATISFECHO ESTA CON SU PEDIDO?
+              </ion-label>
+              <ion-range color="dark" min="1" max="10" pin="true" class="ion-no-padding" id="rango">
+                <ion-icon slot="start" name="sad"></ion-icon>
+                <ion-icon slot="end" name="happy"></ion-icon>
+              </ion-range>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-content>
+              <ion-label class="label">LIMPIEZA DEL ESTABLECIMIENTO</ion-label>
+              <ion-range color="dark" pin="true" min="1" max="10" step="1" snaps="true" id="limpieza"
+                class="ion-no-padding">
+                <ion-icon slot="start" name="trash"></ion-icon>
+                <ion-icon slot="end" name="sparkles"></ion-icon>
+              </ion-range>
+
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-content>
+              <ion-label>
+                ¿QUE LE GUSTO MAS DEL LOCAL?
+              </ion-label>
+              <ion-item>
+
+                <ion-select id="select" placeholder="Elija una opción">
+                  <ion-select-option value="Calidad">La comida</ion-select-option>
+                  <ion-select-option value="Atención">La atención</ion-select-option>
+                  <ion-select-option value="Velocidad">La velocidad</ion-select-option>
+                  <ion-select-option value="Higiene">La higiene</ion-select-option>
+                </ion-select>
+
+              </ion-item>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-content>
+
+              <ion-textarea label="Dejanos tu opinión" labelPlacement="floating" [counter]="true" maxlength="20"
+                [counterFormatter]="customCounterFormatter" class="custom" id="opinion"></ion-textarea>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12" class="ion-padding">
+          <ion-button (click)="enviarEncuesta(request)" color="dark" expand="block">Enviar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+
+  <ion-fab (click)="redirectTo('/home')" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="log-out"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
