@@ -1,0 +1,49 @@
+ion-header {
+    --ion-background-color: linear-gradient(
+      0deg,
+      #4363AC 0%,
+      #00AFEF 100%
+    );
+    font-family: Georgia, Times, "Times New Roman", serif;
+    color: white;
+}
+ion-content {
+    background: rgb(0, 0, 0);
+  //background: 
+  font-family: Georgia, Times, "Times New Roman", serif;
+  height: 100%;
+    --ion-background-color: linear-gradient(
+      0deg,
+      #4363AC 0%,
+      #00AFEF 100%
+    );
+}
+
+
+.container{
+    height: 92.5%;
+  }
+  
+  table {
+      margin-top: 5%;
+      margin-bottom: 5%;
+      width: 100%;
+    }
+  
+    th {
+      padding: 1rem;
+    }
+  
+    th,
+    td {
+      border: 0rem solid transparent !important;
+    }
+  
+    .container-resume {
+      margin-bottom: 20%;
+  
+      ion-card{
+        justify-content: center;
+      }
+    }
+  

@@ -67,6 +67,11 @@ export class MesaService {
     }
   }
 
+  public async updateOne(model: Mesa){
+    try { return this.bd.doc<any>(`mesas/${model.id}`).update(model)}
+    catch (err) {console.log(err);}
+  }
+
   getByUser(correo: string) {
     try {
       return this.getAll().pipe(

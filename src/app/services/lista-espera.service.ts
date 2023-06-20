@@ -101,5 +101,11 @@ export class ListaEsperaService {
     return this.getByUser(correo, estado).pipe(
       map((tables: any[]) => tables.slice(-1)[0]));
   }
+
+  public async updateOne(model: ListaEspera){
+    try { return this.bd.doc<any>(`wait_lista/${model.id}`).update(model)}
+    catch (err) {console.log(err);}
+  }
+
 }
 

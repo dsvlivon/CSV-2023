@@ -163,7 +163,8 @@ export class HomePage implements OnInit, OnDestroy {
             case 'COCINADO':
             case 'ENTREGADO':
             case 'CONFIRMADO':
-              this.router.navigate(['/pedido/id/:id' + this.hasRequest.id]);
+              //this.router.navigate(['/pedido/id/:id' + this.hasRequest.id]);
+              this.router.navigate(['/pedido/id/'+this.hasRequest.id]);
               break;
 
             case 'COBRAR':

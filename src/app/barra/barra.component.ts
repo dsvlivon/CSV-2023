@@ -63,6 +63,8 @@ export class BarraComponent implements OnInit {
   goConsultas() { this.router.navigate(['/consultas']); }
 
   goClientes() { this.router.navigate(['/gestion-metre'])}
+
+  goListaPedidos() {this.router.navigate(['/lista-pedidos'])}
   
   logOut() {
     this.authService.signOut().then(() => {

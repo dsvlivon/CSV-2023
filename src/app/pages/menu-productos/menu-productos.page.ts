@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import Swiper from 'swiper';
 import { ProductoService } from 'src/app/services/productos.service';
 import { Producto } from 'src/app/shared/producto.interface';
+import { PedidoService } from 'src/app/services/pedido.service';
 
 @Component({
   selector: 'app-menu-productos',
@@ -20,7 +21,9 @@ import { Producto } from 'src/app/shared/producto.interface';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class MenuProductosPage implements OnInit {
+
   prods$: Observable<any>;
+  pedido$: Observable<any>;
 
   productos = [
     { val: 'Productos' },
@@ -28,11 +31,16 @@ export class MenuProductosPage implements OnInit {
 
   productsSelected: any[] = [];
   prodSelected: any;
+  user:any;
+  //Variable para definir si un producto esta en el array de productos
+  encontreProducto: boolean = false;
 
-  constructor(private firestoreService: FirestoreService, private router: Router, private productoService: ProductoService) { }
+  constructor(private firestoreService: FirestoreService, private router: Router, private productoService: ProductoService,private pedidoService: PedidoService) { }
 
   ngOnInit() {
     this.prodSelected = this.productos[0];
+    this.getUser();
+    this.getPedido();
     this.getProds(this.prodSelected.val);
     //Si cliente volvio para atras y quiere cambiar algo del pedido
     this.checkProductsSelected();
@@ -52,6 +60,11 @@ export class MenuProductosPage implements OnInit {
     }
   }
 
+  getUser(){
+    this.user = null;
+    this.user = JSON.parse(localStorage.getItem('user'));
+  }
+
   navigateBack(){
     this.router.navigateByUrl('/home', { replaceUrl: true });
   }
@@ -66,14 +79,36 @@ export class MenuProductosPage implements OnInit {
       if (quaa == -1) { model.quantity = 0; }
       else { model.quantity = quaa; }
     }
-
+    //console.log(model);
     if (model.quantity == 0) {
       let a = this.productsSelected.find(x => x.id == model.id);
       let index = this.productsSelected.indexOf(a);
       this.productsSelected.splice(index, 1);
     }
     else {
-      this.productsSelected.push(model);
+      //Agrego el primer producto
+      if(this.productsSelected.length === 0)
+      {
+        this.productsSelected.push(model);
+      }
+      else{
+       this.productsSelected.forEach((p)=>{
+        if(p.id === model.id)
+        {
+          this.encontreProducto = true;
+        }
+       });
+       if(this.encontreProducto === true){
+         let b = this.productsSelected.find(x => x.id == model.id);
+         let index2 = this.productsSelected.indexOf(b);
+         this.productsSelected[index2].quantity = model.quantity;
+         this.encontreProducto = false;
+       }
+       else{
+        this.productsSelected.push(model);
+       }
+      }
+      
     }
   }
   getQuantity(model: Producto) {
@@ -93,6 +128,10 @@ export class MenuProductosPage implements OnInit {
   clickBeforeConfirm() {
    //Aca te redirecciona para el pedido
    localStorage.setItem('products', JSON.stringify(this.productsSelected));
+   const a = this.pedido$.subscribe(data => {
+    this.router.navigate(['/pedido/id/'+data.id],{ replaceUrl: true});
+    a.unsubscribe();
+  });
   }
 
   getAcum() {
@@ -101,9 +140,18 @@ export class MenuProductosPage implements OnInit {
     return a;
   }
 
+  private getPedido() {
+    this.pedido$ = this.pedidoService.getLastByUser(this.user.correo);
+  }
+
   getAproxFinish() {
     let minutos: number = 0;
-    this.productsSelected.forEach(p => { minutos += p.tiempo; });
+    this.productsSelected.forEach(p => { 
+      //minutos += p.tiempo; 
+      if(minutos < p.tiempo){
+        minutos = p.tiempo;
+      }
+    });
     return minutos;
   }
 

@@ -32,6 +32,11 @@ export class PedidoService {
     catch (err) { console.log(err); }
   }
 
+  public async updateOne(model: Pedido){
+    try { return this.bd.doc<any>(`pedidos/${model.id}`).update(model)}
+    catch (err) {console.log(err);}
+  }
+
   getAll() {
     try {
       return this.referenceToCollection.snapshotChanges().pipe(
@@ -39,6 +44,17 @@ export class PedidoService {
       );
     }
     catch (error) { return null; }
+  }
+
+  getActivos() {
+    try {
+      return this.getAll().pipe(
+        map(requests => requests.filter(
+          u => u['estado'] == 'PENDIENTE' || u['estado'] == 'ACEPTADO' || u['estado'] == 'PREPARACION' || u['estado'] == 'COCINADO' || u['estado'] == 'ENTREGADO' ||
+            u['estado'] == 'CONFIRMADO' || u['estado'] == 'COBRAR'
+        )));
+    }
+    catch (error) { return null;}
   }
 
   getById(id: string) {
