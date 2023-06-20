@@ -1,3 +1,14 @@
+ion-header {
+  --ion-background-color: linear-gradient(
+    0deg,
+    #4363AC 0%,
+    #00AFEF 100%
+  );
+  ion-title {
+    color: white;
+    font-weight: bold;
+  }
+}
 img {
     max-height: 7rem;
     min-height: 7rem;
@@ -6,8 +17,23 @@ img {
   }
   
   ion-card {
+    --background: #00AFEF;
+    --background: linear-gradient(180deg,
+        #4363AC 0%,
+        #00AFEF 100%);
+    box-shadow: 9px 11px 10px #000;
+    color: white;
+    border-radius: 15px;
     display: flex;
     justify-content: space-between;
+    ion-card-content {
+      color: white;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgb(0, 0, 0);
+    }
+    p, ion-button {
+      font-weight: bold;
+    }
   }
   
   .details {

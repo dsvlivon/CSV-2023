@@ -10,7 +10,7 @@
 <ion-content>
   <div *ngIf="!this.waitSelected" id="container-users" class="container-cards">
     <div *ngFor="let w of this.waits$ | async as waits">
-      <ion-card class="card-shadow">
+      <ion-card class="card-shadow ion-padding">
 
         <div class="details">
           <p>{{ w.correo }}</p>
@@ -18,7 +18,7 @@
           <p>{{ w.date_created | date:'short' }}</p>
         </div>
 
-        <div class="buttons">
+        <div class="ion-padding">
           <ion-button (click)="clickRequest(w)" *ngIf="w.estado == 'PENDIENTE'">
             Reservar
           </ion-button>

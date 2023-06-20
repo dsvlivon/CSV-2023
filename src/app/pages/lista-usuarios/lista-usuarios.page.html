@@ -1,9 +1,8 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round"
-    color="saffron">
-      <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-  </ion-buttons>
+    <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round" color="saffron">
+      <ion-icon slot="icon-only" name="arrow-back-outline" styke="color: white"></ion-icon>
+    </ion-buttons>
     <ion-title>Listado de usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +11,7 @@
   <div class="container-cards">
     <div style="all:unset;" *ngFor="let user of this.users$ | async">
       <ion-card class="card-shadow">
-        <img src="{{ user.img }}" height="170px" width="100%"/>
+        <img src="{{ user.img }}" height="170px" width="100%" />
 
         <div class="details">
           <p>{{user.nombre}} {{user.apellido}}</p>

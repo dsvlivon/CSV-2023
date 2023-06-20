@@ -4,6 +4,10 @@ ion-header {
       #4363AC 0%,
       #00AFEF 100%
     );
+    ion-title {
+      color: white;
+      font-weight: bold;
+    }
 }
 ion-content {
     background: rgb(0, 0, 0);
@@ -15,6 +19,24 @@ ion-content {
       #4363AC 0%,
       #00AFEF 100%
     );
+}
+ion-card {
+  --background: #00AFEF;
+  --background: linear-gradient(180deg,
+      #4363AC 0%,
+      #00AFEF 100%);
+  box-shadow: 9px 11px 10px #000;
+  color: white;
+  border-radius: 15px;
+
+  ion-card-content {
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgb(0, 0, 0);
+  }
+  p, ion-button {
+    font-weight: bold;
+  }
 }
 .texto{
 	margin-top: 5%;
@@ -61,15 +83,4 @@ img {
     width: 100%;
   }
   
-  .buttons {
-    padding: 1%;
-    margin-right: 0%;
-  }
   
-  p {
-    margin-top: 5%;
-  }
-  
-  #p-title {
-    margin-top: 0%;
-  }
