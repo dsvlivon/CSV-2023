@@ -1,4 +1,3 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -7,6 +6,7 @@ import { ConsultasService } from 'src/app/services/consultas.service';
 import { AuthService } from '../../services/auth.service';
 import * as moment from 'moment';
 import { PedidoService } from '../../services/pedido.service';
+import { Component, OnInit, inject } from '@angular/core';
 
 
 
@@ -21,9 +21,11 @@ export class ConsultasPage implements OnInit {
   user: any = null;
   newMessage: string = '';
   messageList: any = [];
+  data: any = null;
   pressedButton: boolean = false;
   pedido: any = null;
   soundSendMessage: any = new Audio('../../assets/audios/sendMessage.mp3');
+  authSrv = inject(AuthService);
 
   constructor(
     private authService: AuthService,
@@ -35,14 +37,20 @@ export class ConsultasPage implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.user$.subscribe((user: any) => {
-      if (user) {
-        this.user = user;
-        console.log("consultas user:");
-        console.log(this.user);
-      }
+    this.data = null;
+    this.authService.user$.subscribe(data => {
+      this.user = data
+      // console.log("user:");
+      // console.log(this.user);
     });
-    this.chatService.getMessagesA().subscribe((messagesA) => {
+
+    let ls = localStorage.getItem('user');
+    if (ls != null) {
+      let user = JSON.parse(ls);
+      this.user = user;
+    }
+
+    this.chatService.getMessages().subscribe((messagesA) => {
       if (messagesA !== null) {
         this.messageList = messagesA;
         setTimeout(() => {
@@ -77,8 +85,9 @@ export class ConsultasPage implements OnInit {
       user: this.user,
       text: this.newMessage,
       date: date,
+      mesa: this.pedido?.mesa_numero || ''
     };
-    this.chatService.createMessageA(message);
+    this.chatService.createMessage(message);
     this.newMessage = '';
     this.scrollToTheLastElementByClassName();
     this.soundSendMessage.play();
@@ -103,13 +112,15 @@ export class ConsultasPage implements OnInit {
   }
   
   private checkRequest() {
+    console.log("user:");
+    console.log(this.user);
     const a = this.pedidoSrv.getLastByUser(this.user.correo)
       .subscribe((data: any[]) => {
         this.pedido = data;
-        console.log("consultas pedido:");
+        console.log("BARRA PEDIDO:");
         console.log(this.pedido);
         a.unsubscribe();
-      });
+    });
   }
 }
 

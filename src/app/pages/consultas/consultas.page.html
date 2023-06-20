@@ -21,11 +21,15 @@
           [ngClass]="user.uid == message.user.uid ? 'mensaje-enviado' : 'mensaje-recibido'">
           
           <span *ngIf="user.uid != message.user.uid" [ngClass]="user.uid == message.user.uid ? 'email-1' : 'email-2'">
-            {{ message.user.perfil == 'EMPLEADO' ? 'CSV' : 'Cliente' }}<br/>
+            {{ message.user.perfil == 'EMPLEADO' ? 'Mozo: '+ message.user.nombre  : 'Cliente: ' + message.user.nombre + ' / Mesa: ' + this.message.mesa}}<br/>
           </span>
-          {{ message.text }} <br />
-          <span class="fecha">{{ message.user.nombre }}</span>
-          
+          <!-- <span style="font-size: 12px; ">
+            {{ message.user.perfil == 'EMPLEADO' ? 
+            'Mozo: '+ message.user.nombre 
+            : 'Cliente: ' + message.user.nombre + ' / Mesa: ' + this.message.mesa }}
+          </span> -->
+          <br>{{ message.text }}<br />
+
         </p>
       </div>
     </div>
