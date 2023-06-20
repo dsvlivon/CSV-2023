@@ -8,14 +8,14 @@ export class ConsultasService {
 
   constructor(private angularFirestore: AngularFirestore) { }
 
-  getMessagesA() {
+  getMessages() {
     const collection = this.angularFirestore.collection<any>('consultas', (ref) =>
       ref.orderBy('date', 'asc').limit(50)
     );
     return collection.valueChanges();
   }
 
-  createMessageA(message: any) {
+  createMessage(message: any) {
     this.angularFirestore.collection<any>('consultas').add(message);
   }
 

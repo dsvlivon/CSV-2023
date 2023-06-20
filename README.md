@@ -58,10 +58,10 @@
 |  18.a    |    Crear Model de Mesa                               |    Alfa    |   Daniel    |  Resuelto  |
 |  19      | Crear Menu Metre p/ asignar Mesas                    |    Gamma   |   Ignacio   |  Resuelto  |
 |  19.a    |    Verificar q/ el cliente no pueda tomar otra mesa  |            |             |   Nuevo    |
-|  20      | Implementar boton "consulta al mozo"                 |            |             |   Nuevo    |
+|  20      | Implementar boton "consulta al mozo"                 |            |             |  Resuelto  |
 |  20.a    |    Verificar q/ llegue la PN a todos los mozos       |            |             |   Nuevo    |
-|  20.b    |    Implementar respuesta de mozo                     |            |             |   Nuevo    |
-|  20.c    |    Verificar respuesta como cliente                  |            |             |   Nuevo    |
+|  20.b    |    Implementar respuesta de mozo                     |            |             |  Resuelto  |
+|  20.c    |    Verificar respuesta como cliente                  |            |             |  Resuelto  |
 |----------|------------------------------------------------------|------------|-------------|------------|
 |          |  **Sprint 4: Fase final**                            |            | prox. fecha:|  24/06/23  |
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
@@ -69,14 +69,23 @@
 |  20.a    |    Crear Modelo Producto y ProductosService          |    Alfa    |   Daniel    |  Resuelto  |
 |  20.b    |    Crear coleccion Productos en la BD                |    Alfa    |   Daniel    |  Resuelto  |
 |  20.c    |    Cargarr Productos en la BD                        |    Alfa    |   Daniel    |  Resuelto  |
-|  20.d    |    Implementar seleccion de productos                |    Gamma   |   Ignacio   |   Activo   |
+|  20.d    |    Implementar seleccion de productos                |    Gamma   |   Ignacio   |  Resuelto  |
 |   21     |  Crear Modelo de Pedido y PedidosService             |    Alfa    |   Daniel    |  Resuelto  |
-|  21.a    |    Crear coleccion Pedidos en la BD                  |            |             |   Nuevo    |
-|  21.b    |    verificar la carga de Pedidos en la BD            |            |             |   Nuevo    |
-|  21.b    |    verificar vinculaciónes del Pedido                |            |             |   Nuevo    |
-|    X     | Crear Modelo de Juego y JuegoService                 |    Alfa    |   Daniel    |  Resuelto  |
-|    X     |    Implementar Pagina de Juegos                      |    Alfa    |   Daniel    |  Resuelto  |
-|    X     |    Implementar vinc. c/ cliente y asig. recompensa   |    Alfa    |   Daniel    |   Activo   |
+|  21.a    |    Crear coleccion Pedidos en la BD                  |    Gamma   |   Ignacio   |   Activo   |
+|  21.b    |    verificar la carga de Pedidos en la BD            |    Gamma   |   Ignacio   |  Resuelto  |
+|  21.b    |    verificar vinculaciónes del Pedido                |    Gamma   |   Ignacio   |  Resuelto  |
+|  22      | Crear Modelo de Juego y JuegoService                 |    Alfa    |   Daniel    |  Resuelto  |
+|  22.a    |    Implementar Pagina de Juegos                      |    Alfa    |   Daniel    |  Resuelto  |
+|  22.b    |    Implementar vinc. c/ cliente y asig. recompensa   |    Alfa    |   Daniel    |   Activo   |
+|  23      |    Implementar Graficos datos                        |            |             |   Nuevo    |
+|  23      | Crear Menu Cierre de pedidos                         |            |             |   Nuevo    |
+|  23.a    |    Implementar pago del pedido                       |            |             |   Nuevo    |
+|  23.b    |    Verificar que se libere la mesa                   |            |             |   Nuevo    |
+|  24.a    |    Implementar pagina de votacion y comentarios      |            |             |   Nuevo    |
+|  24.b    |    Implementar Graficos datos                        |            |             |   Nuevo    |
+|  24.b    |    Implementar Graficos datos                        |            |             |   Nuevo    |
+
+
 
 
 
