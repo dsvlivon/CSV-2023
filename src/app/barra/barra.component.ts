@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AnimationController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
+import { PedidoService } from '../services/pedido.service';
+import { Console } from 'console';
 
 
 @Component({
@@ -17,33 +19,39 @@ import { ModalController } from '@ionic/angular';
 })
 
 export class BarraComponent implements OnInit {
-
+  data: any = null;
   user: any = null;
   mostrarComponente: boolean = false;
   mostrarColapsar: boolean = false;
   mostrarBotonesFlotantes = false;
 
   authSrv = inject(AuthService);
+  
+  pedido: any = null;
 
   constructor(
     private animationCtrl: AnimationController,
     private authService: AuthService,
     private router: Router,
-    private modalController: ModalController
+    private pedidoSrv: PedidoService,
   ) { }
 
   ngOnInit() {
 
+    this.data = null;
     this.authService.user$.subscribe(data => {
       this.user = data
+      //console.log("user:");
+      //console.log(this.user);
     });
+    
     let ls = localStorage.getItem('user');
     if (ls != null) {
       let user = JSON.parse(ls);
       this.user = user;
-      console.log(user.rol);
     }
 
+    this.checkRequest();
   }
 
   goAltas() { this.router.navigate(['/altas']); }
@@ -127,7 +135,15 @@ export class BarraComponent implements OnInit {
     this.router.navigate(['/alta-empleado']);
   }
 
-
+  private checkRequest() {
+    const a = this.pedidoSrv.getLastByUser(this.user.correo)
+      .subscribe((data: any[]) => {
+        this.pedido = data;
+        // console.log("BARRA PEDIDO:");
+        // console.log(this.pedido);
+        a.unsubscribe();
+      });
+  }
 }
 
 

@@ -4,16 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ConsultasService } from 'src/app/services/consultas.service';
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { AnyMxRecord } from 'dns';
-import { FirestoreService } from 'src/app/services/firestore.service';
-import Swal, { SweetAlertIcon } from 'sweetalert2';
 import { AuthService } from '../../services/auth.service';
-import { User2 } from 'src/app/shared/user2.interface';
-import { JuegoService } from 'src/app/services/juego.service';
-import { SpinnerComponent } from '../../spinner/spinner.component';
 import * as moment from 'moment';
+import { PedidoService } from '../../services/pedido.service';
 
 
 
@@ -29,21 +22,24 @@ export class ConsultasPage implements OnInit {
   newMessage: string = '';
   messageList: any = [];
   pressedButton: boolean = false;
-  
+  pedido: any = null;
   soundSendMessage: any = new Audio('../../assets/audios/sendMessage.mp3');
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private chatService: ConsultasService
+    private chatService: ConsultasService,
+    private pedidoSrv: PedidoService,
   ) {
-    this.soundSendMessage.volume = 0.1;
+    this.soundSendMessage.volume = 0.2;
   }
 
   ngOnInit() {
     this.authService.user$.subscribe((user: any) => {
       if (user) {
         this.user = user;
+        console.log("consultas user:");
+        console.log(this.user);
       }
     });
     this.chatService.getMessagesA().subscribe((messagesA) => {
@@ -54,6 +50,7 @@ export class ConsultasPage implements OnInit {
         }, 100);
       }
     });
+    this.checkRequest();
   }
 
   showChat() {
@@ -62,9 +59,7 @@ export class ConsultasPage implements OnInit {
     setTimeout(() => {
       this.scrollToTheLastElementByClassName();
     }, 2100);
-  } // endo of showChat4A
-
-
+  }
 
   sendMessage() {
     if (this.newMessage.trim() == '') {
@@ -87,14 +82,14 @@ export class ConsultasPage implements OnInit {
     this.newMessage = '';
     this.scrollToTheLastElementByClassName();
     this.soundSendMessage.play();
-  } // end of sendMessageA
+  }
 
   showSpinner(chatOption: number) {
     this.pressedButton = true;
     setTimeout(() => {
       this.pressedButton = false;
     }, 2000);
-  } // end of showSpinner
+  }
 
   navigateBack() {
     this.router.navigateByUrl('/home', { replaceUrl: true });
@@ -105,6 +100,16 @@ export class ConsultasPage implements OnInit {
     const lastElement: any = elements[elements.length - 1];
     const toppos = lastElement.offsetTop;
     document.getElementById('contenedor-mensajes').scrollTop = toppos;
-  } 
+  }
+  
+  private checkRequest() {
+    const a = this.pedidoSrv.getLastByUser(this.user.correo)
+      .subscribe((data: any[]) => {
+        this.pedido = data;
+        console.log("consultas pedido:");
+        console.log(this.pedido);
+        a.unsubscribe();
+      });
+  }
 }
 

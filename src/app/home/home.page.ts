@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-import { FirestoreService } from '../services/firestore.service';
 import { BarraComponent } from 'src/app/barra/barra.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { QrscannerService } from '../services/qrscanner.service';
@@ -14,6 +12,7 @@ import { ListaEspera } from '../shared/listaEspera.interface';
 import { PushnotificationService } from '../services/pushnotification.service';
 import { ListaEsperaService } from '../services/lista-espera.service';
 import { PedidoService } from '../services/pedido.service';
+import { User2 } from '../shared/user2.interface';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +36,8 @@ export class HomePage implements OnInit, OnDestroy {
   wait: Array<any>[] = []
   scanActive = false;
 
+  private static activeUser: User2;
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -51,6 +52,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.authService.user$.subscribe(data => {
       this.user = data
     });
+
     let ls = localStorage.getItem('user');
     if (ls != null) {
 
@@ -204,6 +206,7 @@ export class HomePage implements OnInit, OnDestroy {
     this.scanActive = false;
     this.qrSrv.stopScanner();
   }
+
 }
 
 
