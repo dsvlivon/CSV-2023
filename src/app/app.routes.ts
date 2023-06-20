@@ -10,82 +10,71 @@ export const routes: Routes = [
     redirectTo: 'splash',
     pathMatch: 'full',
   },
-  
+
   {
     path: 'splash',
-    loadComponent: () => import('./splash/splash.page').then( m => m.SplashPage)
+    loadComponent: () => import('./splash/splash.page').then(m => m.SplashPage)
   },
   {
     path: 'splash2',
-    loadComponent: () => import('./splash2/splash2.page').then( m => m.Splash2Page)
+    loadComponent: () => import('./splash2/splash2.page').then(m => m.Splash2Page)
   },
   {
     path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
+    loadComponent: () => import('./login/login.page').then(m => m.LoginPage)
   },
   {
     path: 'home',
-    loadComponent: () => import('./home/home.page').then( m => m.HomePage)
-  },
-  {
-    path: 'lector-qr',
-    loadComponent: () => import('./pages/lector-qr/lector-qr.page').then( m => m.LectorQrPage)
-  },
-  {
-    path: 'encuestas',
-    loadComponent: () => import('./pages/encuestas/encuestas.page').then( m => m.EncuestasPage)
-  },
-  {
-    path: 'gestion',
-    loadComponent: () => import('./pages/gestion/gestion.page').then( m => m.GestionPage)
-  },
-  {
-    path: 'delivery',
-    loadComponent: () => import('./pages/delivery/delivery.page').then( m => m.DeliveryPage)
+    loadComponent: () => import('./home/home.page').then(m => m.HomePage)
   },
   {
     path: 'juegos',
-    loadComponent: () => import('./pages/juegos/juegos.page').then( m => m.JuegosPage)
+    loadComponent: () => import('./pages/juegos/juegos.page').then(m => m.JuegosPage)
   },
   {
     path: 'alta-cliente',
-    loadComponent: () => import('./pages/alta-cliente/alta-cliente.page').then( m => m.AltaClientePage)
+    loadComponent: () => import('./pages/alta-cliente/alta-cliente.page').then(m => m.AltaClientePage)
   },
   {
     path: 'alta-empleado',
-    loadComponent: () => import('./pages/alta-empleado/alta-empleado.page').then( m => m.AltaEmpleadoPage)
+    loadComponent: () => import('./pages/alta-empleado/alta-empleado.page').then(m => m.AltaEmpleadoPage)
   },
   {
     path: 'alta-supervisor',
-    loadComponent: () => import('./pages/alta-supervisor/alta-supervisor.page').then( m => m.AltaSupervisorPage)
+    loadComponent: () => import('./pages/alta-supervisor/alta-supervisor.page').then(m => m.AltaSupervisorPage)
   },
   {
     path: 'lista-usuarios',
-    loadComponent: () => import('./pages/lista-usuarios/lista-usuarios.page').then( m => m.ListaUsuariosPage)
+    loadComponent: () => import('./pages/lista-usuarios/lista-usuarios.page').then(m => m.ListaUsuariosPage)
   },
   {
     path: 'menu-productos',
-    loadComponent: () => import('./pages/menu-productos/menu-productos.page').then( m => m.MenuProductosPage)
+    loadComponent: () => import('./pages/menu-productos/menu-productos.page').then(m => m.MenuProductosPage)
   },
   {
     path: 'lista-pedidos',
-    loadComponent: () => import('./pages/pedidos/lista-pedidos/lista-pedidos.page').then( m => m.ListaPedidosPage)
+    loadComponent: () => import('./pages/pedidos/lista-pedidos/lista-pedidos.page').then(m => m.ListaPedidosPage)
   },
   {
     path: 'pedido/id/:id',
-    loadComponent: () => import('./pages/pedidos/id/id.page').then( m => m.IdPage)
-  },  {
+    loadComponent: () => import('./pages/pedidos/id/id.page').then(m => m.IdPage)
+  },
+  {
     path: 'consultas',
-    loadComponent: () => import('./pages/consultas/consultas.page').then( m => m.ConsultasPage)
+    loadComponent: () => import('./pages/consultas/consultas.page').then(m => m.ConsultasPage)
   },
   {
     path: 'gestion-metre',
-    loadComponent: () => import('./pages/gestion-metre/gestion-metre.page').then( m => m.GestionMetrePage)
+    loadComponent: () => import('./pages/gestion-metre/gestion-metre.page').then(m => m.GestionMetrePage)
   },
   {
     path: 'encuesta-cliente',
-    loadComponent: () => import('./pages/encuesta-cliente/encuesta-cliente.page').then( m => m.EncuestaClientePage)
+    loadComponent: () => import('./pages/encuesta-cliente/encuesta-cliente.page').then(m => m.EncuestaClientePage)
+  },  {
+    path: 'graficos',
+    loadComponent: () => import('./pages/graficos/graficos.page').then( m => m.GraficosPage)
   }
+
 
 
 

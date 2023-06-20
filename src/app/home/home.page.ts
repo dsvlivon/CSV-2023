@@ -24,7 +24,7 @@ import { User2 } from '../shared/user2.interface';
 export class HomePage implements OnInit, OnDestroy {
   user: any = null;
   data: any = null;
-  spinner: boolean = false;
+  spinner: boolean = true;
 
   waitlist = true;
   grid = false;
