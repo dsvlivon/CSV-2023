@@ -141,7 +141,7 @@ export class FirestoreService {
     this.angularFirestore.collection(collection).add(json);
   }
 
-  public obtenerTodos(collection: string) {
-    return this.angularFirestore.collection(collection).valueChanges();
+  obtenerTodos(collection: string) {
+    return this.angularFirestore.collection(collection).valueChanges({ idField: 'id' });
   }
 }

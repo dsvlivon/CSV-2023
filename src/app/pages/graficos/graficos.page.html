@@ -5,7 +5,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <ion-button (click)="generarGraficoBarras()" expand="block" fill="clear" shape="round">
+    generar grafico
+  </ion-button>
   <div class="bar-chart-container">
-    <canvas #graficoBarras></canvas>
+    <canvas id="pipeChart"></canvas>
   </div>
 </ion-content>
