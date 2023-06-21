@@ -1,14 +1,16 @@
-<div class="container" *ngIf="this.pedido$ | async as pedido">
-
-    <ion-header>
+   <ion-header *ngIf="!scanActive">
       <ion-toolbar>
-        <ion-title size="small" style="color:white">{{ this.getTitle(pedido.estado) }}</ion-title>
+        <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round"
+    color="saffron">
+      <ion-icon slot="icon-only" name="arrow-back-outline" style="color:white"></ion-icon>
+  </ion-buttons>
+        <ion-title style="color:white">{{ tituloEstado }}</ion-title>
       </ion-toolbar>
     </ion-header>
   
-    <ion-content>
-  
-      <div class="container-cards">
+    <ion-content [ngClass]="scanActive?'scanner-activo':''">
+      <div class="container" *ngIf="this.pedido$ | async as pedido">
+      <div class="container-cards" *ngIf="!scanActive">
         <ion-card>
           <table>
             <tbody>
@@ -92,11 +94,11 @@
         <!-- Visualizacion de la cuenta -->
         <div class="container-cards container-resume" *ngIf="this.pedirCuenta">
           <ion-card>
-            <p style="font-size: 16px;">MONTO DESCONTADO: {{ this.getDescontado(pedido) | currency}}</p>
-            <p style="font-size: 16px;">PROPINA: {{ this.propina | currency}}</p>
-            <p style="font-size: 16px;">MONTO TOTAL:  {{ this.getAcum(pedido) + this.propina | currency }} </p>
+            <p style="font-size: 16px;color:white">MONTO DESCONTADO: {{ this.getDescontado(pedido) | currency}}</p>
+            <p style="font-size: 16px;color:white">PROPINA: {{ this.propina | currency}}</p>
+            <p style="font-size: 16px;color:white">MONTO TOTAL:  {{ this.getAcum(pedido) + this.propina | currency }} </p>
   
-            <ion-button (click)="agregarPropina()">ESCANEAR PROPINA</ion-button><br>
+            <ion-button (click)="agregarPropina()">AGREGAR PROPINA</ion-button><br>
             <ion-button (click)="clickCobrar(pedido)">PAGAR</ion-button>
             <ion-button (click)="clickCancelarCuenta()">VOLVER</ion-button>
             <br>
@@ -112,12 +114,26 @@
   
           </ion-card>
         </div>
-  
-  
-  
+      </div><!-- Cierre primer DIV-->
       </div>
-    </ion-content>
-  
-  
+      <app-spinner [mostrar]="spinner" *ngIf="!scanActive"></app-spinner>
+        <!-- ESCANER -->
+  <div class="visor" *ngIf="scanActive">
+    <h2 class="titulo" *ngIf="scanActive">ESCANEANDO...</h2>
+    <p class="monto" [ngClass]="scanActive?'scanner-activo-visor':''">
+      <span></span>
+    </p>
   </div>
+  <div class="centrado">
+    <button class="escanear" expand="block" type="button" (click)="stopScan()" *ngIf="scanActive">
+      <ion-text style="
+          color: #fff;
+          text-shadow: 2px 2px 4px #000;
+          font-size: 1.7rem;
+          font-family: fantasy;
+        ">DETENER <ion-icon name="qr-code-outline"></ion-icon></ion-text>
+    </button>
+  </div>
+  <!-- FIN ESCANER -->
+</ion-content>
   

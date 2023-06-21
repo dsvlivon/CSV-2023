@@ -9,45 +9,50 @@ import { PedidoService } from 'src/app/services/pedido.service';
 import { Pedido } from 'src/app/shared/pedido.interface';
 import { PushnotificationService } from 'src/app/services/pushnotification.service';
 import Swal from 'sweetalert2';
+import {SpinnerComponent} from '../../../spinner/spinner.component';
 
 @Component({
   selector: 'app-id',
   templateUrl: './id.page.html',
   styleUrls: ['./id.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, SpinnerComponent]
 })
 export class IdPage implements OnInit {
-  
+   
   pedido$: Observable<any>;
   table$: Observable<any>
   pedirCuenta:boolean = false;
   propina:number = 0;
-  productsSelected: any[];
-
+  productsSelected: any;
+  tituloEstado: string;
+  auxTitulo: string; 
+  spinner: boolean = false;
+  //Para SCANNER
+  scanActive = false;
   constructor(private router: Router,
               private route: ActivatedRoute,
               private pedidoService: PedidoService,
-              private pnService: PushnotificationService) { }
+              private pnService: PushnotificationService,
+              private qrScannerService: QrscannerService) { }
 
   ngOnInit() {
+    this.spinner = false;
     this.getPedido();
     this.checkProductsSelected();
+    this.getTitle();
   }
 
   private checkProductsSelected() {
-    let a = JSON.parse(localStorage.getItem('products'));
-    console.log(a);
-    if (a !== null) { this.productsSelected = a; } else {
-      console.log("entro aca");
-      const id = this.route.snapshot.paramMap.get('id');
-      let b = this.pedidoService.getById(id).subscribe((datos)=>{
-        //console.log(datos);
-         this.productsSelected = datos['producto_id'];
-         alert(this.productsSelected);
-        // b.unsubscribe();
+    //let a = JSON.parse(localStorage.getItem('products'));
+    //console.log(a);
+    //if (a !== null) { this.productsSelected = a; } else {
+    //}
+    //console.log("entro aca");
+    const id = this.route.snapshot.paramMap.get('id');
+    let b = this.pedidoService.getById(id).subscribe((datos)=>{
+            this.productsSelected = datos['producto_id'];
       });
-    }
   }
   getPedido() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -55,34 +60,52 @@ export class IdPage implements OnInit {
   }
 
   getProductsSelected() {
-    return JSON.parse(localStorage.getItem('products'));
+    //return JSON.parse(localStorage.getItem('products'));
   }
 
-  getTitle(status: string) {
-    switch (status) {
-      case 'PENDIENTE':
-        return 'Confirmar Pedido';
-
-      case 'ACEPTADO':
-        return 'Confirmar Recepción a su Mesa';
-
-      case 'CONFIRMADO':
-        return 'Pedir Cuenta para Pagar';
-
-      case 'COBRAR':
-        return 'Confirmar Pago Efectuado';
-
-      case 'COBRAR':
-        return 'Realizar Encuesta';
-
-      case 'PREPARACION':
-        return 'Pedido en Preparación';
-      case 'COBRADO':
-        return 'Recomendación del Cliente';
-
-      default:
-        return '';
-    }
+  getTitle() {
+    const id = this.route.snapshot.paramMap.get('id');
+      let b = this.pedidoService.getById(id).subscribe((datos)=>{
+        console.log(datos);
+        this.auxTitulo = datos['estado'];
+        console.log(this.auxTitulo);
+        switch (this.auxTitulo) {
+          case 'PENDIENTE':
+            //return 'Confirmar Pedido';
+           this.tituloEstado = 'Confirmar Pedido';
+           break;
+          case 'ACEPTADO': 
+            //return 'Confirmar Recepción a su Mesa';
+           this.tituloEstado = 'Confirmar Recepción a su Mesa';
+           break;
+          case 'CONFIRMADO':
+            //return 'Pedir Cuenta para Pagar';
+           this.tituloEstado = 'Pedir Cuenta para Pagar';
+           break;
+          case 'COBRAR':
+           // return 'Confirmar Pago Efectuado';
+           this.tituloEstado = 'Confirmar Pago Efectuado';
+           break;
+          case 'COBRAR':
+            //return 'Realizar Encuesta';
+           this.tituloEstado = 'Realizar Encuesta';
+           break;
+          case 'PREPARACION':
+            //return 'Pedido en Preparación';
+            this.tituloEstado = 'Pedido en Preparación';
+            break;
+          case 'COCINADO':
+            this.tituloEstado = 'Pedido ya cocinado';
+            break;
+          case 'COBRADO':
+            //return 'Recomendación del Cliente';
+            this.tituloEstado = 'Recomendación del Cliente';
+            break;
+          default:
+            //return '';
+            this.tituloEstado = '';
+        }
+      });
   }
 
   getAproxFinish() {
@@ -98,9 +121,11 @@ export class IdPage implements OnInit {
 
   //Cliente envia su pedido al mozo para que lo preparen
   clickPendiente(pedido: Pedido) {
-    pedido.producto_id = this.getProductsSelected();
+    this.spinner = true;
+    pedido.producto_id = this.productsSelected;
     this.pedidoService.updateOne(pedido).then(()=>{
       this.pnService.enviarNotificacionUsuarios('MOZO', 'Pedido', 'Un cliente realizó un pedido', true);
+      this.spinner = false;
       this.toast("Su pedido fue registrado con exito","success").then(()=>{
         this.router.navigate(['/home']);
       })
@@ -161,7 +186,17 @@ export class IdPage implements OnInit {
 
   //ACA SE ESCANEAN LOS QR DE LAS PROPINAS
   agregarPropina(){
-    
+    this.scanActive = true;
+    this.qrScannerService.startScan().then((result) => {
+      this.scanActive = false;
+      alert(result);
+      //this.scanActive = false;
+    });
+  }
+
+  stopScan(){
+    this.scanActive = false;
+    this.qrScannerService.stopScanner();
   }
 
   getAcum(pedido?: Pedido) {
@@ -177,7 +212,7 @@ export class IdPage implements OnInit {
   getDescontado(pedido:Pedido){
     let a = 0;
     let b=0;
-    this.getProductsSelected().forEach(p => { a += (p.quantity * p.precio) });
+    this.productsSelected.forEach(p => { a += (p.quantity * p.precio) });
     if(pedido && pedido.descuento10 == 'GANO'){
       b += (a * 0.1);
     }
@@ -202,6 +237,10 @@ export class IdPage implements OnInit {
 
   clickJuego20(pedido: Pedido) {
     //Aqui va a ir el descuento del 20%
+  }
+
+  navigateBack(){
+    this.router.navigate(['/home']);
   }
 
 }

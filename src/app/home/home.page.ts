@@ -202,7 +202,7 @@ export class HomePage implements OnInit, OnDestroy {
     })
   }
   stopScan() {
-    this.router.navigate(['/home']);
+    //this.router.navigate(['/home']);
     this.scanActive = false;
     this.qrSrv.stopScanner();
   }
