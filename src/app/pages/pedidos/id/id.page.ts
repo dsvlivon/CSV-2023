@@ -188,9 +188,24 @@ export class IdPage implements OnInit {
   agregarPropina(){
     this.scanActive = true;
     this.qrScannerService.startScan().then((result) => {
+      switch(result){
+        case 'MALO':
+          this.propina = 0;
+            break;
+        case 'REGULAR':
+          this.propina = this.getAcum() * 0.05;
+            break;
+        case 'BUENO':
+          this.propina = this.getAcum() * 0.1;
+            break;
+        case 'MUY BUENO':
+          this.propina = this.getAcum() * 0.15;
+            break;
+        case 'EXCELENTE':
+          this.propina = this.getAcum() * 0.2;
+            break;
+      }
       this.scanActive = false;
-      alert(result);
-      //this.scanActive = false;
     });
   }
 

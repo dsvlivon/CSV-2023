@@ -9,8 +9,8 @@
     </ion-header>
   
     <ion-content [ngClass]="scanActive?'scanner-activo':''">
-      <div class="container" *ngIf="this.pedido$ | async as pedido">
-      <div class="container-cards" *ngIf="!scanActive">
+      <div class="container" *ngIf="!scanActive">
+      <div class="container-cards" *ngIf="this.pedido$ | async as pedido">
         <ion-card>
           <table>
             <tbody>
@@ -77,7 +77,6 @@
               <ion-button routerLink="/grafico-encuesta">VER</ion-button>
             </div>
   
-            <!-- Esto tendria que abrir una pantalla, donde se visualicen los detalles de los costos, y deje poner propina -->
             <div *ngIf="pedido.estado == 'CONFIRMADO'">
               <br>
               <p style="font-size: 16px;color:white">Si terminaste de comer, podes pedir tu cuenta!</p>
@@ -91,7 +90,6 @@
   
   
   
-        <!-- Visualizacion de la cuenta -->
         <div class="container-cards container-resume" *ngIf="this.pedirCuenta">
           <ion-card>
             <p style="font-size: 16px;color:white">MONTO DESCONTADO: {{ this.getDescontado(pedido) | currency}}</p>
@@ -102,19 +100,14 @@
             <ion-button (click)="clickCobrar(pedido)">PAGAR</ion-button>
             <ion-button (click)="clickCancelarCuenta()">VOLVER</ion-button>
             <br>
-            <!-- <ion-button (click)="setPropinaTestear('0')">0%</ion-button>
-            <ion-button (click)="setPropinaTestear('5')">5%</ion-button>
-            <ion-button (click)="setPropinaTestear('10')">10%</ion-button>
-            <ion-button (click)="setPropinaTestear('15')">15%</ion-button>
-            <ion-button (click)="setPropinaTestear('20')">20%</ion-button> -->
-  
+
   
             <br>
             <br>
   
           </ion-card>
         </div>
-      </div><!-- Cierre primer DIV-->
+      </div>
       </div>
       <app-spinner [mostrar]="spinner" *ngIf="!scanActive"></app-spinner>
         <!-- ESCANER -->
