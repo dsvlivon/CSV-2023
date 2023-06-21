@@ -6,20 +6,29 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { Chart, BarElement, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip, LinearScale, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { EncuestasCliente } from 'src/app/shared/encuestaCliente.interface';
+import { SpinnerComponent } from 'src/app/spinner/spinner.component';
 
 @Component({
   selector: 'app-graficos',
   templateUrl: './graficos.page.html',
   styleUrls: ['./graficos.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, SpinnerComponent]
 })
 export class GraficosPage implements OnInit {
 
+  spinner = false;
+  promedioLimpieza: Array<any> = [];
+  promedioSatisfecho: Array<any> = [];
+  rangoLimpiezaData: Array<any> = [];
+  rangoSatisfechoData: Array<any> = [];
+  encuestasClienteData: EncuestasCliente[] = [];
 
-  encuestasClientes: Array<any> = [];
-  pipeChart: Chart;
-  constructor(private firestoreSrv: FirestoreService) {
+  graficoBarra = false;
+  graficoTorta = false;
+  graficoLinea = false;
+
+  constructor(private afs: FirestoreService) {
     Chart.register(
       BarElement,
       BarController,
@@ -34,66 +43,93 @@ export class GraficosPage implements OnInit {
     );
 
     Chart.register(...registerables);
-
-
   }
-
-
   ngOnInit() {
-    const a = this.firestoreSrv.obtenerTodos('encuestasCliente').subscribe(data => {
+    this.afs.obtenerTodos('encuestasCliente').subscribe((data: EncuestasCliente[]) => {
       console.log(data);
-      this.encuestasClientes = data;
+      this.encuestasClienteData = data;
+      this.rangoLimpiezaData = this.encuestasClienteData.map(encuesta => encuesta.rangoLimpieza);
+      const sumaRangoLimpieza = this.rangoLimpiezaData.reduce((total, valor) => total + valor, 0);
+      const promedioRangoLimpieza = sumaRangoLimpieza / this.encuestasClienteData.length;
+      this.promedioLimpieza.push(promedioRangoLimpieza);
 
+      this.rangoSatisfechoData = this.encuestasClienteData.map(encuesta => encuesta.rangoSatisfecho);
+      const sumaRangoSatisfecho = this.rangoSatisfechoData.reduce((total, valor) => total + valor, 0);
+      this.promedioSatisfecho.push(sumaRangoSatisfecho / this.encuestasClienteData.length)
     })
-
   }
+  createBarChart() {
 
-  generarGraficoBarras() {
+    this.spinner = true;
+    this.graficoBarra = true;
 
-    const ctx = (<any>document.getElementById('pipeChart')).getContext('2d');
-    const rangoLimpiezaData = this.encuestasClientes.map(encuesta => encuesta.rangoLimpieza);
-    const rangoSatisfechoData = this.encuestasClientes.map(encuesta => encuesta.rangoSatisfecho);
-    console.log(rangoSatisfechoData);
-    // Obtener las etiquetas para el eje X (por ejemplo, los nombres de los clientes)
-    const labels = this.encuestasClientes.map(encuesta => encuesta.cliente);
-    const colors = [
-      '#ffc409',
-      '#eb445a',
-      '#3dc2ff',
-      '#92949c',
-      '#2fdf75',
-      '#0044ff',
-      '#ee55ff',
-    ];
-    this.pipeChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Rango Limpieza',
-            data: rangoLimpiezaData,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-          },
-          {
-              label: 'Rango Satisfecho',
-              data: rangoSatisfechoData,
+    setTimeout(() => {
+      const canvas = document.getElementById('barChart') as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d');
+      const labels = this.encuestasClienteData.map(encuesta => encuesta.cliente);
+
+      this.spinner = false;
+      const barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Promedios', ...labels],
+          datasets: [
+            {
+              label: 'Rango de Limpieza',
+              data: [this.promedioLimpieza, ...this.rangoLimpiezaData],
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Rango de Satisfacción',
+              data: [this.promedioSatisfecho, ...this.rangoSatisfechoData],
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255, 99, 132, 1)',
               borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
-    });
+      });
+    }, 4000);
+
   }
+  /* DANIEL */
+  createTortaChart() {
+    this.spinner = true;
+    this.graficoTorta = true;
+
+    setTimeout(() => {
+      this.spinner = false;
+      /* Insertar grafico aca */
+    }, 4000);
+  }
+
+  /* IGNACIO */
+  createLineChart() {
+    this.spinner = true;
+    this.graficoLinea = true;
+
+    setTimeout(() => {
+      this.spinner = false;
+      /* Insertar grafico aca */
+    }, 4000);
+  }
+  onCloseBarra() {
+    this.graficoBarra = false;
+  }
+  onCloseTorta() {
+    this.graficoTorta = false;
+  }
+  onCloseLinea() {
+    this.graficoLinea = false;
+  }
+
 }
