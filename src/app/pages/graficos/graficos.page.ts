@@ -45,8 +45,7 @@ export class GraficosPage implements OnInit {
     Chart.register(...registerables);
   }
   ngOnInit() {
-    this.afs.obtenerTodos('encuestasCliente').subscribe((data: EncuestasCliente[]) => {
-      console.log(data);
+    const a = this.afs.obtenerTodos('encuestasCliente').subscribe((data: EncuestasCliente[]) => {
       this.encuestasClienteData = data;
       this.rangoLimpiezaData = this.encuestasClienteData.map(encuesta => encuesta.rangoLimpieza);
       const sumaRangoLimpieza = this.rangoLimpiezaData.reduce((total, valor) => total + valor, 0);
@@ -55,7 +54,9 @@ export class GraficosPage implements OnInit {
 
       this.rangoSatisfechoData = this.encuestasClienteData.map(encuesta => encuesta.rangoSatisfecho);
       const sumaRangoSatisfecho = this.rangoSatisfechoData.reduce((total, valor) => total + valor, 0);
-      this.promedioSatisfecho.push(sumaRangoSatisfecho / this.encuestasClienteData.length)
+      this.promedioSatisfecho.push(sumaRangoSatisfecho / this.encuestasClienteData.length);
+      console.log(this.promedioLimpieza);
+      a.unsubscribe();
     })
   }
   createBarChart() {
