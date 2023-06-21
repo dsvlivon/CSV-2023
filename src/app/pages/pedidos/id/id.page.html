@@ -1,123 +1,134 @@
-   <ion-header *ngIf="!scanActive">
-      <ion-toolbar>
-        <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round"
-    color="saffron">
+<ion-header *ngIf="!scanActive">
+  <ion-toolbar>
+    <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round" color="saffron">
       <ion-icon slot="icon-only" name="arrow-back-outline" style="color:white"></ion-icon>
-  </ion-buttons>
-        <ion-title style="color:white">{{ tituloEstado }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
-  
-    <ion-content [ngClass]="scanActive?'scanner-activo':''">
-      <div class="container" *ngIf="this.pedido$ | async as pedido">
-      <div class="container-cards" *ngIf="!scanActive">
+    </ion-buttons>
+    <ion-title style="color:white">{{ tituloEstado }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [ngClass]="scanActive?'scanner-activo':''">
+  <div class="container" *ngIf="this.pedido$ | async as pedido">
+    <div class="container-cards" *ngIf="!scanActive">
+      <ion-card>
+        <table>
+          <tbody>
+            <tr *ngFor="let product of productsSelected">
+              <td>
+                <p style="font-size: 16px;color:white">{{ product.descripcion }}</p>
+              </td>
+              <td>
+                <p style="font-size: 16px;color:white">{{ product.precio | currency }} x {{ product.quantity }} :</p>
+              </td>
+              <td>
+                <p style="font-size: 16px;color:white">{{ product.precio * product.quantity | currency }}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-card>
+
+      <div class="container-cards container-resume" *ngIf="!this.pedirCuenta">
         <ion-card>
-          <table>
-            <tbody>
-              <tr *ngFor="let product of productsSelected">
-                <td>
-                  <p style="font-size: 16px;color:white">{{ product.descripcion }}</p>
-                </td>
-                <td>
-                  <p style="font-size: 16px;color:white">{{ product.precio | currency }} x {{ product.quantity }} :</p>
-                </td>
-                <td>
-                  <p style="font-size: 16px;color:white">{{ product.precio * product.quantity | currency }}</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <p style="font-size: 16px;color:white"
+            *ngIf="pedido.descuento10 != 'GANO' && pedido.descuento15 != 'GANO' && pedido.descuento20 != 'GANO'">MONTO
+            TOTAL: ( {{ this.getAcum() | currency }} )</p>
+          <p style="font-size: 16px;color:white"
+            *ngIf="pedido.descuento10 == 'GANO' || pedido.descuento15 == 'GANO' || pedido.descuento20 == 'GANO'">MONTO
+            TOTAL: {{ this.getAcum(pedido) | currency }} (con descuento)</p>
+          <p style="font-size: 16px;color:white">TIEMPO ESTIMADO: {{ this.getAproxFinish() }} minutos</p>
+          <p style="font-size: 16px;color:white">ESTADO DEL PEDIDO: {{ pedido.estado }}</p>
+
+          <div *ngIf="pedido.estado == 'PENDIENTE'">
+            <ion-button (click)="clickEditarProductos()">EDITAR</ion-button>
+            <ion-button (click)="clickPendiente(pedido)">CONFIRMAR</ion-button>
+          </div>
+
+          <div *ngIf="pedido.estado == 'ENTREGADO'">
+            <ion-button (click)="clickRecibido(pedido)">RECIBIDO</ion-button>
+          </div>
+
+          <div
+            *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento10 == 'NO JUGO'">
+            <br>
+            <p style="font-size: 16px;color:white">¿Le interesa ganar un descuento del 10% en su pedido? haz click aquí:
+            </p>
+            <ion-button (click)="clickJuego10(pedido)">JUGAR</ion-button>
+          </div>
+
+          <div
+            *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento15 == 'NO JUGO'">
+            <br>
+            <p style="font-size: 16px;color:white">¿Le interesa ganar un descuento del 15% en su pedido? haz click aquí:
+            </p>
+            <ion-button (click)="clickJuego15(pedido)">JUGAR</ion-button>
+          </div>
+
+          <div
+            *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento20 == 'NO JUGO'">
+            <br>
+            <p style="font-size: 16px;color:white">¿Le interesa ganar un descuento del 20% en su pedido? haz click aquí:
+            </p>
+            <ion-button (click)="clickJuego20(pedido)">JUGAR</ion-button>
+          </div>
+
+
+
+          <div
+            *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && !pedido.encuestado">
+            <br>
+            <p style="font-size: 16px;color:white">¿Le interesa ser parte de una breve encuesta?</p>
+            <ion-button routerLink="/cliente-encuesta">PARTICIPAR</ion-button>
+          </div>
+
+          <div
+            *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && pedido.encuestado">
+            <br>
+            <p style="font-size: 16px;color:white">Podes ver los resultados de las encuestas!</p>
+            <ion-button routerLink="/grafico-encuesta">VER</ion-button>
+          </div>
+
+          <!-- Esto tendria que abrir una pantalla, donde se visualicen los detalles de los costos, y deje poner propina -->
+          <div *ngIf="pedido.estado == 'CONFIRMADO'">
+            <br>
+            <p style="font-size: 16px;color:white">Si terminaste de comer, podes pedir tu cuenta!</p>
+            <ion-button (click)="clickPedirCuenta()">PEDIR CUENTA</ion-button>
+          </div>
+
+          <br>
+
         </ion-card>
-  
-        <div class="container-cards container-resume" *ngIf="!this.pedirCuenta">
-          <ion-card>
-            <p style="font-size: 16px;color:white" *ngIf="pedido.descuento10 != 'GANO' && pedido.descuento15 != 'GANO' && pedido.descuento20 != 'GANO'">MONTO TOTAL: ( {{ this.getAcum() | currency }} )</p>
-            <p style="font-size: 16px;color:white" *ngIf="pedido.descuento10 == 'GANO' || pedido.descuento15 == 'GANO' || pedido.descuento20 == 'GANO'">MONTO TOTAL:  {{ this.getAcum(pedido) | currency }} (con descuento)</p>
-            <p style="font-size: 16px;color:white">TIEMPO ESTIMADO: {{ this.getAproxFinish() }} minutos</p>
-            <p style="font-size: 16px;color:white">ESTADO DEL PEDIDO: {{ pedido.estado }}</p>
-  
-            <div *ngIf="pedido.estado == 'PENDIENTE'">
-              <ion-button (click)="clickEditarProductos()">EDITAR</ion-button>
-              <ion-button (click)="clickPendiente(pedido)">CONFIRMAR</ion-button>
-            </div>
-  
-            <div *ngIf="pedido.estado == 'ENTREGADO'">
-              <ion-button (click)="clickRecibido(pedido)">RECIBIDO</ion-button>
-            </div>
-  
-            <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento10 == 'NO JUGO'">
-              <br>
-              <p style="font-size: 16px;color:white">¿Le interesa ganar un descuento del 10% en su pedido? haz click aquí:</p>
-              <ion-button (click)="clickJuego10(pedido)">JUGAR</ion-button>
-            </div>
-  
-            <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento15 == 'NO JUGO'">
-              <br>
-              <p style="font-size: 16px;color:white">¿Le interesa ganar un descuento del 15% en su pedido? haz click aquí:</p>
-              <ion-button (click)="clickJuego15(pedido)">JUGAR</ion-button>
-            </div>
-  
-            <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO') && pedido.descuento20 == 'NO JUGO'">
-              <br>
-              <p style="font-size: 16px;color:white">¿Le interesa ganar un descuento del 20% en su pedido? haz click aquí:</p>
-              <ion-button (click)="clickJuego20(pedido)">JUGAR</ion-button>
-            </div>
-  
-  
-  
-            <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && !pedido.encuestado">
-              <br>
-              <p style="font-size: 16px;color:white">¿Le interesa ser parte de una breve encuesta?</p>
-              <ion-button routerLink="/cliente-encuesta">PARTICIPAR</ion-button>
-            </div>
-  
-            <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && pedido.encuestado">
-              <br>
-              <p style="font-size: 16px;color:white">Podes ver los resultados de las encuestas!</p>
-              <ion-button routerLink="/grafico-encuesta">VER</ion-button>
-            </div>
-  
-            <!-- Esto tendria que abrir una pantalla, donde se visualicen los detalles de los costos, y deje poner propina -->
-            <div *ngIf="pedido.estado == 'CONFIRMADO'">
-              <br>
-              <p style="font-size: 16px;color:white">Si terminaste de comer, podes pedir tu cuenta!</p>
-              <ion-button (click)="clickPedirCuenta()">PEDIR CUENTA</ion-button>
-            </div>
-  
-            <br>
-  
-          </ion-card>
-        </div>
-  
-  
-  
-        <!-- Visualizacion de la cuenta -->
-        <div class="container-cards container-resume" *ngIf="this.pedirCuenta">
-          <ion-card>
-            <p style="font-size: 16px;color:white">MONTO DESCONTADO: {{ this.getDescontado(pedido) | currency}}</p>
-            <p style="font-size: 16px;color:white">PROPINA: {{ this.propina | currency}}</p>
-            <p style="font-size: 16px;color:white">MONTO TOTAL:  {{ this.getAcum(pedido) + this.propina | currency }} </p>
-  
-            <ion-button (click)="agregarPropina()">AGREGAR PROPINA</ion-button><br>
-            <ion-button (click)="clickCobrar(pedido)">PAGAR</ion-button>
-            <ion-button (click)="clickCancelarCuenta()">VOLVER</ion-button>
-            <br>
-            <!-- <ion-button (click)="setPropinaTestear('0')">0%</ion-button>
+      </div>
+
+
+
+      <!-- Visualizacion de la cuenta -->
+      <div class="container-cards container-resume" *ngIf="this.pedirCuenta">
+        <ion-card>
+          <p style="font-size: 16px;color:white">MONTO DESCONTADO: {{ this.getDescontado(pedido) | currency}}</p>
+          <p style="font-size: 16px;color:white">PROPINA: {{ this.propina | currency}}</p>
+          <p style="font-size: 16px;color:white">MONTO TOTAL: {{ this.getAcum(pedido) + this.propina | currency }} </p>
+
+          <ion-button (click)="agregarPropina()">AGREGAR PROPINA</ion-button><br>
+          <ion-button (click)="clickCobrar(pedido)">PAGAR</ion-button>
+          <ion-button (click)="clickCancelarCuenta()">VOLVER</ion-button>
+          <br>
+          <!-- <ion-button (click)="setPropinaTestear('0')">0%</ion-button>
             <ion-button (click)="setPropinaTestear('5')">5%</ion-button>
             <ion-button (click)="setPropinaTestear('10')">10%</ion-button>
             <ion-button (click)="setPropinaTestear('15')">15%</ion-button>
             <ion-button (click)="setPropinaTestear('20')">20%</ion-button> -->
-  
-  
-            <br>
-            <br>
-  
-          </ion-card>
-        </div>
-      </div><!-- Cierre primer DIV-->
+
+
+          <br>
+          <br>
+
+        </ion-card>
       </div>
-      <app-spinner [mostrar]="spinner" *ngIf="!scanActive"></app-spinner>
-        <!-- ESCANER -->
+    </div><!-- Cierre primer DIV-->
+  </div>
+  <app-spinner [mostrar]="spinner" *ngIf="!scanActive"></app-spinner>
+  <!-- ESCANER -->
   <div class="visor" *ngIf="scanActive">
     <h2 class="titulo" *ngIf="scanActive">ESCANEANDO...</h2>
     <p class="monto" [ngClass]="scanActive?'scanner-activo-visor':''">
@@ -136,4 +147,3 @@
   </div>
   <!-- FIN ESCANER -->
 </ion-content>
-  
