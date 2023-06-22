@@ -2,7 +2,6 @@
   <ion-toolbar>
     <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round" color="saffron">
       <ion-icon slot="icon-only" name="arrow-back-outline" style="color:white"></ion-icon>
-<<<<<<< HEAD
   </ion-buttons>
         <ion-title style="color:white">{{ tituloEstado }}</ion-title>
       </ion-toolbar>
@@ -11,35 +10,6 @@
     <ion-content [ngClass]="scanActive?'scanner-activo':''">
       <div class="container" *ngIf="!scanActive">
       <div class="container-cards" *ngIf="this.pedido$ | async as pedido">
-=======
-    </ion-buttons>
-    <ion-title style="color:white">{{ tituloEstado }}</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [ngClass]="scanActive?'scanner-activo':''">
-  <div class="container" *ngIf="this.pedido$ | async as pedido">
-    <div class="container-cards" *ngIf="!scanActive">
-      <ion-card>
-        <table>
-          <tbody>
-            <tr *ngFor="let product of productsSelected">
-              <td>
-                <p style="font-size: 16px;color:white">{{ product.descripcion }}</p>
-              </td>
-              <td>
-                <p style="font-size: 16px;color:white">{{ product.precio | currency }} x {{ product.quantity }} :</p>
-              </td>
-              <td>
-                <p style="font-size: 16px;color:white">{{ product.precio * product.quantity | currency }}</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ion-card>
-
-      <div class="container-cards container-resume" *ngIf="!this.pedirCuenta">
->>>>>>> 8d35bf98ebf4141cdd9acb00de8b560d96d00634
         <ion-card>
           <p style="font-size: 16px;color:white"
             *ngIf="pedido.descuento10 != 'GANO' && pedido.descuento15 != 'GANO' && pedido.descuento20 != 'GANO'">MONTO
@@ -109,7 +79,6 @@
           <br>
 
         </ion-card>
-<<<<<<< HEAD
   
         <div class="container-cards container-resume" *ngIf="!this.pedirCuenta">
           <ion-card>
@@ -190,37 +159,7 @@
           </ion-card>
         </div>
       </div>
-=======
       </div>
-
-
-
-      <!-- Visualizacion de la cuenta -->
-      <div class="container-cards container-resume" *ngIf="this.pedirCuenta">
-        <ion-card>
-          <p style="font-size: 16px;color:white">MONTO DESCONTADO: {{ this.getDescontado(pedido) | currency}}</p>
-          <p style="font-size: 16px;color:white">PROPINA: {{ this.propina | currency}}</p>
-          <p style="font-size: 16px;color:white">MONTO TOTAL: {{ this.getAcum(pedido) + this.propina | currency }} </p>
-
-          <ion-button (click)="agregarPropina()">AGREGAR PROPINA</ion-button><br>
-          <ion-button (click)="clickCobrar(pedido)">PAGAR</ion-button>
-          <ion-button (click)="clickCancelarCuenta()">VOLVER</ion-button>
-          <br>
-          <!-- <ion-button (click)="setPropinaTestear('0')">0%</ion-button>
-            <ion-button (click)="setPropinaTestear('5')">5%</ion-button>
-            <ion-button (click)="setPropinaTestear('10')">10%</ion-button>
-            <ion-button (click)="setPropinaTestear('15')">15%</ion-button>
-            <ion-button (click)="setPropinaTestear('20')">20%</ion-button> -->
-
-
-          <br>
-          <br>
-
-        </ion-card>
->>>>>>> 8d35bf98ebf4141cdd9acb00de8b560d96d00634
-      </div>
-    </div><!-- Cierre primer DIV-->
-  </div>
   <app-spinner [mostrar]="spinner" *ngIf="!scanActive"></app-spinner>
   <!-- ESCANER -->
   <div class="visor" *ngIf="scanActive">

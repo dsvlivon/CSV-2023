@@ -28,11 +28,11 @@
                   <thead>
                     <tr>
                       <th>
-                        <ion-button *ngIf="req.estado == 'PENDIENTE' && req.producto_id.length > 0" (click)="setStatus(req, 'CANCELADO')"
+                        <ion-button *ngIf="req.estado == 'PENDIENTE'" (click)="setStatus(req, 'CANCELADO')"
                           id="btn-decline">Cancelar</ion-button>
                         <ion-button *ngIf="req.estado == 'COCINADO'" (click)="setStatus(req, 'ENTREGADO')">Entregar</ion-button>
                       </th>
-                      <th *ngIf="req.estado == 'PENDIENTE' && req.producto_id.length > 0 ">
+                      <th *ngIf="req.estado == 'PENDIENTE'">
                         <ion-button (click)="setStatus(req, 'ACEPTADO')" id="btn-confirm">Aceptar</ion-button>
                       </th>
                       <th *ngIf="req.estado == 'COBRAR'">
