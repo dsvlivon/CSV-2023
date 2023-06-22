@@ -216,7 +216,7 @@ export class IdPage implements OnInit {
 
   getAcum(pedido?: Pedido) {
     let a = 0;
-    this.productsSelected.forEach(p => { a += (p.quantity * p.precio); });
+    this.productsSelected?.forEach(p => { a += (p.quantity * p.precio); });
     return a;
   }
 

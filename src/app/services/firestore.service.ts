@@ -18,9 +18,7 @@ export class FirestoreService {
   constructor(private angularFirestore: AngularFirestore, private authSrv: AuthService) {
     this.ref = this.angularFirestore.collection<User2>(this.collection);
     this.ref2 = this.angularFirestore.collection<any>('token');
-    this.authSrv.user$.subscribe(user => {
-      this.user = user;
-    })
+    
   }
 
   async addUser(user: User2, id?: string) {

@@ -2,7 +2,7 @@ export class Pedido {
     id: string;
     correo: string;
     mesa_numero: number;
-    producto_id: [{ id: string, quantity: number, price: number, name: string }] | null;
+    producto_id: [{ id: string, quantity: number, price: number, name: string }] | [];
     date_created: number;
     date_updated: number;
     estado: 'PENDIENTE' | 'CANCELADO' | 'ACEPTADO' | 'PREPARACION' | 'COCINADO' | 'ENTREGADO' | 'CONFIRMADO' | 'COBRAR' | 'COBRADO';

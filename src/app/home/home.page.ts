@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { AnimationController, IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { BarraComponent } from 'src/app/barra/barra.component';
@@ -13,6 +13,7 @@ import { PushnotificationService } from '../services/pushnotification.service';
 import { ListaEsperaService } from '../services/lista-espera.service';
 import { PedidoService } from '../services/pedido.service';
 import { User2 } from '../shared/user2.interface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -21,14 +22,13 @@ import { User2 } from '../shared/user2.interface';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, BarraComponent, SpinnerComponent]
 })
-export class HomePage implements OnInit, OnDestroy {
-  user: any = null;
+export class HomePage implements OnInit {
+  user: User2 = null;
   data: any = null;
   spinner: boolean = true;
-
-  waitlist = true;
-  grid = false;
-
+  mostrarComponente: boolean = false;
+  mostrarColapsar: boolean = false;
+  us: any;
   hasWait: any = null;
   hasRequest: any = null;
 
@@ -39,6 +39,7 @@ export class HomePage implements OnInit, OnDestroy {
   private static activeUser: User2;
 
   constructor(
+    private animationCtrl: AnimationController,
     private authService: AuthService,
     private router: Router,
     private qrSrv: QrscannerService,
@@ -49,33 +50,27 @@ export class HomePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.data = null;
-    this.authService.user$.subscribe(data => {
-      this.user = data
-    });
-
-    let ls = localStorage.getItem('user');
-    if (ls != null) {
-
-      let user = JSON.parse(ls);
-      this.user = user;
-    }
+    this.user = this.authService.getUser();
+    console.log(this.user.correo);
     this.spinner = true;
+
     this.checkWait();
     this.checkRequest();
+
   }
 
-  ngOnDestroy(): void {
-    this.user = null;
-    localStorage.removeItem('user');
-  }
+
   private checkWait() {
+    console.log(this.user.correo);
     const a = this.listSrv.getLastByUser(this.user.correo)
-      .subscribe((data: any[]) => {
-        if(data['estado'] !== 'FINALIZADO'){
+      .subscribe((data: any) => {
+        if (data?.estado !== 'FINALIZADO') {
+          console.log(data);
           this.hasWait = data;
+          console.log(this.hasWait)
+          a.unsubscribe();
         }
 
-        a.unsubscribe();
       });
   }
   private checkRequest() {
@@ -128,6 +123,7 @@ export class HomePage implements OnInit, OnDestroy {
       this.data = { name: datos[0], id: datos[1], }
       if (result === 'ENTRADALOCAL') {
         this.scanActive = false;
+        console.log(this.hasWait);
         if (!this.hasWait) {
           this.checkWait();
 
@@ -148,7 +144,7 @@ export class HomePage implements OnInit, OnDestroy {
         }
       } else if (this.data.name === 'MESA') {
         this.scanActive = false;
-        
+
 
         if (!this.hasRequest) { //  If first time in restaurant
           this.checkRequest();
@@ -168,7 +164,7 @@ export class HomePage implements OnInit, OnDestroy {
             case 'ENTREGADO':
             case 'CONFIRMADO':
               //this.router.navigate(['/pedido/id/:id' + this.hasRequest.id]);
-              this.router.navigate(['/pedido/id/'+this.hasRequest.id]);
+              this.router.navigate(['/pedido/id/' + this.hasRequest.id]);
               break;
 
             case 'COBRAR':
@@ -207,6 +203,91 @@ export class HomePage implements OnInit, OnDestroy {
     //this.router.navigate(['/home']);
     this.scanActive = false;
     this.qrSrv.stopScanner();
+  }
+
+
+  /* BARRA */
+  goAltas() { this.router.navigate(['/altas']); }
+
+  goEncuestas() { this.router.navigate(['/encuestas']); }
+
+  goGestion() { this.router.navigate(['/lista-usuarios']); }
+
+  goDelivery() { this.router.navigate(['/delivery']); }
+
+  goJuegos() { this.router.navigate(['/juegos']); }
+
+  goQr() { this.router.navigate(['/lector-qr']); }
+
+  goHome() { this.router.navigate(['/home']); }
+
+  goConsultas() { this.router.navigate(['/consultas']); }
+
+  goClientes() { this.router.navigate(['/gestion-metre'])}
+
+  goListaPedidos() {this.router.navigate(['/lista-pedidos'])}
+  
+  logOut() {
+    
+      this.authService.signOut().then(() => {
+        this.router.navigateByUrl('login', { replaceUrl: true})
+        this.spinner = false;
+  
+      });
+      
+  }
+
+  expandir() {
+    this.mostrarComponente = true;
+    this.mostrarColapsar = true;
+  }
+
+  colapsar() {
+    this.mostrarComponente = false;
+    this.mostrarColapsar = false;
+  }
+
+  enterAnimation = (baseEl: HTMLElement) => {
+    const root = baseEl.shadowRoot;
+
+    const backdropAnimation = this.animationCtrl
+      .create()
+      .addElement(root.querySelector('ion-backdrop')!)
+      .fromTo('opacity', '0.01', 'var(--backdrop-opacity)');
+
+    const wrapperAnimation = this.animationCtrl
+      .create()
+      .addElement(root.querySelector('.modal-wrapper')!)
+      .keyframes([
+        { offset: 0, opacity: '0', transform: 'scale(0)' },
+        { offset: 1, opacity: '0.99', transform: 'scale(1)' },
+      ]);
+
+    return this.animationCtrl
+      .create()
+      .addElement(baseEl)
+      .easing('ease-out')
+      .duration(500)
+      .addAnimation([backdropAnimation, wrapperAnimation]);
+  };
+
+  leaveAnimation = (baseEl: HTMLElement) => {
+    return this.enterAnimation(baseEl).direction('reverse');
+  };
+
+  altaCliente(tipo: string) {
+    this.authService.tipo = tipo;
+    this.router.navigate(['/alta-cliente']);
+  }
+
+  altaSupervisor() {
+    this.authService.tipo = 'anonimo';
+    this.router.navigate(['/alta-supervisor']);
+  }
+
+  altaEmpleado() {
+    this.authService.tipo = 'anonimo';
+    this.router.navigate(['/alta-empleado']);
   }
 
 }

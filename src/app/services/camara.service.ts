@@ -21,11 +21,7 @@ export class CamaraService {
     private angularFirestorage: AngularFireStorage,
     private firestoreService: FirestoreService
   ) {
-    this.authService.user$.subscribe((user: any) => {
-      if (user) {
-        this.user = user;
-      }
-    });
+    
   }
 
   async addNewToGallery(data: any) {

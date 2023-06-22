@@ -129,7 +129,7 @@ export class GestionMetrePage implements OnInit {
       id: '',
       correo: this.waitSelected.correo,
       mesa_numero: mesa.numero,
-      producto_id: null,
+      producto_id: [],
       date_created: new Date().getTime(),
       date_updated: new Date().getTime(),
       estado: 'PENDIENTE',

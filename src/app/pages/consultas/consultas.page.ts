@@ -38,17 +38,7 @@ export class ConsultasPage implements OnInit {
 
   ngOnInit() {
     this.data = null;
-    this.authService.user$.subscribe(data => {
-      this.user = data
-      // console.log("user:");
-      // console.log(this.user);
-    });
-
-    let ls = localStorage.getItem('user');
-    if (ls != null) {
-      let user = JSON.parse(ls);
-      this.user = user;
-    }
+    this.user = this.authService.getUser();
 
     this.chatService.getMessages().subscribe((messagesA) => {
       if (messagesA !== null) {

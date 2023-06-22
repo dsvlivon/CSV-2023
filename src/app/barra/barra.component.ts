@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -19,6 +19,10 @@ import { Console } from 'console';
 })
 
 export class BarraComponent implements OnInit {
+
+  @Input() usuario: any = null;
+  @Input() spinner;
+
   data: any = null;
   user: any = null;
   mostrarComponente: boolean = false;
@@ -39,17 +43,8 @@ export class BarraComponent implements OnInit {
   ngOnInit() {
 
     this.data = null;
-    this.authService.user$.subscribe(data => {
-      this.user = data
-      //console.log("user:");
-      //console.log(this.user);
-    });
     
-    let ls = localStorage.getItem('user');
-    if (ls != null) {
-      let user = JSON.parse(ls);
-      this.user = user;
-    }
+    this.user = this.usuario;
 
     this.checkRequest();
   }
@@ -75,11 +70,15 @@ export class BarraComponent implements OnInit {
   goListaPedidos() {this.router.navigate(['/lista-pedidos'])}
   
   logOut() {
-    this.authService.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigateByUrl('login', { replaceUrl: true})
-
-    });
+    this.spinner = true;
+    setTimeout(() => {
+      this.authService.signOut().then(() => {
+        this.router.navigateByUrl('login', { replaceUrl: true})
+        this.spinner = false;
+  
+      });
+      
+    }, 3000);
   }
 
   expandir() {

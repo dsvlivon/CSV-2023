@@ -181,7 +181,7 @@
   /* FIN SCANNER */
 
   /* SPINNER */
-  
+
   .spinner-overlay {
     height: 50px;
     width: 50px;
@@ -204,7 +204,7 @@
     filter: brightness(150%);
   }
 
-  
+
   ion-spinner {
     --color: magenta;
     z-index: 1;
@@ -213,7 +213,7 @@
   .spinner-image {
     /*  display: flex; */
     // position: relative;
-   
+
     height: 9rem;
     /* Ajusta el tamaño de la imagen si es necesario */
     width: 9rem;
@@ -257,4 +257,41 @@
     margin-top: -62%;
     box-shadow: 0 0 20px rgb(0, 175, 239), 0 0 40px magenta, 0 0 60px rgb(0, 175, 239);
     filter: brightness(150%);
+  }
+
+
+  /* BARRA */
+ /*  ion-footer {
+    position: initial;
+  } */
+
+  ion-tab-bar {
+    background-color: white !important;
+    --ion-background-color: linear-gradient(0deg,
+        white 0%,
+        white 100%);
+  }
+
+  .botones-flotantes {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    margin-top: -35px;
+    /* Ajusta este valor según sea necesario */
+    margin-right: 10px;
+    /* Ajusta este valor según sea necesario */
+  }
+
+  ion-modal#example-modal {
+    --width: fit-content;
+    --min-width: 250px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  .wrapper {
+    border-radius: 15px;
+    border: 3px solid #fff;
   }

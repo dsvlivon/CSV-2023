@@ -20,8 +20,8 @@
   <div class="ion-padding" *ngIf="!scanActive">
 
     <div class="barra" *ngIf="this.user?.perfil == 'CLIENTE' || this.user?.perfil == 'ANONIMO'">
-
-      <div [ngSwitch]="hasWait?.estado">
+      <!-- [ngSwitch]="hasWait?.estado | async" -->
+      <div>
 
         <div *ngIf="!hasWait">
 
@@ -39,17 +39,17 @@
             </ion-card-content>
           </ion-card>
         </div>
-
-        <div *ngSwitchCase="'PENDIENTE'">
+        <!-- *ngSwitchCase="'PENDIENTE'" -->
+        <div *ngIf="hasWait?.estado === 'PENDIENTE'">
           <ion-card class="ion-padding">
             <ion-card-content>
               <ion-card>
                 <ion-card-content>
                   <div class="d-flex justify-content-center">
 
-                    <ion-spinner class="spinner spinner-overlay spinner-image" ></ion-spinner>
+                    <ion-spinner class="spinner spinner-overlay spinner-image"></ion-spinner>
                   </div>
-                  
+
                 </ion-card-content>
               </ion-card>
               <div class="mt-3">
@@ -59,9 +59,10 @@
             </ion-card-content>
           </ion-card>
         </div>
-
-        <div class="texto" *ngSwitchCase="'EN USO'">
-          <div *ngIf="hasRequest">
+        <!-- *ngSwitchCase="'EN USO'" -->
+        <div class="texto" *ngIf="hasWait?.estado != 'PENDIENTE'">
+          <!-- *ngIf="hasRequest" -->
+          <div >
 
             <ion-card class="flex-column">
               <ion-card-content>
@@ -89,15 +90,15 @@
   </div>
 
   <!-- HOME CLIENTE -->
-  <ion-grid *ngIf="!scanActive ">
+  <!-- <ion-grid *ngIf="!scanActive ">
 
     <ion-row>
       <div></div>
-      <app-barra></app-barra>
+      <app-barra [usuario]="this.user" [spinner]="this.spinner"></app-barra>
 
     </ion-row>
 
-  </ion-grid>
+  </ion-grid> -->
   <!-- ESCANER -->
   <div class="visor" *ngIf="scanActive">
     <h2 class="titulo" *ngIf="scanActive">ESCANEANDO...</h2>
@@ -116,4 +117,109 @@
     </button>
   </div>
 
+  <div *ngIf="!scanActive">
+    <ion-modal id="example-modal" #modal [enterAnimation]="enterAnimation" [leaveAnimation]="leaveAnimation">
+      <ng-template>
+        <div class="wrapper" style="padding: 10px; padding-bottom: 30px">
+  
+          <ion-grid>
+  
+            <ion-row>
+              <button *ngIf="user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO'" expand="full"
+                class="btn btn-primary" style="
+                margin: 1rem;
+                width: 13rem;
+                font-size: 1.3rem;
+                text-shadow: 1px 1px 1px #000;
+                box-shadow: 2px 2px 4px #000;
+              " (click)="modal.dismiss()" (click)="altaEmpleado()">Alta Empleado</button>
+            </ion-row>
+  
+            <ion-row>
+              <button *ngIf="user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO'" expand="full"
+                class="btn btn-primary" style="
+                margin: 1rem;
+                width: 13rem;
+                font-size: 1.3rem;
+                text-shadow: 1px 1px 1px #000;
+                box-shadow: 2px 2px 4px #000;
+              " (click)="modal.dismiss()" (click)="altaSupervisor()">Alta Supervisor/Dueño</button>
+            </ion-row>
+  
+            <ion-row>
+              <button *ngIf="user?.rol === 'METRE'" expand="full" class="btn btn-light" style="
+                margin: 1rem;
+                width: 13rem;
+                font-size: 1.3rem;
+                text-shadow: 1px 1px 1px #000;  
+                box-shadow: 2px 2px 4px #000;
+              " (click)="modal.dismiss()" (click)="altaCliente('cliente')">Alta Cliente</button>
+            </ion-row>
+  
+          </ion-grid>
+  
+        </div>
+      </ng-template>
+    </ion-modal>
+  
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" style="background-color: white !important; color: white;">
+  
+        <ion-tab-button (click)="goHome()">
+          <ion-icon color="secondary" name="home-outline" aria-hidden="true"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-tab-button>
+  
+        <ion-tab-button id="open-custom-dialog"
+          *ngIf="user?.rol === 'METRE' || user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO'"
+          (click)="modal.present()">
+          <ion-icon color="secondary" name="add-circle-outline" aria-hidden="true"></ion-icon>
+          <ion-label>Altas</ion-label>
+        </ion-tab-button>
+  
+        <ion-tab-button id="open-custom-dialog" *ngIf="user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO'"
+          (click)="goGestion()">
+          <ion-icon color="secondary" name="person-add-outline" aria-hidden="true"></ion-icon>
+          <ion-label>Clientes</ion-label>
+        </ion-tab-button>
+  
+        <ion-tab-button id="open-custom-dialog" *ngIf="user?.rol === 'METRE'" (click)="goClientes()">
+          <ion-icon color="secondary" name="person-add-outline" aria-hidden="true"></ion-icon>
+          <ion-label>Clientes</ion-label>
+        </ion-tab-button>
+        <ion-tab-button *ngIf="(user?.rol === 'METRE') || (user?.perfil === 'SUPERVISOR' || user?.perfil === 'DUENIO')"
+          (click)="goEncuestas()">
+          <ion-icon color="secondary" name="cash" aria-hidden="true"></ion-icon>
+          <ion-label>Encuestas</ion-label>
+        </ion-tab-button>
+  
+        <!-- CLIENTE -->
+        <ion-tab-button *ngIf="(user?.perfil === 'CLIENTE' && hasRequest?.mesa_numero)" (click)="goConsultas()">
+          <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
+          <ion-icon color="secondary" name="chatbox-ellipses-outline" aria-hidden="true"></ion-icon>
+          <ion-label>Consultas</ion-label>
+        </ion-tab-button>
+  
+        <!-- MOZO -->
+        <ion-tab-button *ngIf="(user?.rol === 'MOZO')" (click)="goConsultas()">
+          <ion-icon color="secondary" name="chatbox-ellipses-outline" aria-hidden="true"></ion-icon>
+          <ion-label>Consultas</ion-label>
+        </ion-tab-button>
+  
+        <ion-tab-button *ngIf="(user?.rol === 'MOZO' || user?.rol === 'BARTENDER' || user?.rol === 'COCINERO')"
+          (click)="goListaPedidos()">
+          <ion-icon color="secondary" name="fast-food-outline" aria-hidden="true"></ion-icon>
+          <ion-label>Pedidos</ion-label>
+        </ion-tab-button>
+  
+  
+        <ion-tab-button (click)="logOut()">
+          <ion-icon color="danger" name="exit" aria-hidden="true"></ion-icon>
+          <ion-label>Salir</ion-label>
+        </ion-tab-button>
+  
+      </ion-tab-bar>
+    </ion-tabs>
+  </div>
 </ion-content>
+

@@ -22,7 +22,7 @@ import { MailService } from '../services/mail.service';
 export class LoginPage implements OnInit {
   spinner: boolean = false;
   authSrv = inject(AuthService);
-  user = null;
+
   formData: FormGroup;
   error: boolean = false;
   message: string = '';
@@ -35,8 +35,7 @@ export class LoginPage implements OnInit {
     private mailService: MailService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('user'))
-    console.log(this.user);
+
     this.formData = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -48,11 +47,10 @@ export class LoginPage implements OnInit {
     const form = this.formData.value;
     this.spinner = true;
 
-    const user = await this.authSrv.signIn(form.email, form.password).then(resp => {
-      const sub = this.firestoreService.getByMail(resp.user.email).subscribe((data) => {
-        console.log('entro en data ');
-        console.log(data);
+    const user = await this.authSrv.signIn(form.email, form.password).then(async (resp) => {
+      const sub = await this.firestoreService.getByMail(resp.user.email).subscribe((data) => {
         if (data[0]['estado'] === 'ACEPTADO') {
+          localStorage.setItem('user', JSON.stringify(data[0]));
           sub.unsubscribe();
           this.toast('Ingreso exitoso', 'success');
           this.pnService.getUser(data[0]);
