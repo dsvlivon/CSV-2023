@@ -18,7 +18,7 @@ import { PedidoService } from 'src/app/services/pedido.service';
   templateUrl: './menu-productos.page.html',
   styleUrls: ['./menu-productos.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, SpinnerComponent]
 })
 export class MenuProductosPage implements OnInit {
 
@@ -34,10 +34,13 @@ export class MenuProductosPage implements OnInit {
   user:any;
   //Variable para definir si un producto esta en el array de productos
   encontreProducto: boolean = false;
+  //Variable para mostrar spinner
+  spinner: boolean = false;
 
   constructor(private firestoreService: FirestoreService, private router: Router, private productoService: ProductoService,private pedidoService: PedidoService) { }
 
   ngOnInit() {
+    this.spinner = false;
     this.prodSelected = this.productos[0];
     this.getUser();
     this.getPedido();
@@ -47,8 +50,18 @@ export class MenuProductosPage implements OnInit {
   }
 
   private checkProductsSelected() {
-    let a = JSON.parse(localStorage.getItem('products'));
-    if (a) { this.productsSelected = a; }
+    //let a = JSON.parse(localStorage.getItem('products'));
+    //if (a) { this.productsSelected = a; }
+    //const id = this.route.snapshot.paramMap.get('id');
+    this.pedidoService.getLastByUser(this.user.correo).subscribe((data)=>{
+      console.log(data);
+      let b = this.pedidoService.getById(data['id']).subscribe((datos)=>{
+        //console.log(datos);
+         this.productsSelected = datos['producto_id'];
+         //alert(this.productsSelected);
+        // b.unsubscribe();
+      });
+    });
   }
 
   getProds(filter: string) {
@@ -127,9 +140,15 @@ export class MenuProductosPage implements OnInit {
 
   clickBeforeConfirm() {
    //Aca te redirecciona para el pedido
-   localStorage.setItem('products', JSON.stringify(this.productsSelected));
+   //localStorage.setItem('products', JSON.stringify(this.productsSelected));
+   this.spinner = true;
    const a = this.pedido$.subscribe(data => {
-    this.router.navigate(['/pedido/id/'+data.id],{ replaceUrl: true});
+    data.producto_id = this.productsSelected;
+    this.pedidoService.updateOne(data).then(()=>{
+      this.spinner = false;
+      this.router.navigate(['/pedido/id/'+data.id],{ replaceUrl: true});
+    });
+    //this.router.navigate(['/pedido/id/'+data.id],{ replaceUrl: true});
     a.unsubscribe();
   });
   }

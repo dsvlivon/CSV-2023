@@ -60,7 +60,7 @@
       </ion-button>
     </div>
   </div>
-
+  <app-spinner [mostrar]="spinner"></app-spinner>
 </ion-content>
 
 
@@ -77,7 +77,7 @@
       <ion-button [disabled]="this.getAcum() < 0" item-end ion-button color="danger" (click)="clickBeforeConfirm()"
         icon-left>
         <ion-icon name="cart"></ion-icon>
-        Finalizar Pedido
+        Confirmar Pedido
       </ion-button>
     </ion-item>
   </ion-list>

@@ -55,7 +55,8 @@ export class ListaPedidosPage implements OnInit {
     }
     this.kyndSelected = this.kynds[0];
     this.getRequests(this.kyndSelected.val);
-
+    this.getAllTables();
+    this.getAllWaits();
   }
 
   getRequests(filter: string) {
@@ -101,30 +102,25 @@ export class ListaPedidosPage implements OnInit {
           this.pnService.enviarNotificacionUsuarios('MOZO', 'Pedido', 'Un pedido está listo para entregarse', true);
           break;
       }
-
-      if (model.estado == 'COBRADO') {
-
+      if (model.estado === 'COBRADO') {
         this.waits.reverse().forEach(t => {
+          console.log(t);
           if (t.correo == model.correo) {
             this.setStatusWait(t);
           }
         });
 
         this.tables.forEach(t => {
+          console.log(t);
           if (t.numero == model.mesa_numero) {
             this.setStatusTable(t);
-
-            // let audio = new Audio('./assets/sounds/noti.mp3');
-            // audio.play();
             this.toast('Mesa disponible','success','Se ha liberado la mesa '+t.numero);
-            // this.toastr.success('Datos registrados, ahora la mesa Nº ' + t.numero + ' está Disponible', 'Estado de Pedido');
           }
         });
       }
     }
     catch (error) {
-      this.toast('Error','danger','Ocurrio un error al actualizar el estado!');
-      // this.toastr.error('Error inesperado al momento de cambiar estado del pedido', 'Acción')
+      this.toast('Error','error','Ocurrio un error al actualizar el estado!');
     }
   }
 

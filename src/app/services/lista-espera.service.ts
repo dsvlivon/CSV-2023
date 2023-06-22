@@ -103,7 +103,7 @@ export class ListaEsperaService {
   }
 
   public async updateOne(model: ListaEspera){
-    try { return this.bd.doc<any>(`wait_lista/${model.id}`).update(model)}
+    try { return this.bd.doc<any>(`wait_list/${model.id}`).update(model)}
     catch (err) {console.log(err);}
   }
 

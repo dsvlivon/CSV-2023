@@ -3,40 +3,32 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { FirestoreService } from 'src/app/services/firestore.service';
-
 import { Chart, BarElement, BarController, CategoryScale, Decimation, Filler, Legend, Title, Tooltip, LinearScale, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { EncuestasCliente } from 'src/app/shared/encuestaCliente.interface';
+import { SpinnerComponent } from 'src/app/spinner/spinner.component';
 
 @Component({
   selector: 'app-graficos',
   templateUrl: './graficos.page.html',
   styleUrls: ['./graficos.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, SpinnerComponent]
 })
-export class GraficosPage implements OnInit, AfterViewInit {
+export class GraficosPage implements OnInit {
 
-  @ViewChild('graficoBarras') graficoBarrasCanvas: ElementRef;
+  spinner = false;
+  promedioLimpieza: Array<any> = [];
+  promedioSatisfecho: Array<any> = [];
+  rangoLimpiezaData: Array<any> = [];
+  rangoSatisfechoData: Array<any> = [];
+  encuestasClienteData: EncuestasCliente[] = [];
 
-  encuestas: Array<any> = [];
-  pipeChart: Chart;
-  constructor(private firestoreSrv: FirestoreService) { }
+  graficoBarra = false;
+  graficoTorta = false;
+  graficoLinea = false;
 
-  ngAfterViewInit(): void {
-    this.generarGraficoBarras();
-  }
-
-  ngOnInit() {
-    this.firestoreSrv.obtenerTodos('encuestasCliente').subscribe(data => {
-      this.encuestas = data;
-        console.log(data);
-      /* data.forEach(element => {
-        let data = element.payload.doc.data();
-        this.encuestas.push(data);
-        console.log(this.encuestas);
-      }) */
-    })
+  constructor(private afs: FirestoreService) {
     Chart.register(
       BarElement,
       BarController,
@@ -52,47 +44,93 @@ export class GraficosPage implements OnInit, AfterViewInit {
 
     Chart.register(...registerables);
   }
+  ngOnInit() {
+    const a = this.afs.obtenerTodos('encuestasCliente').subscribe((data: EncuestasCliente[]) => {
+      this.encuestasClienteData = data;
+      this.rangoLimpiezaData = this.encuestasClienteData.map(encuesta => encuesta.rangoLimpieza);
+      const sumaRangoLimpieza = this.rangoLimpiezaData.reduce((total, valor) => total + valor, 0);
+      const promedioRangoLimpieza = sumaRangoLimpieza / this.encuestasClienteData.length;
+      this.promedioLimpieza.push(promedioRangoLimpieza);
 
-  generarGraficoBarras() {
-    const ctx = this.graficoBarrasCanvas.nativeElement.getContext('2d');
+      this.rangoSatisfechoData = this.encuestasClienteData.map(encuesta => encuesta.rangoSatisfecho);
+      const sumaRangoSatisfecho = this.rangoSatisfechoData.reduce((total, valor) => total + valor, 0);
+      this.promedioSatisfecho.push(sumaRangoSatisfecho / this.encuestasClienteData.length);
+      console.log(this.promedioLimpieza);
+      a.unsubscribe();
+    })
+  }
+  createBarChart() {
 
-    // Obtener los datos necesarios para el gráfico
-    const etiquetas = this.encuestas.map(encuesta => encuesta.cliente);
-    const datosRangoLimpieza = this.encuestas.map(encuesta => 
-      console.log(encuesta));
-      console.log(datosRangoLimpieza)
-    const datosRangoSatisfecho = this.encuestas.map(encuesta => encuesta.rangoSatisfecho);
+    this.spinner = true;
+    this.graficoBarra = true;
 
-    // Crear el gráfico de barras
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: etiquetas,
-        datasets: [
-          {
-            label: 'Rango Limpieza',
-            data: datosRangoLimpieza,
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-          },
-          {
-            label: 'Rango Satisfecho',
-            data: datosRangoSatisfecho,
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
+    setTimeout(() => {
+      const canvas = document.getElementById('barChart') as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d');
+      const labels = this.encuestasClienteData.map(encuesta => encuesta.cliente);
+
+      this.spinner = false;
+      const barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Promedios', ...labels],
+          datasets: [
+            {
+              label: 'Rango de Limpieza',
+              data: [this.promedioLimpieza, ...this.rangoLimpiezaData],
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Rango de Satisfacción',
+              data: [this.promedioSatisfecho, ...this.rangoSatisfechoData],
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
           }
         }
-      }
-    });
+      });
+    }, 4000);
+
   }
+  /* DANIEL */
+  createTortaChart() {
+    this.spinner = true;
+    this.graficoTorta = true;
+
+    setTimeout(() => {
+      this.spinner = false;
+      /* Insertar grafico aca */
+    }, 4000);
+  }
+
+  /* IGNACIO */
+  createLineChart() {
+    this.spinner = true;
+    this.graficoLinea = true;
+
+    setTimeout(() => {
+      this.spinner = false;
+      /* Insertar grafico aca */
+    }, 4000);
+  }
+  onCloseBarra() {
+    this.graficoBarra = false;
+  }
+  onCloseTorta() {
+    this.graficoTorta = false;
+  }
+  onCloseLinea() {
+    this.graficoLinea = false;
+  }
+
 }

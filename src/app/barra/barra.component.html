@@ -150,7 +150,7 @@
     </ion-tab-button>
 
     <!-- CLIENTE -->
-    <ion-tab-button *ngIf="(user?.perfil === 'CLIENTE' && pedido?.mesa_numero)" (click)="goConsultas()"> <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
+    <ion-tab-button *ngIf="(user?.perfil === 'CLIENTE' && pedido?.mesa_numero)" (click)="goConsultas()"> 
       <ion-icon color="secondary" name="chatbox-ellipses-outline" aria-hidden="true"></ion-icon>
       <ion-label>Consultas</ion-label>
     </ion-tab-button>

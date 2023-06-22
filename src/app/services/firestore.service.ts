@@ -141,7 +141,7 @@ export class FirestoreService {
     this.angularFirestore.collection(collection).add(json);
   }
 
-  public obtenerTodos(collection: string) {
+  obtenerTodos(collection: string) {
     return this.angularFirestore.collection(collection).valueChanges();
   }
 }

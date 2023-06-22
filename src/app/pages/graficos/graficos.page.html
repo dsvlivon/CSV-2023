@@ -1,11 +1,81 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>graficos</ion-title>
+    <ion-title>Estadísticas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="bar-chart-container">
-    <canvas #graficoBarras></canvas>
-  </div>
+<ion-content>
+
+  <ion-card class="ion-padding">
+
+    <ion-card-content class=" ion-padding">
+
+      <div class="d-flex">
+
+        <ion-button (click)="createBarChart()" fill="clear" class="ingresoRapido">
+          <div class="d-flex flex-column justify-content-center">
+            <img src="../../../assets/images/barra-grafica.png" alt="">
+          </div>
+        </ion-button>
+
+        <ion-button (click)="createTortaChart()" fill="clear" class="ingresoRapido">
+          <div class="d-flex flex-column justify-content-center">
+            <img src="../../../assets/images/grafico-de-torta.png" alt="">
+          </div>
+        </ion-button>
+
+        <ion-button (click)="createLineChart()" fill="clear" class="ingresoRapido">
+          <div class="d-flex flex-column justify-content-center">
+            <img src="../../../assets/images/grafico-de-lineas.png" alt="">
+          </div>
+        </ion-button>
+       
+      </div>
+
+    </ion-card-content>
+
+  </ion-card>
+  
+
+  <ion-card *ngIf="graficoBarra">
+    <ion-card-content>
+      <h2>GRÁFICO DE BARRAS</h2>
+      <div class="bar-chart-container">
+        <canvas id="barChart"></canvas>
+      </div>
+      <ion-button (click)="onCloseBarra()" color="danger">
+        Cerrar
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="graficoTorta">
+    <ion-card-content>
+      <h2>GRÁFICO DE TORTA</h2>
+      <div class="bar-chart-container">
+        <canvas id="barChart"></canvas>
+      </div>
+      <ion-button (click)="onCloseTorta()" color="danger">
+        Cerrar
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="graficoLinea">
+    <ion-card-content>
+      <h2>GRÁFICO DE LINEA</h2>
+      <div class="bar-chart-container">
+        <canvas id="barChart"></canvas>
+      </div>
+      <ion-button (click)="onCloseLinea()" color="danger">
+        Cerrar
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+
+  <app-spinner [mostrar]="spinner"></app-spinner>
 </ion-content>

@@ -71,7 +71,9 @@ export class HomePage implements OnInit, OnDestroy {
   private checkWait() {
     const a = this.listSrv.getLastByUser(this.user.correo)
       .subscribe((data: any[]) => {
-        this.hasWait = data;
+        if(data['estado'] !== 'FINALIZADO'){
+          this.hasWait = data;
+        }
 
         a.unsubscribe();
       });
@@ -202,7 +204,7 @@ export class HomePage implements OnInit, OnDestroy {
     })
   }
   stopScan() {
-    this.router.navigate(['/home']);
+    //this.router.navigate(['/home']);
     this.scanActive = false;
     this.qrSrv.stopScanner();
   }
