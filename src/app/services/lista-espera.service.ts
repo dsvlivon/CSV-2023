@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { map } from 'rxjs/operators';
 import { ListaEspera } from '../shared/listaEspera.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListaEsperaService {
+  listaEspera: Observable<ListaEspera[]>;
+
   pathOfCollection = 'wait_list';
   referenceToCollection: AngularFirestoreCollection;
 
@@ -55,6 +58,7 @@ export class ListaEsperaService {
     }
   }
 
+
   getAll() {
     try {
       return this.referenceToCollection.snapshotChanges().pipe(
@@ -66,7 +70,7 @@ export class ListaEsperaService {
       return null;
      }
   }
-
+  
   getById(id: string) {
     try {
       return this.getAll().pipe(

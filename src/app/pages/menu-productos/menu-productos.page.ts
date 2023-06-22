@@ -12,6 +12,7 @@ import Swiper from 'swiper';
 import { ProductoService } from 'src/app/services/productos.service';
 import { Producto } from 'src/app/shared/producto.interface';
 import { PedidoService } from 'src/app/services/pedido.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-menu-productos',
@@ -37,12 +38,12 @@ export class MenuProductosPage implements OnInit {
   //Variable para mostrar spinner
   spinner: boolean = false;
 
-  constructor(private firestoreService: FirestoreService, private router: Router, private productoService: ProductoService,private pedidoService: PedidoService) { }
+  constructor(private authSrv: AuthService, private firestoreService: FirestoreService, private router: Router, private productoService: ProductoService,private pedidoService: PedidoService) { }
 
   ngOnInit() {
     this.spinner = false;
     this.prodSelected = this.productos[0];
-    this.getUser();
+    this.user = this.authSrv.getUser();
     this.getPedido();
     this.getProds(this.prodSelected.val);
     //Si cliente volvio para atras y quiere cambiar algo del pedido
@@ -155,7 +156,7 @@ export class MenuProductosPage implements OnInit {
 
   getAcum() {
     let a = 0;
-    this.productsSelected.forEach(p => { a += (p.quantity * p.precio); });
+    this.productsSelected?.forEach(p => { a += (p.quantity * p.precio); });
     return a;
   }
 

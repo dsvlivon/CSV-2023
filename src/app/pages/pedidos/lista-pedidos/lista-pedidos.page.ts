@@ -44,15 +44,7 @@ export class ListaPedidosPage implements OnInit {
 
   ngOnInit() {
     //PARA LEVANTAR USUARIO TIPO MOZO-BARTENDER-COCINERO
-    this.authService.user$.subscribe(data => {
-      this.user = data
-    });
-    let ls = localStorage.getItem('user');
-    if (ls != null) {
-      let user = JSON.parse(ls);
-      this.user = user;
-      console.log(user.rol);
-    }
+    this.user = this.authService.getUser();
     this.kyndSelected = this.kynds[0];
     this.getRequests(this.kyndSelected.val);
     this.getAllTables();
