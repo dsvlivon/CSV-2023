@@ -16,14 +16,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [ngClass]="scanActive?'scanner-activo':''">
-
-  <div class="ion-padding" *ngIf="!scanActive">
+  <h1>{{us}}</h1>
+  <div class="ion-padding" *ngIf="!scanActive" >
 
     <div class="barra" *ngIf="this.user?.perfil == 'CLIENTE' || this.user?.perfil == 'ANONIMO'">
       <!-- [ngSwitch]="hasWait?.estado | async" -->
-      <div>
-
-        <div *ngIf="!hasWait">
+      <div >
+        <div *ngIf="us == '' || us == 'FINALIZADO'">
 
           <ion-card class="button" (click)="escanearQR()">
             <ion-card-content>
@@ -40,7 +39,7 @@
           </ion-card>
         </div>
         <!-- *ngSwitchCase="'PENDIENTE'" -->
-        <div *ngIf="hasWait?.estado === 'PENDIENTE'">
+        <div *ngIf="us == 'PENDIENTE'">
           <ion-card class="ion-padding">
             <ion-card-content>
               <ion-card>
@@ -54,13 +53,13 @@
               </ion-card>
               <div class="mt-3">
                 Espere mientras se le asigna una mesa...
-
+                
               </div>
             </ion-card-content>
           </ion-card>
         </div>
         <!-- *ngSwitchCase="'EN USO'" -->
-        <div class="texto" *ngIf="hasWait?.estado != 'PENDIENTE'">
+        <div class="texto" *ngIf="us == 'EN USO'">
           <!-- *ngIf="hasRequest" -->
           <div >
 
@@ -90,7 +89,7 @@
   </div>
 
   <!-- HOME CLIENTE -->
-  <!-- <ion-grid *ngIf="!scanActive ">
+  <ion-grid *ngIf="!scanActive ">
 
     <ion-row>
       <div></div>
@@ -98,7 +97,7 @@
 
     </ion-row>
 
-  </ion-grid> -->
+  </ion-grid>
   <!-- ESCANER -->
   <div class="visor" *ngIf="scanActive">
     <h2 class="titulo" *ngIf="scanActive">ESCANEANDO...</h2>
@@ -222,4 +221,3 @@
     </ion-tabs>
   </div>
 </ion-content>
-

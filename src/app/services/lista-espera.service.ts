@@ -11,7 +11,7 @@ export class ListaEsperaService {
   listaEspera: Observable<ListaEspera[]>;
 
   pathOfCollection = 'wait_list';
-  referenceToCollection: AngularFirestoreCollection;
+  referenceToCollection: AngularFirestoreCollection<ListaEspera>;
 
   constructor(private bd: AngularFirestore) {
     this.referenceToCollection =
@@ -19,6 +19,9 @@ export class ListaEsperaService {
         (this.pathOfCollection, (ref: { orderBy: (arg0: string, arg1: string) => any; }) => ref.orderBy('date_created', 'asc'));
   }
 
+  getStateChanges(): Observable<any> {
+    return this.bd.doc('wait_list').valueChanges();
+  }
   public async createOne(model: ListaEspera) {
     try {
       model.id = this.bd.createId();
@@ -44,7 +47,10 @@ export class ListaEsperaService {
       return null;
      }
   }
-
+  getList(correo: string) {
+    this.referenceToCollection = this.bd.collection('wait_list', ref => ref.where('correo', '==', `${correo}`));
+    return this.referenceToCollection.valueChanges();
+  }
   getActivos() {
     try {
       return this.getAll().pipe(
@@ -71,10 +77,10 @@ export class ListaEsperaService {
      }
   }
   
-  getById(id: string) {
+  getById(uid: string) {
     try {
       return this.getAll().pipe(
-        map((tables: any[]) => tables.find((u: { id: string; }) => u.id == id)));
+        map((tables: any[]) => tables.find((u: { uid: string; }) => u.uid == uid)));
     }
     catch (error) { 
       console.log(error);
@@ -103,7 +109,9 @@ export class ListaEsperaService {
 
   getLastByUser(correo: string, estado?: string) {
     return this.getByUser(correo, estado).pipe(
-      map((tables: any[]) => tables.slice(-1)[0]));
+      map((tables: any[]) => {
+      console.log('tables', tables)
+      tables.slice(-1)[0]}));
   }
 
   public async updateOne(model: ListaEspera){

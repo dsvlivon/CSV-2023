@@ -58,10 +58,15 @@ export class HomePage implements OnInit {
 
     this.checkWait();
     this.checkRequest();
-
+    this.getState();
   }
 
-
+  private getState() {
+    this.listSrv.getList(this.user.correo).subscribe( data => {
+      this.us = data.map((data: ListaEspera) => data.estado);
+      console.log(this.us);
+    });
+  }
   private checkWait() {
     console.log(this.user.correo);
     const a = this.listSrv.getLastByUser(this.user.correo)
@@ -299,6 +304,3 @@ export class HomePage implements OnInit {
   }
 
 }
-
-
-
