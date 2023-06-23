@@ -87,8 +87,8 @@
 |  22.b    |    Implementar vinc. c/ cliente y asig. recompensa   |    Alfa    |   Daniel    |   Activo   |
 |  23      | Crear Menu Encuestas                                 |    Beta    |   Sergio    |  Resuelto  |
 |  23      |    Implementar Graficos Barra                        |    Beta    |   Sergio    |  Resuelto  |
-|  23      |    Implementar Graficos Torta                        |    Alfa    |   Daniel    |   Nuevo    |
-|  23      |    Implementar Graficos Lineal                       |    Gamma   |   Ignacio   |   Nuevo    |
+|  23      |    Implementar Graficos Torta                        |    Alfa    |   Daniel    |  Resuelto  |
+|  23      |    Implementar Graficos Lineal                       |    Gamma   |   Ignacio   |  Resuelto  |
 |  23      | Crear Menu Cierre de pedidos                         |    Gamma   |   Ignacio   |  Resuelto  |
 |  23.a    |    Implementar pago del pedido                       |    Gamma   |   Ignacio   |  Resuelto  |
 |  23.b    |    Verificar que se libere la mesa                   |    Gamma   |   Ignacio   |  Resuelto  |
@@ -96,10 +96,10 @@
 |----------|------------------------------------------------------|------------|-------------|------------|
 |          |  **Sprint 5: Ultimas Correciones                     |            | prox. fecha:|  24/06/23  |
 |  **N°**  | **Tareas**                                           |   **Rol**  | **Miembro** | **Estado** |
-|  **20.a**|  **Verificar q/ llegue la PN a todos los mozos**     |    Alfa    |   Daniel    |   Nuevo    |
-|  **23**  |  **Implementar Graficos Torta**                      |    Alfa    |   Daniel    |   Nuevo    |
-|  **23**  |  **Implementar Graficos Lineal**                     |    Gamma   |   Ignacio   |   Nuevo    |
-|  **22.b**|  **Implementar vinc. c/ cliente y asig. recompensa** |    Alfa    |   Daniel    |   Activo   |
+|  **20.a**|  **Verificar q/ llegue la PN a todos los mozos**     |    Alfa    |   Daniel    |**Resuelto**|
+|  **23**  |  **Implementar Graficos Torta**                      |    Alfa    |   Daniel    |**Resuelto**|
+|  **23**  |  **Implementar Graficos Lineal**                     |    Gamma   |   Ignacio   |**Resuelto**|
+|  **22.b**|  **Implementar vinc. c/ cliente y asig. recompensa** |    Alfa    |   Daniel    |**Resuelto**|
 
 # ***Diseño y otras herramientas***
 **Link a Editor:** [CSV-2023 designer](https://github.com/dsvlivon/CSV-2023/blob/main/Otros/CSV-2023%20designer.cdr)
