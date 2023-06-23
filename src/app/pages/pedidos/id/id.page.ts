@@ -52,6 +52,7 @@ export class IdPage implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     let b = this.pedidoService.getById(id).subscribe((datos)=>{
             this.productsSelected = datos['producto_id'];
+            b.unsubscribe();
       });
   }
   getPedido() {
@@ -105,6 +106,7 @@ export class IdPage implements OnInit {
             //return '';
             this.tituloEstado = '';
         }
+        b.unsubscribe();
       });
   }
 
