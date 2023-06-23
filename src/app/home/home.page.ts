@@ -14,6 +14,7 @@ import { ListaEsperaService } from '../services/lista-espera.service';
 import { PedidoService } from '../services/pedido.service';
 import { User2 } from '../shared/user2.interface';
 import { Observable } from 'rxjs';
+import { FirestoreService } from '../services/firestore.service';
 
 @Component({
   selector: 'app-home',
@@ -45,7 +46,8 @@ export class HomePage implements OnInit {
     private qrSrv: QrscannerService,
     private pnSrv: PushnotificationService,
     private listSrv: ListaEsperaService,
-    private pedidoSrv: PedidoService
+    private pedidoSrv: PedidoService,
+    private firestoreService: FirestoreService
   ) { }
 
   ngOnInit() {
@@ -228,10 +230,16 @@ export class HomePage implements OnInit {
   goListaPedidos() {this.router.navigate(['/lista-pedidos'])}
   
   logOut() {
-    
+    this.spinner = true;
       this.authService.signOut().then(() => {
-        this.router.navigateByUrl('login', { replaceUrl: true})
+        let auxUser: any = this.user;
+        auxUser.token = '';
+        this.firestoreService.updateEstadoUsuario(auxUser).then(()=>{
+          this.router.navigateByUrl('login', { replaceUrl: true})
         this.spinner = false;
+        })
+        //this.router.navigateByUrl('login', { replaceUrl: true})
+        //this.spinner = false;
   
       });
       

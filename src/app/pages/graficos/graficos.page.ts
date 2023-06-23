@@ -119,10 +119,43 @@ export class GraficosPage implements OnInit {
     this.graficoLinea = true;
 
     setTimeout(() => {
+      const canvas = document.getElementById('lineChart') as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d');
+      const labels = this.encuestasClienteData.map(encuesta => encuesta.cliente);
+
       this.spinner = false;
-      /* Insertar grafico aca */
+      const lineChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Promedios', ...labels],
+          datasets: [
+            {
+              label: 'Rango de Limpieza',
+              data: [this.promedioLimpieza, ...this.rangoLimpiezaData],
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Rango de Satisfacción',
+              data: [this.promedioSatisfecho, ...this.rangoSatisfechoData],
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      }); 
     }, 4000);
   }
+  
   onCloseBarra() {
     this.graficoBarra = false;
   }
