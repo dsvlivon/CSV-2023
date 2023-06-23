@@ -11,6 +11,9 @@ import { AuthService } from '../../services/auth.service';
 import { Observable } from 'rxjs';
 import { User2 } from 'src/app/shared/user2.interface';
 import { JuegoService } from 'src/app/services/juego.service';
+import { ListaEsperaService } from '../../services/lista-espera.service';
+import { PedidoService } from '../../services/pedido.service';
+
 import { SpinnerComponent } from '../../spinner/spinner.component';
 
 @Component({
@@ -26,7 +29,7 @@ export class JuegosPage implements OnInit {
   @Output() terminadoEvent = new EventEmitter<boolean>();
 
   spinner = false;
-  user: any = null;
+  user: User2 = null;
   mostrar: boolean = true;
   result: string;
   pointsUser = 0;
@@ -34,6 +37,12 @@ export class JuegosPage implements OnInit {
   turnos = 0;
   resultado = "";
   vidas: number = 2;
+
+  data: any = null;
+
+  hasWait: any = null;
+  hasRequest: any = null;
+
   
   msgTitulo="Vence a nuestro campeón para ganar beneficios!"
   msgRes = "Reglas: Se juega al mejor de 3 intentos. En caso de empate nadie suma"
@@ -42,24 +51,45 @@ export class JuegosPage implements OnInit {
     private authService: AuthService,
     private firestoreService: FirestoreService,
     private playGame: JuegoService,
-    private router: Router) {
+    private router: Router,
+    private listSrv: ListaEsperaService,
+    private pedidoSrv: PedidoService) {
 
   }
 
   ngOnInit(): void {
     this.result = 'Esperando jugada...';
     this.result = '';
-    console.log(this.pointsUser);
-    this.authService.user$.subscribe(data => {
-      this.user = data
-      console.log(this.user);
-    });
-    let ls = localStorage.getItem('user');
-    if (ls != null) {
+    //nuevo auth
+    this.data = null;
+    this.user = this.authService.getUser();
+    console.log(this.user.correo);
+    this.spinner = true;
 
-      let user = JSON.parse(ls);
-      this.user = user;
-    }
+    this.checkWait();
+    this.checkRequest();
+  }
+
+  private checkWait() {
+    console.log(this.user.correo);
+    const a = this.listSrv.getLastByUser(this.user.correo)
+      .subscribe((data: any) => {
+        if (data?.estado !== 'FINALIZADO') {
+          console.log(data);
+          this.hasWait = data;
+          console.log(this.hasWait)
+          a.unsubscribe();
+        }
+
+      });
+  }
+  private checkRequest() {
+    const a = this.pedidoSrv.getLastByUser(this.user.correo)
+      .subscribe((data: any[]) => {
+        this.hasRequest = data;
+        console.log(this.hasRequest);
+        a.unsubscribe();
+      });
   }
 
   evaluar() {
@@ -75,12 +105,12 @@ export class JuegosPage implements OnInit {
       } else {
         if (this.vidas === 2) {
           this.msgTitulo = "FELICITACIONES HAS GANADO Y HAS GANADO UN PREMIO!!!";
-          //asignar DTO
+          this.hasRequest.descuento10 = 'GANO';//asignar DTO
         } else {
           this.msgTitulo = "FELICITACIONES HAS GANADO!!!";
         }
         this.mostrar = false;
-      }
+      } 
       
       this.msgRes = "";
       this.pointsUser = 0;
