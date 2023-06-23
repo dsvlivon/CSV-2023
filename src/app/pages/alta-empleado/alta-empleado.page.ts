@@ -61,6 +61,7 @@ export class AltaEmpleadoPage implements OnInit {
 
   async Registro() {
     const form = this.formData.value;
+    console.log(form.rol);
     this.spinner = true;
     if (form.password === form.confirmPassword) {
       if (this.dataUrl !== '../../../assets/images/clientes/usuario.png') {
@@ -76,13 +77,14 @@ export class AltaEmpleadoPage implements OnInit {
             password: form.password,
             perfil: 'EMPLEADO',
             fechaCreacion: new Date().getTime(),
-            rol: form.rol.toUppercase(),
+            rol: form.rol,
             uid: resp.user.uid
           }
           this.firestore.addUser(datos, resp.user.uid);
           this.emailSrv.notificationInabled(datos);
           this.toast(`${form.rol}  creado correctamente`, 'success');
           this.spinner = false;
+          this.router.navigateByUrl('home', { replaceUrl: true })
 
         }).catch(err => {
           this.manejoErrores(err.code);
