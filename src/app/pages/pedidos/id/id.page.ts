@@ -257,7 +257,7 @@ export class IdPage implements OnInit {
   }
 
   navigateBack(){
-    this.router.navigate(['/home']);
+    this.router.navigateByUrl('home', { replaceUrl: true });
   }
 
 }

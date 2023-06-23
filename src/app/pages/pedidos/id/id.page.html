@@ -1,5 +1,5 @@
 
-  <ion-header>
+  <ion-header *ngIf="!scanActive">
     <ion-toolbar>
       <ion-buttons slot="start" fill="outline" (click)="navigateBack()" shape="round" color="saffron">
         <ion-icon slot="icon-only" name="arrow-back-outline" style="color:white"></ion-icon>
@@ -8,9 +8,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content [ngClass]="scanActive?'scanner-activo':''">
 
-    <div class="container">
+    <div class="container" *ngIf="!scanActive">
     <div class="container-cards" *ngIf="this.pedido$ | async as pedido">
       <ion-card>
         <table>
