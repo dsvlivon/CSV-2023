@@ -106,6 +106,7 @@ export class JuegosPage implements OnInit {
         if (this.vidas === 2) {
           this.msgTitulo = "FELICITACIONES HAS GANADO Y HAS GANADO UN PREMIO!!!";
           this.hasRequest.descuento10 = 'GANO';//asignar DTO
+          this.pedidoSrv.updateOne(this.hasRequest)
         } else {
           this.msgTitulo = "FELICITACIONES HAS GANADO!!!";
         }
