@@ -29,3 +29,16 @@ Minuta clase 10/6/23
 - si o si vamos a distribuir altas p cada uno
 - se definió que el alta de clientes no usa la barra, sino q tendra un metodo p volver al login
 - las tareas pendientes se mueven al siguiente sprint como *n.n*
+
+
+Minuta Meet 22/6/23
+-En el alta empleado quedó una opcion del select "camarero". no va
+-Al marcar el pedido aparecen 2 pedidos, se repiten
+-al cargar la mesa, el spinner queda girando indefinido
+-la tarjeta de presentacion en el mail (el q envia mailjs) no se ve
+-falta agregar las PN a la parte de consultas
+-Error en el alta de Empleados
+-como cliente al escanear QR para obtener una mesa, se muestra doble
+-falta ligar los dtos de los juegos a la estructura de los pedidos
+-como bartender/cocinero, al aprobar los pedidos, la card no muestra nombre de cliente
+-error en el manejo de usuarios, posible bug en el authService
