@@ -106,10 +106,42 @@ export class GraficosPage implements OnInit {
   createTortaChart() {
     this.spinner = true;
     this.graficoTorta = true;
-
+  
     setTimeout(() => {
+      const canvas = document.getElementById('tortaChart') as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d');
+      const labels = this.encuestasClienteData.map(encuesta => encuesta.cliente);
+  
       this.spinner = false;
-      /* Insertar grafico aca */
+      const tortaChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Promedios', ...labels],
+          datasets: [
+            {
+              label: 'Rango de Limpieza',
+              data: [this.promedioLimpieza, ...this.rangoLimpiezaData],
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Rango de Satisfacción',
+              data: [this.promedioSatisfecho, ...this.rangoSatisfechoData],
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      }); 
     }, 4000);
   }
 
