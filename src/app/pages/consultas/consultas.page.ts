@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 import * as moment from 'moment';
 import { PedidoService } from '../../services/pedido.service';
 import { Component, OnInit, inject } from '@angular/core';
-
+import { PushnotificationService } from 'src/app/services/pushnotification.service';
 
 
 @Component({
@@ -32,6 +32,7 @@ export class ConsultasPage implements OnInit {
     private router: Router,
     private chatService: ConsultasService,
     private pedidoSrv: PedidoService,
+    private pnService: PushnotificationService
   ) {
     this.soundSendMessage.volume = 0.2;
   }
@@ -81,6 +82,7 @@ export class ConsultasPage implements OnInit {
     this.newMessage = '';
     this.scrollToTheLastElementByClassName();
     this.soundSendMessage.play();
+    this.pnService.enviarNotificacionUsuarios('MOZO', 'Consultas', 'Hay una nueva consulta de un cliente', true);
   }
 
   showSpinner(chatOption: number) {
