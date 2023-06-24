@@ -8,6 +8,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { EncuestasCliente } from 'src/app/shared/encuestaCliente.interface';
 import { SpinnerComponent } from 'src/app/spinner/spinner.component';
 
+
 @Component({
   selector: 'app-graficos',
   templateUrl: './graficos.page.html',
@@ -102,24 +103,24 @@ export class GraficosPage implements OnInit {
     }, 4000);
 
   }
-  /* DANIEL */
+
   createTortaChart() {
     this.spinner = true;
     this.graficoTorta = true;
-  
+
     setTimeout(() => {
       const canvas = document.getElementById('tortaChart') as HTMLCanvasElement;
       const ctx = canvas.getContext('2d');
       const labels = this.encuestasClienteData.map(encuesta => encuesta.cliente);
-  
+
       this.spinner = false;
       const tortaChart = new Chart(ctx, {
-        type: 'line',
+        type: 'pie',
         data: {
           labels: ['Promedios', ...labels],
           datasets: [
             {
-              label: 'Rango de Limpieza',
+              label: 'Limpieza',
               data: [this.promedioLimpieza, ...this.rangoLimpiezaData],
               backgroundColor: 'rgba(75, 192, 192, 0.2)',
               borderColor: 'rgba(75, 192, 192, 1)',
@@ -141,7 +142,7 @@ export class GraficosPage implements OnInit {
             }
           }
         }
-      }); 
+      });
     }, 4000);
   }
 
@@ -159,23 +160,21 @@ export class GraficosPage implements OnInit {
       const lineChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['Promedios', ...labels],
-          datasets: [
-            {
-              label: 'Rango de Limpieza',
-              data: [this.promedioLimpieza, ...this.rangoLimpiezaData],
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1
-            },
-            {
-              label: 'Rango de Satisfacción',
-              data: [this.promedioSatisfecho, ...this.rangoSatisfechoData],
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgba(255, 99, 132, 1)',
-              borderWidth: 1
-            }
-          ]
+          labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+          datasets: [{
+            label: 'Rango de Limpieza',
+            data: this.promedioLimpieza[0],
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Rango de Satisfacción',
+            data: this.rangoSatisfechoData,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+          }]
         },
         options: {
           scales: {
@@ -184,10 +183,10 @@ export class GraficosPage implements OnInit {
             }
           }
         }
-      }); 
+      });
     }, 4000);
   }
-  
+
   onCloseBarra() {
     this.graficoBarra = false;
   }
