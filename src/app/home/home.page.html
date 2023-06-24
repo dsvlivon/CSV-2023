@@ -16,13 +16,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [ngClass]="scanActive?'scanner-activo':''">
-  <h1>{{us}}</h1>
   <div class="ion-padding" *ngIf="!scanActive" >
 
     <div class="barra" *ngIf="this.user?.perfil == 'CLIENTE' || this.user?.perfil == 'ANONIMO'">
       <!-- [ngSwitch]="hasWait?.estado | async" -->
       <div >
-        <div *ngIf="us == '' || us == 'FINALIZADO'">
+        <div *ngIf="us == [] || us == 'FINALIZADO'">
 
           <ion-card class="button" (click)="escanearQR()">
             <ion-card-content>
@@ -89,7 +88,7 @@
   </div>
 
   <!-- HOME CLIENTE -->
-<!--   <ion-grid *ngIf="!scanActive ">
+  <!-- <ion-grid *ngIf="!scanActive ">
 
     <ion-row>
       <div></div>
@@ -211,7 +210,11 @@
           <ion-label>Pedidos</ion-label>
         </ion-tab-button>
   
-  
+        <ion-tab-button *ngIf="(user?.perfil === 'CLIENTE' && us == 'PENDIENTE')" (click)="goGraficos()">
+          <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
+          <ion-icon color="secondary" name="bar-chart-outline" aria-hidden="true"></ion-icon>
+          <ion-label>Estadística</ion-label>
+        </ion-tab-button>
         <ion-tab-button (click)="logOut()">
           <ion-icon color="danger" name="exit" aria-hidden="true"></ion-icon>
           <ion-label>Salir</ion-label>
@@ -221,3 +224,4 @@
     </ion-tabs>
   </div>
 </ion-content>
+

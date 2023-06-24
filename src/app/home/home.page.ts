@@ -267,7 +267,7 @@ export class HomePage implements OnInit,OnDestroy, ViewWillEnter, ViewWillLeave,
 
   goDelivery() { this.router.navigate(['/delivery']); }
 
-  goJuegos() { this.router.navigate(['/juegos']); }
+  /* goJuegos() { this.router.navigate(['/juegos']); } */
 
   goQr() { this.router.navigate(['/lector-qr']); }
 
@@ -279,6 +279,7 @@ export class HomePage implements OnInit,OnDestroy, ViewWillEnter, ViewWillLeave,
 
   goListaPedidos() {this.router.navigate(['/lista-pedidos'])}
   
+  goGraficos() { this.router.navigateByUrl('graficos', { replaceUrl: true }); }
   logOut() {
     this.spinner = true;
       this.authService.signOut().then(() => {

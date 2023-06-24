@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ViewDidEnter } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ConsultasService } from 'src/app/services/consultas.service';
 import { AuthService } from '../../services/auth.service';
 import * as moment from 'moment';
 import { PedidoService } from '../../services/pedido.service';
-import {Component, OnInit, inject, OnDestroy} from '@angular/core';
+import { Component, OnInit, inject, OnDestroy } from '@angular/core';
 import { PushnotificationService } from 'src/app/services/pushnotification.service';
 import { ViewWillEnter, ViewWillLeave, ViewDidLeave } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
-export class ConsultasPage implements OnInit, OnDestroy, ViewWillEnter, ViewWillLeave, ViewDidLeave {
+export class ConsultasPage implements OnInit, OnDestroy {
   user: any = null;
   newMessage: string = '';
   messageList: any = [];
@@ -42,13 +42,38 @@ export class ConsultasPage implements OnInit, OnDestroy, ViewWillEnter, ViewWill
   ) {
     this.soundSendMessage.volume = 0.2;
   }
-  ionViewDidLeave(): void {
+
+
+  ngOnInit() {
+    this.user = this.authService.getUser();
+    this.user = this.authService.getUser();
+    this.checkRequest();
+    this.sub2 = this.chatService.getMessages().subscribe((messagesA) => {
+      if (messagesA !== null) {
+        console.log('en otra linea', this.sub2)
+
+        this.messageList = messagesA;
+        this.sub2.unsubscribe();
+        setTimeout(() => {
+          this.scrollToTheLastElementByClassName();
+        }, 100);
+      }
+    });
+    console.log('en oninit', this.sub2)
+  }
+  ngOnDestroy(): void {
     this.user = null;
+    this.data = null;
+
     this.sub1.unsubscribe();
     this.sub2.unsubscribe();
+    console.log('en destroy', this.sub2);
+    console.log('en destroy sub 1', this.sub1);
+
+    console.log(this.user);
   }
-  ionViewWillEnter(): void {
-    this.user = this.authService.getUser();
+
+ /*  ionViewDidEnter(): void {
     this.checkRequest();
     this.sub2 = this.chatService.getMessages().subscribe((messagesA) => {
       if (messagesA !== null) {
@@ -59,31 +84,23 @@ export class ConsultasPage implements OnInit, OnDestroy, ViewWillEnter, ViewWill
       }
     });
   }
+  ionViewWillEnter(): void {
+  }
+  ionViewDidLeave(): void {
+    console.log(this.sub1);
+
+    this.sub1.unsubscribe();
+    this.sub2.unsubscribe();
+  }
+
   ionViewWillLeave(): void {
     this.user = null;
+
     this.sub1.unsubscribe();
     this.sub2.unsubscribe();
-  }
-  ngOnDestroy(): void {
-    this.user = null;
-    this.sub1.unsubscribe();
-    this.sub2.unsubscribe();
-  }
 
-  ngOnInit() {
-    /* this.data = null;
-    this.user = this.authService.getUser();
+  } */
 
-    this.chatService.getMessages().subscribe((messagesA) => {
-      if (messagesA !== null) {
-        this.messageList = messagesA;
-        setTimeout(() => {
-          this.scrollToTheLastElementByClassName();
-        }, 100);
-      }
-    });
-    this.checkRequest(); */
-  }
 
   showChat() {
     this.newMessage = '';
@@ -135,17 +152,13 @@ export class ConsultasPage implements OnInit, OnDestroy, ViewWillEnter, ViewWill
     const toppos = lastElement.offsetTop;
     document.getElementById('contenedor-mensajes').scrollTop = toppos;
   }
-  
+
   private checkRequest() {
-    console.log("user:");
-    console.log(this.user);
     this.sub1 = this.pedidoSrv.getLastByUser(this.user.correo)
       .subscribe((data: any[]) => {
         this.pedido = data;
-        console.log("BARRA PEDIDO:");
-        console.log(this.pedido);
-        //a.unsubscribe();
-    });
+        this.sub1.unsubscribe();
+      });
   }
 }
 
