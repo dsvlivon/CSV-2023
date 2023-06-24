@@ -260,4 +260,7 @@ export class IdPage implements OnInit {
     this.router.navigateByUrl('home', { replaceUrl: true });
   }
 
+  goEncuestas() {
+    this.router.navigateByUrl('encuestas', { replaceUrl: true });
+  }
 }

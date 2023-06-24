@@ -60,6 +60,7 @@ export class GestionMetrePage implements OnInit {
 
       case 'Inactivos':
         this.waits$ = this.waitService.getInactivos();
+        console.log(this.waits$);
         break;
 
       default:

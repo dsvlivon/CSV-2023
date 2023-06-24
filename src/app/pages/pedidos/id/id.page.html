@@ -75,7 +75,7 @@
           <div *ngIf="(pedido.estado == 'ACEPTADO' || pedido.estado == 'PREPARACION' || pedido.estado == 'COCINADO' || pedido.estado == 'ENTREGADO' || pedido.estado == 'CONFIRMADO' || pedido.estado == 'COBRAR' || pedido.estado == 'COBRADO') && pedido.encuestado">
             <br>
             <p style="font-size: 16px;color:white">Podes ver los resultados de las encuestas!</p>
-            <ion-button>VER</ion-button>
+            <ion-button (click)="goEncuestas()">VER</ion-button>
           </div>
 
           <!-- Esto tendria que abrir una pantalla, donde se visualicen los detalles de los costos, y deje poner propina -->
