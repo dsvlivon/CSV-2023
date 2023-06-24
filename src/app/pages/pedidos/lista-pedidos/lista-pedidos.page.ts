@@ -144,18 +144,18 @@ export class ListaPedidosPage implements OnInit {
     let a = 0;
     let b = 0;
     pedido.producto_id.forEach(p => {
-      a += p.precio
+      a += p.precio * p.quantity;
     });
     if (pedido.descuento10 == 'GANO') {
-      b += (a * 0.1);
+      b = (a * 0.1);
     }
 
     if (pedido.descuento15 == 'GANO') {
-      b += (a * 0.15);
+      b = (a * 0.15);
     }
 
     if (pedido.descuento20 == 'GANO') {
-      b += (a * 0.2);
+      b = (a * 0.2);
     }
     return a-b;
   }

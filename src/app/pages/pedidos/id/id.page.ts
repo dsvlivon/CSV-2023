@@ -218,8 +218,20 @@ export class IdPage implements OnInit {
 
   getAcum(pedido?: Pedido) {
     let a = 0;
+    let b = 0;
     this.productsSelected?.forEach(p => { a += (p.quantity * p.precio); });
-    return a;
+    if (pedido && pedido.descuento10 == 'GANO') {
+      b = (a * 0.1);
+    }
+
+    if (pedido && pedido.descuento15 == 'GANO') {
+      b = (a * 0.15);
+    }
+
+    if (pedido &&pedido.descuento20 == 'GANO') {
+      b = (a * 0.2);
+    }
+    return a-b;
   }
 
   clickEditarProductos(){
@@ -245,22 +257,22 @@ export class IdPage implements OnInit {
   }
 
   clickJuego10(pedido: Pedido) {
-    //Aqui va a ir el descuento del 10%
+    this.router.navigateByUrl('/juegos/id/10',{replaceUrl: true});
   }
 
   clickJuego15(pedido: Pedido) {
-    //Aqui va a ir el descuento del 15%
+    this.router.navigateByUrl('/juegos/id/15',{replaceUrl: true});
   }
 
   clickJuego20(pedido: Pedido) {
-    //Aqui va a ir el descuento del 20%
+    this.router.navigateByUrl('/juegos/id/20',{replaceUrl: true});
   }
 
   navigateBack(){
     this.router.navigateByUrl('home', { replaceUrl: true });
   }
 
-  goEncuestas() {
-    this.router.navigateByUrl('encuestas', { replaceUrl: true });
+  goEncuestasCliente(){
+    this.router.navigateByUrl('encuesta-cliente', { replaceUrl: true });
   }
 }

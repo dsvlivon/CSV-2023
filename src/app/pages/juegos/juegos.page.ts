@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { AnyMxRecord } from 'dns';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import Swal, { SweetAlertIcon } from 'sweetalert2';
@@ -50,6 +50,7 @@ export class JuegosPage implements OnInit {
   constructor(
     private authService: AuthService,
     private firestoreService: FirestoreService,
+    private route: ActivatedRoute,
     private playGame: JuegoService,
     private router: Router,
     private listSrv: ListaEsperaService,
@@ -87,6 +88,10 @@ export class JuegosPage implements OnInit {
     const a = this.pedidoSrv.getLastByUser(this.user.correo)
       .subscribe((data: any[]) => {
         this.hasRequest = data;
+        this.hasRequest.descuento10 = 'PERDIO';
+        this.hasRequest.descuento15 = 'PERDIO';
+        this.hasRequest.descuento20 = 'PERDIO';
+        this.pedidoSrv.updateOne(this.hasRequest);
         console.log(this.hasRequest);
         a.unsubscribe();
       });
@@ -105,8 +110,17 @@ export class JuegosPage implements OnInit {
       } else {
         if (this.vidas === 2) {
           this.msgTitulo = "FELICITACIONES HAS GANADO Y HAS GANADO UN PREMIO!!!";
-          this.hasRequest.descuento10 = 'GANO';//asignar DTO
-          this.pedidoSrv.updateOne(this.hasRequest)
+          const id = this.route.snapshot.paramMap.get('id');
+          if(id === '10'){
+            this.hasRequest.descuento10 = 'GANO';//asignar DTO
+          }
+          else if(id === '15'){
+            this.hasRequest.descuento15 = 'GANO';
+          }
+          else if(id === '20'){
+            this.hasRequest.descuento20 = 'GANO';
+          }
+          this.pedidoSrv.updateOne(this.hasRequest);
         } else {
           this.msgTitulo = "FELICITACIONES HAS GANADO!!!";
         }
