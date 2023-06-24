@@ -55,29 +55,37 @@ export class HomePage implements OnInit {
     this.user = this.authService.getUser();
     console.log(this.user.correo);
     this.spinner = true;
-
+    this.scanActive = false;
     this.checkWait();
     this.checkRequest();
     this.getState();
   }
 
+  ionViewWillEnter(){
+    console.log("ionViewWillEnter");
+  }
+
+  ionViewWillLeave(){
+     console.log("ionViewWillLeave");
+  }
+
   private getState() {
-    this.listSrv.getList(this.user.correo).subscribe( data => {
+    let a = this.listSrv.getList(this.user.correo).subscribe( data => {
       this.us = data.map((data: ListaEspera) => data.estado);
       console.log(this.us);
+      a.unsubscribe();
     });
   }
   private checkWait() {
-    console.log(this.user.correo);
     const a = this.listSrv.getLastByUser(this.user.correo)
-      .subscribe((data: any) => {
-        if (data?.estado !== 'FINALIZADO') {
-          console.log(data);
+      .subscribe((data : ListaEspera) => {
+        if (data['estado'] !== 'FINALIZADO') {
           this.hasWait = data;
-          console.log(this.hasWait)
-          a.unsubscribe();
         }
-
+        else{
+          this.hasWait = null;
+        }
+        a.unsubscribe();
       });
   }
   private checkRequest() {
@@ -154,12 +162,12 @@ export class HomePage implements OnInit {
 
 
         if (!this.hasRequest) { //  If first time in restaurant
-          this.checkRequest();
+          //this.checkRequest();
           this.toast('Primero debe ser aprobado para ingresar al local', 'info');
           // this.toastr.warning('Lo sentimos, primero debe anunciarse en recepción', 'QR');
         }
         else if (this.hasRequest.mesa_numero == this.data.id) {
-          this.checkRequest();
+          //this.checkRequest();
           switch (this.hasRequest.estado) {
             case 'PENDIENTE':
               this.router.navigate(['/menu-productos']);

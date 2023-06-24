@@ -38,9 +38,9 @@ export class ListaEsperaService {
   getInactivos() {
     try {
       return this.getAll().pipe(
-        map((waits: any[]) => waits.filter(
-          (u: { estado: string; }) => u.estado == 'CANCELADO' || u.estado == 'FINALIZADO'
-        )));
+        map(waits => waits.filter(u => u['estado'] == 'CANCELADO' || u['estado'] == 'FINALIZADO')));
+        //  (u: { estado: string; }) => u.estado == 'CANCELADO' || u.estado == 'FINALIZADO'
+        //)));
     }
     catch (error) {
       console.log(error);
@@ -54,9 +54,9 @@ export class ListaEsperaService {
   getActivos() {
     try {
       return this.getAll().pipe(
-        map((waits: any[]) => waits.filter(
-          (u: { estado: string; }) => u.estado == 'PENDIENTE' || u.estado == 'EN USO'
-        )));
+        map(waits => waits.filter(u => u['estado'] == 'PENDIENTE' || u['estado'] == 'EN USO')));
+         // (u) => u.estado == 'PENDIENTE' || u.estado == 'EN USO'
+        //)));
     }
     catch (error) { 
       console.log(error);
@@ -92,12 +92,14 @@ export class ListaEsperaService {
     try {
       if (!estado) {
         return this.getAll().pipe(
-          map((tables: any[]) => tables.filter((u: { correo: string; }) => u.correo == correo)));
+          map(waits => waits.filter(u => u['correo'] == correo)));
+          //map((tables: any[]) => tables.filter((u: { correo: string; }) => u.correo == correo)));
       }
       else {
         return this.getAll().pipe(
           map((tables: any[]) => tables.filter(
-            (u: { correo: string; estado: string; }) => u.correo == correo && u.estado == estado
+            u => u['correo'] == correo && u['estado'] == estado
+            //(u: { correo: string; estado: string; }) => u.correo == correo && u.estado == estado
           )));
       }
     }
@@ -109,9 +111,10 @@ export class ListaEsperaService {
 
   getLastByUser(correo: string, estado?: string) {
     return this.getByUser(correo, estado).pipe(
-      map((tables: any[]) => {
-      console.log('tables', tables)
-      tables.slice(-1)[0]}));
+      map(pedidos => pedidos.slice(-1)[0]));
+      //map((tables: any[]) => {
+      //console.log('tables', tables)
+      //tables.slice(-1)[0]}));
   }
 
   public async updateOne(model: ListaEspera){
