@@ -22,7 +22,7 @@ import { ListaEsperaService } from 'src/app/services/lista-espera.service';
 export class GestionMetrePage implements OnInit {
 
   waitSelected;
-
+  wait: Array<any> = [];
   waits$: Observable<any>;
   tables$: Observable<any>;
 
@@ -41,11 +41,25 @@ export class GestionMetrePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.wait = [];
     this.kyndSelected = this.kynds[0];
-    this.getWaits(this.kyndSelected.val);
+    /* this.waits$ = this.waitService.getActivos(); */
     this.getTables();
+    this.getWaits(this.kyndSelected.val);
+    this.getMesas();
   }
 
+  getMesas() {
+
+    this.waitService.getActive().subscribe((data) => {
+      this.wait = [];
+      data.forEach(element => {
+        this.wait.push(element);
+        console.log(this.wait)
+      })
+    });
+
+  }
   setFilter(p) {
     this.kyndSelected = p;
     this.getWaits(p.val);
@@ -53,6 +67,7 @@ export class GestionMetrePage implements OnInit {
 
   getTables() {
     this.tables$ = this.tableService.getByStatus('DISPONIBLE');
+    console.log(this.tables$)
   }
 
   getWaits(filter: string) {
@@ -60,11 +75,12 @@ export class GestionMetrePage implements OnInit {
 
       case 'Inactivos':
         this.waits$ = this.waitService.getInactivos();
-        console.log(this.waits$);
+
         break;
 
       default:
         this.waits$ = this.waitService.getActivos();
+        console.log(this.waits$);
         break;
     }
   }
@@ -78,7 +94,7 @@ export class GestionMetrePage implements OnInit {
     this.waitService.setOne(this.waitSelected);
 
     model.estado = 'RESERVADO';
-    this.tableService.setOne(model,this.waitSelected.user_uid);
+    this.tableService.setOne(model, this.waitSelected.user_uid);
 
     let p: Pedido = this.createModelPedido(model);
     this.pedidoService.createOne(p);
@@ -101,7 +117,7 @@ export class GestionMetrePage implements OnInit {
 
         const b = this.tableService.getByNumber(data.mesa_numero).subscribe((mesa: Mesa) => {
           mesa.estado = 'DISPONIBLE';
-          this.tableService.setOne(mesa,'');
+          this.tableService.setOne(mesa, '');
           b.unsubscribe();
         });
 
@@ -134,10 +150,10 @@ export class GestionMetrePage implements OnInit {
       date_created: new Date().getTime(),
       date_updated: new Date().getTime(),
       estado: 'PENDIENTE',
-      encuestado:false,
+      encuestado: false,
       descuento10: 'NO JUGO',
-      descuento15:'NO JUGO',
-      descuento20:'NO JUGO'
+      descuento15: 'NO JUGO',
+      descuento20: 'NO JUGO'
     }
     return m;
   }

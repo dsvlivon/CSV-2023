@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title size="small">Listado Clientes en Espera ({{ this.kyndSelected.val }})</ion-title>
+    <ion-title size="small">Listado Clientes en Espera</ion-title>
     <p *ngIf="this.waitSelected"> ( Seleccione Mesa )</p>
   </ion-toolbar>
 </ion-header>
@@ -8,8 +8,8 @@
 
 
 <ion-content>
-  <div *ngIf="!this.waitSelected" id="container-users" class="container-cards">
-    <div *ngFor="let w of this.waits$ | async as waits">
+  <div  id="container-users" class="container-cards">
+    <div *ngFor="let w of wait">
       <ion-card class="card-shadow ion-padding">
 
         <div class="details">
@@ -29,7 +29,7 @@
 
       </ion-card>
 
-      <p *ngIf="!waits">No hay clientes en espera por aquí</p>
+      <p *ngIf="!wait">No hay clientes en espera por aquí</p>
     </div>
   </div>
 
@@ -63,13 +63,13 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-fab *ngIf="!this.waitSelected" vertical="bottom" horizontal="end" slot="fixed">
+  <!-- <ion-fab *ngIf="!this.waitSelected" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>{{ this.kyndSelected.val }}</ion-fab-button>
     <ion-fab-list side="top">
       <ion-fab-button *ngFor="let p of this.kynds" (click)="setFilter(p)">
         <p>{{p.val}}</p>
       </ion-fab-button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab> -->
 
 </ion-content>

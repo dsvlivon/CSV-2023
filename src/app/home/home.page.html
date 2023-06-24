@@ -21,7 +21,7 @@
     <div class="barra" *ngIf="this.user?.perfil == 'CLIENTE' || this.user?.perfil == 'ANONIMO'">
       <!-- [ngSwitch]="hasWait?.estado | async" -->
       <div >
-        <div *ngIf="us == [] || us == 'FINALIZADO'">
+        <div *ngIf="us == [] || us == 'FINALIZADO' || us == ''">
 
           <ion-card class="button" (click)="escanearQR()">
             <ion-card-content>
@@ -192,7 +192,7 @@
         </ion-tab-button>
   
         <!-- CLIENTE -->
-        <ion-tab-button *ngIf="(user?.perfil === 'CLIENTE' && hasRequest?.mesa_numero)" (click)="goConsultas()">
+        <ion-tab-button *ngIf="(user?.perfil === 'CLIENTE' && us == 'EN USO')" (click)="goConsultas()">
           <!-- aca abria luego q verificar q tiene mesa, sino esto no se muestra-->
           <ion-icon color="secondary" name="chatbox-ellipses-outline" aria-hidden="true"></ion-icon>
           <ion-label>Consultas</ion-label>

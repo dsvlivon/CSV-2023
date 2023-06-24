@@ -8,20 +8,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ListaEsperaService {
-  listaEspera: Observable<ListaEspera[]>;
 
   pathOfCollection = 'wait_list';
-  referenceToCollection: AngularFirestoreCollection<ListaEspera>;
-
+  referenceToCollection: AngularFirestoreCollection;
   constructor(private bd: AngularFirestore) {
     this.referenceToCollection =
       this.bd.collection<ListaEspera>
         (this.pathOfCollection, (ref: { orderBy: (arg0: string, arg1: string) => any; }) => ref.orderBy('date_created', 'asc'));
   }
 
-  getStateChanges(): Observable<any> {
-    return this.bd.doc('wait_list').valueChanges();
-  }
   public async createOne(model: ListaEspera) {
     try {
       model.id = this.bd.createId();
@@ -38,32 +33,28 @@ export class ListaEsperaService {
   getInactivos() {
     try {
       return this.getAll().pipe(
-        map(waits => waits.filter(u => u['estado'] == 'CANCELADO' || u['estado'] == 'FINALIZADO')));
-        //  (u: { estado: string; }) => u.estado == 'CANCELADO' || u.estado == 'FINALIZADO'
-        //)));
+        map((waits: any[]) => waits.filter(
+          (u: { estado: string; }) => u.estado == 'CANCELADO' || u.estado == 'FINALIZADO'
+        )));
     }
     catch (error) {
       console.log(error);
       return null;
      }
   }
-  getList(correo: string) {
-    this.referenceToCollection = this.bd.collection('wait_list', ref => ref.where('correo', '==', `${correo}`));
-    return this.referenceToCollection.valueChanges();
-  }
+
   getActivos() {
     try {
       return this.getAll().pipe(
-        map(waits => waits.filter(u => u['estado'] == 'PENDIENTE' || u['estado'] == 'EN USO')));
-         // (u) => u.estado == 'PENDIENTE' || u.estado == 'EN USO'
-        //)));
+        map((waits: any[]) => waits.filter(
+          (u: { estado: string; }) => u.estado == 'PENDIENTE' || u.estado == 'EN USO'
+        )));
     }
     catch (error) { 
       console.log(error);
       return null;
     }
   }
-
 
   getAll() {
     try {
@@ -76,11 +67,11 @@ export class ListaEsperaService {
       return null;
      }
   }
-  
-  getById(uid: string) {
+
+  getById(id: string) {
     try {
       return this.getAll().pipe(
-        map((tables: any[]) => tables.find((u: { uid: string; }) => u.uid == uid)));
+        map((tables: any[]) => tables.find((u: { id: string; }) => u.id == id)));
     }
     catch (error) { 
       console.log(error);
@@ -92,14 +83,12 @@ export class ListaEsperaService {
     try {
       if (!estado) {
         return this.getAll().pipe(
-          map(waits => waits.filter(u => u['correo'] == correo)));
-          //map((tables: any[]) => tables.filter((u: { correo: string; }) => u.correo == correo)));
+          map((tables: any[]) => tables.filter((u: { correo: string; }) => u.correo == correo)));
       }
       else {
         return this.getAll().pipe(
           map((tables: any[]) => tables.filter(
-            u => u['correo'] == correo && u['estado'] == estado
-            //(u: { correo: string; estado: string; }) => u.correo == correo && u.estado == estado
+            (u: { correo: string; estado: string; }) => u.correo == correo && u.estado == estado
           )));
       }
     }
@@ -111,10 +100,7 @@ export class ListaEsperaService {
 
   getLastByUser(correo: string, estado?: string) {
     return this.getByUser(correo, estado).pipe(
-      map(pedidos => pedidos.slice(-1)[0]));
-      //map((tables: any[]) => {
-      //console.log('tables', tables)
-      //tables.slice(-1)[0]}));
+      map((tables: any[]) => tables.slice(-1)[0]));
   }
 
   public async updateOne(model: ListaEspera){
@@ -122,5 +108,13 @@ export class ListaEsperaService {
     catch (err) {console.log(err);}
   }
 
+  getList(correo: string) {
+    this.referenceToCollection = this.bd.collection('wait_list', ref => ref.where('correo', '==', `${correo}`));
+    return this.referenceToCollection.valueChanges();
+  }
+  getActive() {
+    this.referenceToCollection = this.bd.collection('wait_list');
+    return this.referenceToCollection.valueChanges();
+  }
 }
 
