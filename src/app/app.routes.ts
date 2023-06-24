@@ -23,10 +23,10 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./login/login.page').then(m => m.LoginPage)
   },
-  {
+  /* {
     path: 'home',
     loadComponent: () => import('./home/home.page').then(m => m.HomePage)
-  },
+  } ,*/
   {
     path: 'juegos',
     loadComponent: () => import('./pages/juegos/juegos.page').then(m => m.JuegosPage)
@@ -70,7 +70,8 @@ export const routes: Routes = [
   {
     path: 'encuesta-cliente',
     loadComponent: () => import('./pages/encuesta-cliente/encuesta-cliente.page').then(m => m.EncuestaClientePage)
-  },  {
+  },
+  {
     path: 'graficos',
     loadComponent: () => import('./pages/graficos/graficos.page').then( m => m.GraficosPage)
   }

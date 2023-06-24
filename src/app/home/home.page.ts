@@ -13,8 +13,9 @@ import { PushnotificationService } from '../services/pushnotification.service';
 import { ListaEsperaService } from '../services/lista-espera.service';
 import { PedidoService } from '../services/pedido.service';
 import { User2 } from '../shared/user2.interface';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FirestoreService } from '../services/firestore.service';
+import { ViewWillEnter, ViewWillLeave, ViewDidLeave } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,7 @@ import { FirestoreService } from '../services/firestore.service';
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule, BarraComponent, SpinnerComponent]
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit,OnDestroy, ViewWillEnter, ViewWillLeave, ViewDidLeave {
   user: User2 = null;
   data: any = null;
   spinner: boolean = true;
@@ -36,6 +37,11 @@ export class HomePage implements OnInit {
   request: Array<any>[] = []
   wait: Array<any>[] = []
   scanActive = false;
+
+  //suscripciones
+  sub1: Subscription;
+  sub2: Subscription;
+  sub3: Subscription;
 
   private static activeUser: User2;
 
@@ -51,33 +57,64 @@ export class HomePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.data = null;
+    /* this.data = null;
     this.user = this.authService.getUser();
     console.log(this.user.correo);
     this.spinner = true;
     this.scanActive = false;
     this.checkWait();
     this.checkRequest();
-    this.getState();
+    this.getState(); */
   }
 
   ionViewWillEnter(){
     console.log("ionViewWillEnter");
+    this.data = null;
+    this.user = this.authService.getUser();
+    console.log(this.user.correo);
+    this.spinner = true;
+    //this.scanActive = false;
+    this.checkWait();
+    this.checkRequest();
+    this.getState();
   }
 
   ionViewWillLeave(){
      console.log("ionViewWillLeave");
+     this.user = null;
+     this.data = null;
+     this.sub1.unsubscribe();
+     this.sub2.unsubscribe();
+     this.sub3.unsubscribe();
+  }
+
+  ionViewDidLeave(): void {
+    console.log("ionViewWillLeave");
+     this.user = null;
+     this.data = null;
+     this.sub1.unsubscribe();
+     this.sub2.unsubscribe();
+     this.sub3.unsubscribe();
+  }
+
+  ngOnDestroy(){
+     console.log("ngOnDestroy");
+     this.user = null;
+     //this.data = null;
+     this.sub1.unsubscribe();
+     this.sub2.unsubscribe();
+     this.sub3.unsubscribe();
   }
 
   private getState() {
-    let a = this.listSrv.getList(this.user.correo).subscribe( data => {
+    this.sub1 = this.listSrv.getList(this.user.correo).subscribe( data => {
       this.us = data.map((data: ListaEspera) => data.estado);
       console.log(this.us);
-      a.unsubscribe();
+      //a.unsubscribe();
     });
   }
   private checkWait() {
-    const a = this.listSrv.getLastByUser(this.user.correo)
+    this.sub2 = this.listSrv.getLastByUser(this.user.correo)
       .subscribe((data : ListaEspera) => {
         if (data['estado'] !== 'FINALIZADO') {
           this.hasWait = data;
@@ -85,15 +122,15 @@ export class HomePage implements OnInit {
         else{
           this.hasWait = null;
         }
-        a.unsubscribe();
+        //a.unsubscribe();
       });
   }
   private checkRequest() {
-    const a = this.pedidoSrv.getLastByUser(this.user.correo)
+   this.sub3 = this.pedidoSrv.getLastByUser(this.user.correo)
       .subscribe((data: any[]) => {
         this.hasRequest = data;
         console.log(this.hasRequest);
-        a.unsubscribe();
+        //a.unsubscribe();
       });
   }
   private addToWaitList() {
